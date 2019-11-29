@@ -1,8 +1,11 @@
 import React from 'react';
 import logo from '../../assets/images/logo.svg';
 import './App.css';
+import {  bindActionCreators } from 'redux'; 
+import {  connect } from 'react-redux'; 
+import { changeProjectTitle } from '../../store/actions'
 
-export const App: React.FC = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -22,3 +25,16 @@ export const App: React.FC = () => {
     </div>
   );
 };
+
+
+const mapStateToProps = (state: any) => {
+  return {projectTitle: state.projectTitle};
+}
+
+const mapActionsCreators = (dispatch: any) => {
+  return {
+      changeProjectTitle: bindActionCreators(changeProjectTitle, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapActionsCreators)(App);
