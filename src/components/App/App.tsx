@@ -1,27 +1,17 @@
 import React from 'react';
-import logo from '../../assets/images/logo.svg';
 import './App.css';
-import {  bindActionCreators } from 'redux'; 
-import {  connect } from 'react-redux'; 
-import { changeProjectTitle } from '../../store/actions'
+import '../../assets/fonts/FontAwesome.css';
+import { bindActionCreators } from 'redux'; 
+import { connect } from 'react-redux'; 
+import { changeProjectTitle } from '../../store/actions';
+import MenuContainer from './MenuContainer/MenuContainer';
+import ContentWrapper from './ContentWrapper/ContentWrapper';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MenuContainer />
+      <ContentWrapper />
     </div>
   );
 };
