@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import './MenuContainer.css';
 import NavigationMenu from './NavigationMenu/NavigationMenu';
-import Logo from './Logo/Logo';
-import Chat from './Chat/Chat';
 
 import menuSections from './MenuInterface';
 
@@ -12,16 +10,21 @@ const MenuContainer = () => {
   const [openedSections, setOpenedSections] = useState<any>(
     ['root']
   );
-  const [sections, setSections] = useState<any>([]);
+  let sections = 1;
 
   const onClickItemMenu = (id: string, param: string) => {
-
+    const newSection = Number(id.split('')[0]);
     const tmpArray = [
       ...openedSections
     ];
 
-    tmpArray.push(param);
+    
+    sections = newSection;
+    tmpArray[sections] = param;
+    
     setOpenedSections(tmpArray);
+    
+
   }
 
 
