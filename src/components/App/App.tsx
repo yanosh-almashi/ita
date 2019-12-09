@@ -10,6 +10,7 @@ import ContentWrapper from './ContentWrapper/ContentWrapper';
 const App = () => {
   return (
     <div className="App">
+      <div>Травис Джексон</div>
       <MenuContainer />
       <ContentWrapper />
     </div>
