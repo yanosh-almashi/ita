@@ -14,7 +14,4 @@ export const rootReducer = (state: any = initialState, action: any) => {
             return {...state, projectTitle: action.payload}
     }
     return state;
-}
-  
-  
-  
+} 
