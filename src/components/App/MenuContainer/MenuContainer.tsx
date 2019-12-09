@@ -6,7 +6,7 @@ import menuSections from './MenuInterface';
 
 const MenuContainer = () => {
 
-  const [menu, setMenu] = useState<any>(menuSections);
+  const [menu] = useState<any>(menuSections);
   const [openedSections, setOpenedSections] = useState<any>(
     ['1-root']
   );
@@ -15,7 +15,6 @@ const MenuContainer = () => {
   );
 
   const onClickItemMenu = (id: string, param: string) => {
-    const newSection = Number(id.split('')[0]);
     const tmpArray = [
       ...openedSections
     ];
@@ -25,10 +24,7 @@ const MenuContainer = () => {
     tmpArray[sections] = param;
     
     setOpenedSections(tmpArray);
-    
-
   }
-
 
   let sectionWrapped = (content: any, key : string, small: boolean) => {
     let menuClasses = 'menu';

@@ -1,6 +1,5 @@
 import React from 'react';
 import './NavigationMenu.css';
-import MenuItems from './MenuItems/MenuItems';
 
 interface Props {
   content: MenuItemInterface[];
