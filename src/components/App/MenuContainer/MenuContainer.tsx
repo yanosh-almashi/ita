@@ -8,9 +8,11 @@ const MenuContainer = () => {
 
   const [menu, setMenu] = useState<any>(menuSections);
   const [openedSections, setOpenedSections] = useState<any>(
-    ['root']
+    ['1-root']
   );
-  let sections = 1;
+  const [sections, setSections] = useState<number>(
+    1
+  );
 
   const onClickItemMenu = (id: string, param: string) => {
     const newSection = Number(id.split('')[0]);
@@ -18,8 +20,8 @@ const MenuContainer = () => {
       ...openedSections
     ];
 
-    
-    sections = newSection;
+    let addSection = sections + 1;
+    setSections(addSection);
     tmpArray[sections] = param;
     
     setOpenedSections(tmpArray);
@@ -28,9 +30,13 @@ const MenuContainer = () => {
   }
 
 
-  let sectionWrapped = (content: any, key : string) => {
+  let sectionWrapped = (content: any, key : string, small: boolean) => {
+    let menuClasses = 'menu';
+    if (small) {
+      menuClasses = 'menu menu--small';
+    }
     return (
-      <div className="menu" key={key}>
+      <div className={ menuClasses } key={key}>
         <NavigationMenu content = { content } onClickItem = { onClickItemMenu }/>
       </div>
     )
@@ -41,8 +47,12 @@ const MenuContainer = () => {
 
     for(let menuKey in menu) {
       if(menuKey === openedSections[i]) {
-        //console.log(sectionWrapped(menu[menuKey].menuItems));
-        tmpSections.push(sectionWrapped(menu[menuKey].menuItems, menuKey));
+        const currentSection = Number(menuKey.split('-')[0]);
+        let small = true;
+        if (currentSection === sections) {
+          small = false;
+        }
+        tmpSections.push(sectionWrapped(menu[menuKey].menuItems, menuKey, small));
         i++;
       }
     }
