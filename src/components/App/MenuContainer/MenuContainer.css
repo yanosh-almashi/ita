@@ -1,0 +1,16 @@
+.menu-container {
+  display: flex;
+  height: 100vh;
+  border-right: 1px solid #000;
+  width: 200px;
+}
+
+.menu {
+  background-color: rgb(221, 156, 156);
+  width: 50%;
+}
+
+.menu__submenus {
+  background-color: #3d3d3d;
+  color: #fff;
+}

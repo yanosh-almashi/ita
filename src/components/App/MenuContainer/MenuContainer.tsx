@@ -7,10 +7,18 @@ import Chat from './Chat/Chat';
 const MenuContainer = () => {
   return (
     <div>
-      <div>Трэвис Джэксон</div>
-      <Logo />
-      <NavigationMenu />
-      <Chat />
+    <div className="menu-container">
+      <div id="menuRoot" className="menu">
+        <Logo />
+        <NavigationMenu />
+        <Chat />
+      </div>
+      <div className="menu menu__submenus">
+
+      </div>
+    </div>
+
+
     </div>
   )
 } 
