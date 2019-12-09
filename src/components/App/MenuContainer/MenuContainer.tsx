@@ -7,7 +7,7 @@ import Chat from './Chat/Chat';
 const MenuContainer = () => {
   return (
     <div>
-      <div>MenuContainer</div>
+      <div>Трэвис Джэксон</div>
       <Logo />
       <NavigationMenu />
       <Chat />
