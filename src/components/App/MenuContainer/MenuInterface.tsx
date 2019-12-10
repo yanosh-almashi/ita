@@ -1,5 +1,6 @@
 const menuSections = {
   '1-root': {
+    isOpen: true,
     menuItems: [
       {
         id: '11',
@@ -16,6 +17,7 @@ const menuSections = {
     ]
   },
   '2-home': {
+    isOpen: false,
     menuItems: [
       {
         id: '21',
@@ -34,6 +36,7 @@ const menuSections = {
     ]
   },
   '2-tools': {
+    isOpen: false,
     menuItems: [
       {
         id: '21',
@@ -51,6 +54,7 @@ const menuSections = {
     ]
   },
   '3-something': {
+    isOpen: false,
     menuItems: [
       {
         id: '31',
@@ -68,6 +72,7 @@ const menuSections = {
     ]
   },
   '4-something': {
+    isOpen: false,
     menuItems: [
       {
         id: '41',

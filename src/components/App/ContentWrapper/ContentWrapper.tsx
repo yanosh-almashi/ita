@@ -6,7 +6,7 @@ import ProfilePage from './ProfilePage/ProfilePage';
 
 const ContentWrapper = () => {
   return (
-    <div>
+    <div className="content-wrapper">
       <div>ContentWrapper</div>
       <Switch>
         <Route path="/" exact component={ HomePage } />

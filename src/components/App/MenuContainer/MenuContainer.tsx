@@ -10,20 +10,27 @@ const MenuContainer = () => {
   const [openedSections, setOpenedSections] = useState<any>(
     ['1-root']
   );
-  const [sections, setSections] = useState<number>(
-    1
-  );
+  const [sections, setSections] = useState<number>(1);
+  const [clickedSection, setClickedSection] = useState<number>(1);
 
   const onClickItemMenu = (id: string, param: string) => {
     const tmpArray = [
       ...openedSections
     ];
+    const currentSection = Number(id.split('')[0]);
+    let addSection;
+    addSection = sections + 1;
 
-    let addSection = sections + 1;
+
     setSections(addSection);
     tmpArray[sections] = param;
-    
     setOpenedSections(tmpArray);
+  }
+
+  const onClickItemMenuSection = (key: string): void => {
+    const currentSection = Number(key.split('-')[0]);
+    
+    setClickedSection(currentSection);
   }
 
   let sectionWrapped = (content: any, key : string, small: boolean) => {
@@ -32,7 +39,7 @@ const MenuContainer = () => {
       menuClasses = 'menu menu--small';
     }
     return (
-      <div className={ menuClasses } key={key}>
+      <div className={ menuClasses } key={key} onClick={() => onClickItemMenuSection(key)} >
         <NavigationMenu content = { content } onClickItem = { onClickItemMenu }/>
       </div>
     )
@@ -52,7 +59,6 @@ const MenuContainer = () => {
         i++;
       }
     }
-
 
   return (
     <div className="menu-container">
