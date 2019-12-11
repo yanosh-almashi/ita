@@ -1,0 +1,29 @@
+.menu-container {
+  display: flex;
+  height: 100vh;
+}
+
+.menu {
+  background-color: #20233f;
+  border-right: 1px solid #f8f6ff;
+  color: #f8f6ff;
+  text-align: center;
+  padding: 50px 10px;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  box-shadow: 1px 1px 15px rgba(1,1,1,.7);
+}
+
+.menu__submenus {
+  background-color: #3d3d3d;
+  color: #fff;
+}
+
+.menu--small span {
+  display: none;
+}
+
+.menu--small {
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
