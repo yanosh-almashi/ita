@@ -7,6 +7,7 @@ import { changeProjectTitle } from '../../store/actions';
 import MenuContainer from './MenuContainer/MenuContainer';
 import ContentWrapper from './ContentWrapper/ContentWrapper';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const App = () => {
   return (
@@ -14,11 +15,15 @@ const App = () => {
       <MenuContainer />
       <ContentWrapper />
       <Button variant="contained" color="primary">
-        Hello World
+        Submit
       </Button>
       <Button variant="contained" color="secondary">
-        Hello World
+        Submit
       </Button>
+
+      <form className="form" noValidate autoComplete="off">
+        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      </form>
     </div>
   );
 };
