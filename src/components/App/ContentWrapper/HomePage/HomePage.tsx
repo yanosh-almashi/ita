@@ -38,8 +38,22 @@ const tiles = [
     name: 'Random4',
     text: 'text',
     icon: 'icon-cogs'
+  },
+  {
+    id: '006',
+    name: 'Random4',
+    text: 'text',
+    icon: 'icon-cogs'
+  },
+  {
+    id: '006',
+    name: 'Random4',
+    text: 'text',
+    icon: 'icon-cogs'
   }
 ];
+
+
 
 const HomePage = () => {
   return (

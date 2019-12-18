@@ -33,40 +33,11 @@ const MenuContainer = () => {
     setClickedSection(currentSection);
   }
 
-  let sectionWrapped = (content: any, key : string, small: boolean) => {
-    let menuClasses = 'menu';
-    if (small) {
-      menuClasses = 'menu menu--small';
-    }
-    return (
-      <div className={ menuClasses } key={key} onClick={() => onClickItemMenuSection(key)} >
-        <NavigationMenu content = { content } onClickItem = { onClickItemMenu }/>
-      </div>
-    )
-  }
-
-  let tmpSections = [];
-  let i = 0;
-
-    for(let menuKey in menu) {
-      if(menuKey === openedSections[i]) {
-        const currentSection = Number(menuKey.split('-')[0]);
-        let small = true;
-        if (currentSection === sections) {
-          small = false;
-        }
-        tmpSections.push(sectionWrapped(menu[menuKey].menuItems, menuKey, small));
-        i++;
-      }
-    }
-
   return (
     <div className="menu-container">
-      {
-        tmpSections.map( section => {
-          return section;
-        })
-      }
+        <div className="menu" >
+        <NavigationMenu />
+      </div>
     </div>
   )
 } 

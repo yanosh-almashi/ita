@@ -4,26 +4,36 @@
 }
 
 .menu {
-  background-color: #20233f;
-  border-right: 1px solid #f8f6ff;
-  color: #f8f6ff;
+  background-color: #fefefe;
+  border-right: 1px solid #f8f8f9;
+  color: #9ba6b2;
   text-align: center;
   padding: 50px 10px;
-  border-bottom-right-radius: 15px;
-  border-top-right-radius: 15px;
-  box-shadow: 1px 1px 15px rgba(1,1,1,.7);
+  width: 80px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
 
-.menu__submenus {
-  background-color: #3d3d3d;
-  color: #fff;
+.menu__item {
+  width: 40px;
+  border-radius: 8px;
 }
 
-.menu--small span {
-  display: none;
+.menu__icon {
+  font-size: 23px;
+  margin: 10px 0px;
+  display: block;
+  padding: 8px 0px;
+  transition: .3s;
 }
 
-.menu--small {
-  border-bottom-right-radius: 0px;
-  border-top-right-radius: 0px;
+.menu__item--active {
+  color: #24c0fd;
+  background-color: #e1f6ff;
 }
+
+.menu__icon:hover {
+  color: #24c0fd; 
+}
+

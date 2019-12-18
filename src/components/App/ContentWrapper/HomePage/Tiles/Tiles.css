@@ -1,32 +1,33 @@
 .tile {
   display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 15px;
+	grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 25px;
   margin: 0 auto;
-  width: 80%;
+  width: 70%;
   position: relative;
 }
 
-
 .tiles__tile {
-  background-color: #20233f;
-  color: #f8f7ff;
+  background-color: #ffffff;
+  color: #abb0b5;
   padding: 0px 20px;
-  height: 170px;
+  height: 138px;
   display: flex;
   justify-content: center;
   position: relative;
-
+  border-radius: 10px;
+  box-shadow: 6px 10px 15px -15px rgba(0,0,0,0.52);
+  cursor: pointer;
 }
 
 .tiles__tile h3 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   border-bottom: 1px solid #f8f7ff;
   padding: 10px 0px;
   z-index: 1000;
   position: absolute;
-  background-color: #20233f;
+  background-color: #ffffff;
   top: 0;
   right: 15px;
   left: 15px;
@@ -41,7 +42,7 @@
   z-index: 900;
   align-self: center;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -66,7 +67,7 @@
 }
 
 .tiles__tile:hover i {
-  top: 10%;
+  top: 15%;
 }
 
 .tiles__tile p {
@@ -78,11 +79,25 @@
   display: block;
 }
 
+.tiles__tile:hover {
+  background-color: #31c0fb;
+  color: #f8f7ff;
+}
 
-.tiles__tile:nth-child(1) {
+.tiles__tile:hover h3 {
+  background-color: #31c0fb;
+}
+
+.tiles__tile:hover p::-webkit-scrollbar-thumb {
+  background-color: #f8f7ff;
+}
+
+
+
+/* .tiles__tile:nth-child(1) {
   grid-column: 1/3;
 }
 
 .tiles__tile:nth-child(6) {
   grid-column: 3/5;
-}
+} */
