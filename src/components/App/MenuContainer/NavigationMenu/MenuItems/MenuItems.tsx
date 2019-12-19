@@ -3,7 +3,7 @@ import './MenuItems.css';
 
 const MenuItems = () => {
   return (
-    <div>--------MenuItems</div>
+    <div></div>
   )
 } 
 

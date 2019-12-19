@@ -1,18 +1,38 @@
 import React from 'react';
-import './Tiles.css';
 import TileItem from './TileItem/TileItem';
+import styled from 'styled-components';
+import TileInterface from './TileInterface';
+
+const StyledTiles = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 25px;
+  margin: 0 auto;
+  width: 70%;
+  position: relative;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr 1fr;
+    width: 90%;
+  }
+
+  @media (max-width: 800px) {
+    grid-template-columns: 1fr;
+  }
+`;
 
 interface Props {
-  tiles: any;
+  tiles: TileInterface[];
 }
 
 const Tiles: React.FC<Props> = ({ tiles }) => {
   return (
-    <div className="tile">
-      {
-        tiles.map((tile: any) => <TileItem tile={tile} key={tile.id}/>)
-      }
-
+    <div className="tiles-container">
+      <StyledTiles>
+        {
+          tiles.map((tile: any) => <TileItem tile={tile} key={tile.id} />)
+        }
+      </StyledTiles>
     </div>
   )
 }
