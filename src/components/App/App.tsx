@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import '../../assets/fonts/FontAwesome.css';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
 import { changeProjectTitle } from '../../store/actions';
