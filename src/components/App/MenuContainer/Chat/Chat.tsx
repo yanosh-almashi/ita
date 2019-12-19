@@ -3,8 +3,10 @@ import './Chat.css';
 
 const Chat = () => {
   return (
-    <div>----Chat</div>
+    <div className='chat'>
+      <p>Chat</p>
+    </div>
   )
-} 
+}
 
 export default Chat;

@@ -4,11 +4,11 @@ import MenuItems from './MenuItems/MenuItems';
 
 const NavigationMenu = () => {
   return (
-    <div>
-      <div>----NavigationMenu</div>
+    <div className='nav-menu'>
+      <div>Nav</div>
       <MenuItems />
     </div>
   )
-} 
+}
 
 export default NavigationMenu;

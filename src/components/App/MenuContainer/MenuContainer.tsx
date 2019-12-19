@@ -6,13 +6,12 @@ import Chat from './Chat/Chat';
 
 const MenuContainer = () => {
   return (
-    <div>
-      <div>Трэвис Джэксон</div>
+    <div className='menu-container'>
       <Logo />
       <NavigationMenu />
       <Chat />
     </div>
   )
-} 
+};
 
 export default MenuContainer;
