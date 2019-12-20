@@ -1,11 +1,15 @@
 import React from 'react';
-import './Logo.css';
+import styled from "styled-components";
+
+const StyledLogo = styled.div`
+  margin-top: 25px;
+`;
 
 const Logo = () => {
   return (
-    <div className='logo'>
+    <StyledLogo>
       <p>Logo</p>
-    </div>
+    </StyledLogo>
   )
 }
 
