@@ -1,17 +1,11 @@
 * {
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: 'OpenSans', sans-serif;
+  background-color: #f8f7ff;
 }
 
 .App {
-  padding: 10px 50px;
-}
-
-.form {
-  padding: 60px 0px;
+  display: flex;
 }
