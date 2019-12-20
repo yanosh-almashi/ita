@@ -1,6 +1,10 @@
 import React from "react";
-import "./NavigationMenu.css";
 import MenuItems from "./MenuItems/MenuItems";
+import styled from "styled-components";
+
+const StyledNavMenu = styled.ul`
+  margin-top: 40px;
+`;
 
 export const itemProps = [
   {
@@ -27,7 +31,7 @@ export const itemProps = [
 ];
 const NavigationMenu: React.FC<any> = () => {
   return (
-    <ul className='nav-menu'>
+    <StyledNavMenu>
       {itemProps.map(item => (
         <MenuItems
           key={item.id}
@@ -38,7 +42,7 @@ const NavigationMenu: React.FC<any> = () => {
           nextMenu={item.nextMenu}
         />
       ))}
-    </ul>
+    </StyledNavMenu>
   );
 };
 

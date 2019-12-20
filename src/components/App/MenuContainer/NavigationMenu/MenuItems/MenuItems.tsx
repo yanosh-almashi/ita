@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import "./MenuItems.css";
 
 const MenuItems: React.FC<any> = (props: any) => {
   console.dir(props);
