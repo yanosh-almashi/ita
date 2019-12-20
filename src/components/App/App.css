@@ -9,7 +9,7 @@ body {
 }
 
 .App {
-  padding: 10px 50px;
+  display: flex;
 }
 
 .form {
