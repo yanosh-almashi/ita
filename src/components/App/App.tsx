@@ -9,14 +9,11 @@ import ContentWrapper from './ContentWrapper/ContentWrapper';
 const App = () => {
   return (
     <div className="App">
-      <div>Травис Джексон</div>
-      <MenuContainer />
       <MenuContainer />
       <ContentWrapper />
     </div>
   );
 };
-
 
 const mapStateToProps = (state: any) => {
   return {projectTitle: state.projectTitle};

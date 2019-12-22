@@ -1,8 +1,43 @@
-import React from 'react';
-import NavigationMenu from './NavigationMenu/NavigationMenu';
+import React, {useState} from 'react';
+import NavigationMenu from './NavigationMenuList/NavigationMenuList';
 import Logo from './Logo/Logo';
 import Chat from './Chat/Chat';
 import styled from "styled-components";
+
+export const menuItems = [
+  {
+    name: "home",
+    icon: "fas fa-home",
+    path: "/random"
+  },
+  {
+    name: "profile",
+    icon: "fas fa-user",
+    path: "/profile"
+  },
+  {
+    name: "tools",
+    icon: "fas fa-wrench",
+    path: '/tools',
+    nextMenu: [
+      {
+        name: "home",
+        icon: "fas fa-home",
+        path: "/random"
+      },
+      {
+        name: "profile",
+        icon: "fas fa-user",
+        path: "/profile"
+      },
+      {
+        name: "tools",
+        icon: "fas fa-wrench",
+        path: '/tools'
+      }
+    ]
+  }
+];
 
 const StyledContainer = styled.div`
   display: flex;
@@ -17,13 +52,24 @@ const StyledContainer = styled.div`
   transition: .3s;
 `;
 
+const StyledMenuContainer =styled.div`
+  display: flex;
+`;
+
 const MenuContainer = () => {
+  const [nestedMenuContent, addNestedMenuContent] = useState();
   return (
-    <StyledContainer>
-      <Logo />
-      <NavigationMenu />
-      <Chat />
-    </StyledContainer>
+    <StyledMenuContainer>
+      <StyledContainer>
+        <Logo />
+        <NavigationMenu addNestedMenuContent={addNestedMenuContent} menuItems={menuItems}/>
+        <Chat />
+      </StyledContainer>
+      { nestedMenuContent && <StyledContainer>
+            { nestedMenuContent}
+        </StyledContainer>
+      }
+    </StyledMenuContainer>
   )
 };
 
