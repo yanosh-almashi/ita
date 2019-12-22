@@ -9,8 +9,9 @@ import { rootReducer } from './store/reduces';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, StylesProvider, withStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
+import authReducer from './store/authReducer';
 
-const store = createStore(rootReducer);
+const store = createStore(authReducer);
 
 const theme = createMuiTheme({
   palette: {
