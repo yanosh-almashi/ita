@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+const logo = require("../../../../assets/images/Logo.png");
 
 const StyledLogo = styled.div`
   margin-top: 25px;
@@ -8,7 +9,7 @@ const StyledLogo = styled.div`
 const Logo = () => {
   return (
     <StyledLogo>
-      <p>Logo</p>
+      <img src={logo} alt=""/>
     </StyledLogo>
   )
 }
