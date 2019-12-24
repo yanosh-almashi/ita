@@ -3,7 +3,6 @@ import HomePage from './HomePage/HomePage';
 import { Switch, Route } from 'react-router';
 import ProfilePage from './ProfilePage/ProfilePage';
 import styled from 'styled-components';
-import { Form } from '../Auth/Signin/Signin'
 
 const StyledContentWrapper = styled.div`
   width: 100%;

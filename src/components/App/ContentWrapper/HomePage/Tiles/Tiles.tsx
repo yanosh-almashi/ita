@@ -1,8 +1,7 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import TileItem from './TileItem/TileItem';
 import styled from 'styled-components';
 import TileInterface from './TileInterface';
-import {AuthContext} from "@components/App/App";
 
 const StyledTiles = styled.div`
   display: grid;

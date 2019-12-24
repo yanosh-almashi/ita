@@ -1,30 +1,18 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../App";
 import * as firebase from "firebase";
 import {
   Dialog,
   Button,
   DialogActions,
-  DialogTitle,
   DialogContent,
-  withStyles,
-  Tabs, Tab,
+  Tabs,
+  Tab,
+  Typography,
+  Box,
   TextField
 } from "@material-ui/core";
 import styled from "styled-components";
-
-const StyledDialog = withStyles({
-  root: {
-    textAlign: "center",
-    position: "relative"
-  }
-})(Dialog);
-
-const StyledDialogContent = withStyles({
-  root: {
-    paddingTop: "0px"
-  }
-})(DialogContent);
 
 const CloseIcon = styled.i`
   position: absolute;
@@ -38,16 +26,26 @@ const CloseIcon = styled.i`
   }
 `;
 
-export const Form: React.FC<any> = () => {
+export const SignIn: React.FC<any> = () => {
+  const Auth: any = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [isOpen, setOpen] = useState(true);
+  const [isOpen, setOpen] = useState(false);
   const [value, setValue] = useState(0);
+  const [user, setUser] = useState();
 
-
-  const Auth: any = useContext(AuthContext);
-
+  useEffect(() =>
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        Auth.setLog(true);
+        setUser(user.email);
+      }
+    })
+  );
+  console.dir(user);
+  console.log(Auth.isLoggedIn);
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
     console.dir(Auth);
@@ -57,7 +55,7 @@ export const Form: React.FC<any> = () => {
       .then(res => {
         if (res.user) {
           Auth.setLog(true);
-          setOpen(false)
+          setOpen(false);
         }
       })
       .catch(error => {
@@ -66,49 +64,72 @@ export const Form: React.FC<any> = () => {
         alert("Error");
       });
   };
-    const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-        setValue(newValue);
-    };
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
+
+  const handleSignOut = (e: any) => {
+    e.preventDefault();
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        setUser(undefined);
+        Auth.setLog(false);
+      })
+      .catch(error => {
+        setError(error.message);
+        console.dir(error);
+      });
+  };
+
   return (
-    <StyledDialog open={isOpen}>
-      <form onSubmit={handleFormSubmit}>
-          <Tabs
-              onChange = {handleChange}
-              value = {value}
-              indicatorColor="primary"
-              textColor="secondary"
-              centered
-          >
-              <Tab label="SIGN IN" />
-              <Tab label="SIGN UP" />
-          </Tabs>
-        <StyledDialogContent>
-          <TextField
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-            type="email"
-            name="email"
-            value={email}
-            onChange={(e: any) => setEmail(e.target.value)}
-          />
-          <TextField
-            id = {(error !== '') ? "standard-error-helper-text":"outlined-basic"}
-            label={(error !== '') ? "Email or password isn't correct":"Password"}
-            variant="outlined"
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e: any) => setPassword(e.target.value)}
-          />
-        </StyledDialogContent>
-        <DialogActions>
-          <Button variant="contained" color="primary" type="submit">
-            Submit
-          </Button>
-        </DialogActions>
-      </form>
-      <CloseIcon className="fas fa-times" onClick = {() => setOpen(false)} />
-    </StyledDialog>
+    <div>
+      <div>Current user: {user}</div>
+      {!Auth.isLoggedIn && <button onClick={() => setOpen(true)}>Sign in</button>}
+      <button onClick={handleSignOut}>Sign out</button>
+      <Dialog open={isOpen}>
+        <Tabs
+          onChange={handleChange}
+          value={value}
+          indicatorColor="primary"
+          textColor="secondary"
+          centered
+        >
+          <Tab label="SIGN IN" />
+          <Tab label="SIGN UP" />
+        </Tabs>
+        <form onSubmit={handleFormSubmit}>
+          <DialogContent>
+            <TextField
+              id="outlined-basic email"
+              label="Email"
+              variant="outlined"
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setEmail(e.currentTarget.value)
+              }
+            />
+            <TextField
+              id="outlined-basic pass"
+              label={error ? "Email or password isn't correct" : "Password"}
+              variant="outlined"
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e: any) => setPassword(e.target.value)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button variant="contained" color="primary" type="submit">
+              Submit
+            </Button>
+          </DialogActions>
+        </form>
+        <CloseIcon className="fas fa-times" onClick={() => setOpen(false)} />
+      </Dialog>
+    </div>
   );
 };

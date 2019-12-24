@@ -1,7 +1,6 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import './TileItem.css';
 import TileInterface from '../TileInterface';
-import {AuthContext} from "@components/App/App";
 
 interface Props {
   tile: TileInterface;

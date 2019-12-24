@@ -5,16 +5,15 @@ import { connect } from 'react-redux';
 import { changeProjectTitle } from '../../store/actions';
 import MenuContainer from './MenuContainer/MenuContainer';
 import ContentWrapper from './ContentWrapper/ContentWrapper';
-import { Form } from "./Auth/Signin/Signin";
+import { SignIn } from "./Auth/Signin/Signin";
 
 export const AuthContext: any = React.createContext(null);
 const App = () => {
     const [isLoggedIn, setLog ] = React.useState(false);
   return (
       <AuthContext.Provider value = { { isLoggedIn, setLog } }>
-          {isLoggedIn ? alert('You are logged in' ) : alert('Error')}
     <div className="App">
-        <Form/>
+        <SignIn/>
       <MenuContainer />
       <ContentWrapper />
     </div>

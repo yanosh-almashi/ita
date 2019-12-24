@@ -71,7 +71,14 @@ const GlobalCSS = withStyles({
     },
     '.PrivateNotchedOutline-root-137': {
       top: '0px'
-    }
+    },
+    '.MuiDialogContent-root:first-child': {
+      paddingTop: '0px'
+    },
+    '.MuiBox-root': {
+      textAlign: 'center',
+      position: 'relative'
+    },
   }
 })(() => null);
 
