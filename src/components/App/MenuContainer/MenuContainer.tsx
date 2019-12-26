@@ -1,14 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router';
-import NavigationMenu from './NavigationMenu/NavigationMenu';
+import React, {useState, useEffect} from 'react';
+import NavigationMenu from './NavigationMenuList/NavigationMenuList';
 import Logo from './Logo/Logo';
 import Chat from './Chat/Chat';
 import styled from "styled-components";
-import { ItemsInterface } from "../MenuContainer/types/types";
-import { SubMenuType } from "../MenuContainer/types/types";
+import {Route, Switch} from 'react-router-dom';
+
+export const menuItems = [
+  {
+    name: "home",
+    icon: "fas fa-home",
+    path: "/random"
+  },
+  {
+    name: "profile",
+    icon: "fas fa-user",
+    path: "/profile"
+  },
+  {
+    name: "tools",
+    icon: "fas fa-wrench",
+    path: '/tools',
+    nextMenu: [
+      {
+        name: "home1",
+        icon: "fas fa-home",
+        path: "/random1"
+      },
+      {
+        name: "profile1",
+        icon: "fas fa-user",
+        path: "/profile1"
+      },
+      {
+        name: "tools1",
+        icon: "fas fa-wrench",
+        path: '/tools1'
+      }
+    ]
+  },
+  {
+    name: "tools-new",
+    icon: "fas fa-wrench",
+    path: '/tools-new',
+    nextMenu: [
+      {
+        name: "home1-new",
+        icon: "fas fa-home",
+        path: "/random1-new"
+      },
+
+      {
+        name: "tools1-new",
+        icon: "fas fa-wrench",
+        path: '/tools1-new'
+      },
+      {
+        name: "profile1-new",
+        icon: "fas fa-user",
+        path: "/profile1-new"
+      }
+    ]
+  }
+];
 
 const StyledContainer = styled.div`
-  padding: 25px 0 100px 0;
+  padding: 25px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -21,97 +77,56 @@ const StyledContainer = styled.div`
   box-shadow: 10px 0px 15px -15px rgba(0,0,0,0.72);
 `;
 
-const itemProps : ItemsInterface[] = [
-    {
-        name: "home",
-        id: 11,
-        icon: "fas fa-home",
-        path: "/home"
-    },
-    {
-        name: "profile",
-        id: 12,
-        icon: "fas fa-user",
-        path: "/profile"
-    },
-    {
-        name: "tools",
-        id: 13,
-        icon: "fas fa-wrench",
-        isActive: false,
-        nextMenu: [
-            {
-                name: "randomaizer",
-                id: 14,
-                icon: "fas fa-random",
-                path: "/random"
-            },
-            {
-                name: "rem",
-                id: 15,
-                icon: "far fa-address-book",
-                path: "/rem"
-            },
-            {
-                name: "schedule",
-                id: 16,
-                icon: "far fa-calendar-alt",
-                path: "/schedule"
-            }
-        ]
-    },
-];
+const StyledMenuContainer = styled.div`
+  display: flex;
+`;
 
 const MenuContainer = () => {
-    const [subMenu, setSubMenu] = useState<SubMenuType>(null);
-    const [initialNestedMenu, setInitialNestedMenu] = useState<Array<any>>([]);
-    const [itemsConfig, setItemsConfig] = useState<ItemsInterface[]>(itemProps);
+  const [nestedMenuContent, addNestedMenuContent] = useState();
+  const [initialNestedMenu, addInitialNestedMenu] = useState<Array<any>>([]);
 
-    function handleClick(nextMenu :ItemsInterface[], active: boolean) {
-        if (subMenu === null) {
-            setSubMenu(
+  useEffect(() => {
+    menuItems.forEach((item: any, i: number) => {
+      if ( item.nextMenu ) {
+        console.log(item.nextMenu);
+
+        addInitialNestedMenu((prevState) => {
+          return [
+            ...prevState,
+            (
+              <Route key={i} path={item.path} render={() => {
+                return (
                 <StyledContainer>
-                    <NavigationMenu  items={nextMenu} />
-                </StyledContainer>
-            );
-        } else {
-            setSubMenu(null);
-        }
-        let newConfig = [...itemsConfig];
-        newConfig.forEach(item => item.isActive = !active);
-        setItemsConfig(newConfig);
-
-    }
-
-    useEffect(() => {
-        itemProps.forEach((item: any, index: any) => {
-            if (item.nextMenu) {
-                console.log(item.nextMenu);
-
-               /* setInitialNestedMenu([...initialNestedMenu, (
-                    <Route key={index} path={item.nextMenu.map((item: any) => item.path)} render={() => {
-                        return (
-                            <StyledContainer>
-                                <NavigationMenu  items={item.nextMenu} />
-                            </StyledContainer>
-                        )
-                    }} />
-                )])*/
-            }
-        })
-    }, []);
+                  <NavigationMenu nestedRoute={item.path} menuItems={item.nextMenu}/>
+                </StyledContainer>)
+              }}/>
+            )
+          ]
+        });
+      }
+    });
+  }, []);
 
   return (
-    <React.Fragment>
+    <StyledMenuContainer>
+      <StyledContainer>
+        <div>
+          <Logo />
+          <NavigationMenu addNestedMenuContent={addNestedMenuContent}  menuItems={menuItems}/>
+        </div>
+        <Chat />
+      </StyledContainer>
+      { nestedMenuContent ?
         <StyledContainer>
-            <div>
-                <Logo />
-                <NavigationMenu  items={itemsConfig} handleClick={handleClick} />
-            </div>
-            <Chat />
-        </StyledContainer>
-        {subMenu}
-    </React.Fragment>
+          {nestedMenuContent}
+        </StyledContainer> :
+        (<Switch>
+            {initialNestedMenu.map((item: any) => {
+              console.log(item);
+              return item;
+            })}
+        </Switch>) }
+    </StyledMenuContainer>
   )
 };
 

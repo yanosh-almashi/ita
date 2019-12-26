@@ -15,7 +15,6 @@ const App = () => {
   );
 };
 
-
 const mapStateToProps = (state: any) => {
   return {projectTitle: state.projectTitle};
 }
@@ -26,4 +25,5 @@ const mapActionsCreators = (dispatch: any) => {
   }
 }
 
+// @ts-ignore
 export default connect(mapStateToProps, mapActionsCreators)(App);

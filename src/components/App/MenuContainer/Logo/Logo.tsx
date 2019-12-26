@@ -12,12 +12,10 @@ const RouterLink = styled(NavLink)`
 
 const Logo = () => {
   return (
-    <React.Fragment>
-        <RouterLink to="/">
-            <img src={logo} alt="logo"/>
-        </RouterLink>
-    </React.Fragment>
+      <RouterLink to="/">
+        <img src={logo} alt="logo"/>
+      </RouterLink>
   )
-}
+};
 
 export default Logo;
