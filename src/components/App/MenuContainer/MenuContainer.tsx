@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import NavigationMenu from './NavigationMenuList/NavigationMenuList';
 import Logo from './Logo/Logo';
 import Chat from './Chat/Chat';
 import styled from "styled-components";
+import {Route, Switch} from 'react-router-dom';
 
 export const menuItems = [
   {
@@ -21,19 +22,42 @@ export const menuItems = [
     path: '/tools',
     nextMenu: [
       {
-        name: "home",
+        name: "home1",
         icon: "fas fa-home",
-        path: "/random"
+        path: "/random1"
       },
       {
-        name: "profile",
+        name: "profile1",
         icon: "fas fa-user",
-        path: "/profile"
+        path: "/profile1"
       },
       {
-        name: "tools",
+        name: "tools1",
         icon: "fas fa-wrench",
-        path: '/tools'
+        path: '/tools1'
+      }
+    ]
+  },
+  {
+    name: "tools-new",
+    icon: "fas fa-wrench",
+    path: '/tools-new',
+    nextMenu: [
+      {
+        name: "home1-new",
+        icon: "fas fa-home",
+        path: "/random1-new"
+      },
+      
+      {
+        name: "tools1-new",
+        icon: "fas fa-wrench",
+        path: '/tools1-new'
+      },
+      {
+        name: "profile1-new",
+        icon: "fas fa-user",
+        path: "/profile1-new"
       }
     ]
   }
@@ -58,17 +82,47 @@ const StyledMenuContainer =styled.div`
 
 const MenuContainer = () => {
   const [nestedMenuContent, addNestedMenuContent] = useState();
+  const [initialNestedMenu, addInitialNestedMenu] = useState<Array<any>>([]);
+  
+  useEffect(() => {
+    menuItems.forEach((item: any, i: number) => {
+      if ( item.nextMenu ) {  
+        console.log(item.nextMenu);
+              
+        addInitialNestedMenu((prevState) => {
+          return [
+            ...prevState,
+            (
+              <Route key={i} path={item.path} render={() => {
+                return (
+                <StyledContainer>
+                  <NavigationMenu nestedRoute={item.path} menuItems={item.nextMenu}/>
+                </StyledContainer>)
+              }}/>
+            )
+          ]
+        });       
+      }
+    });
+  }, []);
+  
   return (
     <StyledMenuContainer>
       <StyledContainer>
         <Logo />
-        <NavigationMenu addNestedMenuContent={addNestedMenuContent} menuItems={menuItems}/>
+        <NavigationMenu addNestedMenuContent={addNestedMenuContent}  menuItems={menuItems}/>
         <Chat />
       </StyledContainer>
-      { nestedMenuContent && <StyledContainer>
-            { nestedMenuContent}
-        </StyledContainer>
-      }
+      { nestedMenuContent ?
+        <StyledContainer>
+          {nestedMenuContent}
+        </StyledContainer> :
+        (<Switch>
+            {initialNestedMenu.map((item: any) => {                  
+              console.log(item);
+              return item;
+            })}
+        </Switch>) }
     </StyledMenuContainer>
   )
 };

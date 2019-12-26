@@ -13,8 +13,9 @@ const NavigationMenu: React.FC<any> = (props) => {
       {props.menuItems.map((item: any, i:number ) => (
         <MenuItem
           key={i + item.name}
+          isNestedItem={props.nestedRoute}
           name={item.name}
-          path={item.path}
+          path={props.nestedRoute ? props.nestedRoute + item.path: item.path}
           icon={item.icon}
           nextMenu={item.nextMenu}
           addNestedMenuContent={props.addNestedMenuContent}

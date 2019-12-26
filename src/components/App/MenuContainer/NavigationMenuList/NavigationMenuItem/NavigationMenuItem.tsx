@@ -1,22 +1,29 @@
 import React from "react";
 import styled from "styled-components";
-import {NavLink} from 'react-router-dom';
+import {NavLink, useLocation} from 'react-router-dom';
 import NavigationMenu from '../NavigationMenuList';
 
 const MenuItem: React.FC<any> = (props: any) => {
+  let location = useLocation();  
+  // const [nestedMenuOpened, nestedMenuOpenedListenter] = useState();
   const Item = styled.li`
-    list-style-type: none;
-    color:  #9ba6b2;
-    backgroundColor: #fff;
-    font-size: 0;
-    width: 40px;
-    border-radius: 8px;
-    padding: 8px;
-    text-align: center;
-    margin: 10px auto; 
-    position: relative;
+    list-style-type: none; 
+    font-size: 0; 
+    padding: 8px; 
+    text-align: center; 
+    margin: auto; 
+    position: relative; 
     & a {
       color:  #9ba6b2;
+      display: block;
+      width: 40px;
+      padding: 10px;
+      border-radius: 8px;
+      position: relative;
+      margin: 0 auto;
+    }
+    & a:hover {
+      background-color: #e1f6ff;
     }    
   `;
   const MenuItemIcon = styled.i`
@@ -30,32 +37,42 @@ const MenuItem: React.FC<any> = (props: any) => {
     color:  #9ba6b2;
   `;
   let link;
+
   let linkContent = (<>
   {props.name}
     <MenuItemIcon className={props.icon} />
     {props.nextMenu && <ArrowSubmenu className="fas fa-chevron-down" />}
   </>);
-  
-  const linkClickListener = (event: any) => {
-    event.preventDefault();
-    props.addNestedMenuContent(<NavigationMenu menuItems={props.nextMenu}/>)
-  }
 
   if ( props.nextMenu ) {
-    link = (<a
+    const linkClickListener = (event: any) => {
+      event.preventDefault();
+      props.addNestedMenuContent(<NavigationMenu nestedRoute={props.path} menuItems={props.nextMenu}/>);
+      
+    }
+    link = (<a 
+      style={ location.pathname.indexOf(props.path + '/') !== -1 ? {
+        color: `#24c0fd`,
+        backgroundColor: `#e1f6ff`
+    }: {}}
       href={props.path}
       onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>)=>{linkClickListener(event)}}
       >
        {linkContent}
-      
-     </a>)
+     </a>);
   } else {
+    const linkClickListener = () => {
+      if ( props.addNestedMenuContent) {
+        props.addNestedMenuContent('');
+      }      
+    }
     link = ( <NavLink 
       to={props.path}
       activeStyle={{
          color: `#24c0fd`,
          backgroundColor: `#e1f6ff`
-     }}>
+     }}
+     onClick={linkClickListener}>
        {linkContent}
      </NavLink>
      );
