@@ -1,14 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
+import {NavLink} from "react-router-dom";
+import Tooltip from '@material-ui/core/Tooltip';
+import './MenuItems.css';
+import {ItemsInterface} from "@components/App/MenuContainer/types/types";
 
-const MenuItems: React.FC<any> = (props: any) => {
-  console.dir(props);
+interface Props {
+    name: string;
+    icon: string;
+    path?: string;
+    nextMenu?: ItemsInterface[];
+    isActive?: boolean;
+    handleClick?(nextMenu: ItemsInterface[] , active: boolean): void;
+}
 
-  const Item = styled.li`
+const MenuItems: React.FC<Props> = ({name, icon, path, nextMenu, handleClick, isActive}) => {
+
+  const ListItem = styled.li`
     list-style-type: none;
-    ${props.isActive
-      ? `color: #24c0fd; background-color: #e1f6ff;`
-      : `color:  #9ba6b2; backgroundColor: #fff;`}
+    ${isActive
+      ? `color: #24c0fd`
+      : `color:  #9ba6b2`}
     font-size: 20px;
     width: 40px;
     border-radius: 8px;
@@ -16,6 +28,10 @@ const MenuItems: React.FC<any> = (props: any) => {
     text-align: center;
     margin: 10px auto; 
     position: relative;
+    cursor: pointer;
+    &:hover {
+      background-color: #e1f6ff;
+    }
   `;
   const ArrowSubmenu = styled.i`
     position: absolute;
@@ -23,11 +39,36 @@ const MenuItems: React.FC<any> = (props: any) => {
     right: 0;
     margin-top: 8px;
   `;
+
+  const RouterLink = styled(NavLink)`
+    text-decoration: none;
+    color: #9ba6b2;
+  `;
+
+  let itemContainer;
+
+  if (nextMenu) {
+      itemContainer =
+          <ListItem onClick={() => handleClick!(nextMenu , isActive!)}>
+              <i className={icon}/>
+              {isActive
+                  ? <ArrowSubmenu className="fas fa-chevron-right" />
+                  : <ArrowSubmenu className="fas fa-chevron-down" />
+              }
+          </ListItem>
+  } else {
+      itemContainer =
+          <ListItem>
+              <RouterLink to={path!} activeClassName="active">
+                  <i className={icon} />
+              </RouterLink>
+          </ListItem>
+  }
+
   return (
-    <Item {...props.isActive}>
-      <i className={props.icon} />
-      {props.nextMenu && <ArrowSubmenu className="fas fa-chevron-down" />}
-    </Item>
+      <Tooltip title={name} placement="right" >
+          {itemContainer}
+      </Tooltip>
   );
 };
 

@@ -1,38 +1,22 @@
 import React from "react";
 import MenuItems from "./MenuItems/MenuItems";
 import styled from "styled-components";
+import { ItemsInterface } from "../types/types";
 
 const StyledNavMenu = styled.ul`
   margin-top: 40px;
 `;
 
-export const itemProps = [
-  {
-    name: "home",
-    id: 11,
-    icon: "fas fa-home",
-    isActive: true,
-    path: "/random"
-  },
-  {
-    name: "profile",
-    id: 12,
-    icon: "fas fa-user",
-    isActive: false,
-    path: "/profile"
-  },
-  {
-    name: "tools",
-    id: 13,
-    icon: "fas fa-wrench",
-    isActive: false,
-    nextMenu: []
-  }
-];
-const NavigationMenu: React.FC<any> = () => {
+interface Props {
+  items: ItemsInterface[];
+  handleClick?(nextMenu: ItemsInterface[], active: boolean): void;
+}
+
+const NavigationMenu: React.FC<Props> = ({items, handleClick}) => {
+
   return (
     <StyledNavMenu>
-      {itemProps.map(item => (
+      {items.map(item => (
         <MenuItems
           key={item.id}
           isActive={item.isActive}
@@ -40,6 +24,7 @@ const NavigationMenu: React.FC<any> = () => {
           path={item.path}
           icon={item.icon}
           nextMenu={item.nextMenu}
+          handleClick={handleClick}
         />
       ))}
     </StyledNavMenu>

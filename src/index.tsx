@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { rootReducer } from './store/reduces';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, StylesProvider, withStyles } from '@material-ui/core/styles';
-import { useTheme, createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 const store = createStore(rootReducer);
 

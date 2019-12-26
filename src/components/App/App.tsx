@@ -10,7 +10,6 @@ const App = () => {
   return (
     <div className="App">
       <MenuContainer />
-      <MenuContainer />
       <ContentWrapper />
     </div>
   );
