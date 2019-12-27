@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, ReactElement} from 'react';
 import NavigationMenu from './NavigationMenuList/NavigationMenuList';
 import Logo from './Logo/Logo';
 import Chat from './Chat/Chat';
 import styled from "styled-components";
+import { ItemsInterface } from "./types/types";
 import {Route, Switch} from 'react-router-dom';
 
-export const menuItems = [
+export const menuItems: ItemsInterface[] = [
   {
     name: "home",
     icon: "fas fa-home",
@@ -82,8 +83,8 @@ const StyledMenuContainer = styled.div`
 `;
 
 const MenuContainer = () => {
-  const [nestedMenuContent, addNestedMenuContent] = useState();
-  const [initialNestedMenu, addInitialNestedMenu] = useState<Array<any>>([]);
+  const [nestedMenuContent, addNestedMenuCgontent] = useState<ReactElement>();
+  const [initialNestedMenu, addInitialNestedMenu] = useState<Array<ReactElement>>([]);
 
   useEffect(() => {
     menuItems.forEach((item: any, i: number) => {
@@ -121,7 +122,7 @@ const MenuContainer = () => {
           {nestedMenuContent}
         </StyledContainer> :
         (<Switch>
-            {initialNestedMenu.map((item: any) => {
+            {initialNestedMenu.map((item: ReactElement) => {
               console.log(item);
               return item;
             })}

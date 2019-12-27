@@ -3,8 +3,18 @@ import styled from "styled-components";
 import {NavLink, useLocation} from 'react-router-dom';
 import NavigationMenu from '../NavigationMenuList';
 import Tooltip from '@material-ui/core/Tooltip';
+import {ItemsInterface} from "@components/App/MenuContainer/types/types";
 
-const MenuItem: React.FC<any> = (props: any) => {
+interface Props {
+    name: string;
+    icon: string;
+    nextMenu: ItemsInterface[];
+    isNestedItem: string;
+    addNestedMenuContent?(val: any): void;
+    path: string;
+}
+
+const MenuItem: React.FC<Props> = (props: Props) => {
   let location = useLocation();
   // const [nestedMenuOpened, nestedMenuOpenedListenter] = useState();
   const Item = styled.li`
@@ -37,18 +47,17 @@ const MenuItem: React.FC<any> = (props: any) => {
     margin-top: 8px;
     color:  #9ba6b2;
   `;
-  let link;
 
+  let link;
   let linkContent = (<>
     <MenuItemIcon className={props.icon} />
     {props.nextMenu && <ArrowSubmenu className="fas fa-chevron-down" />}
   </>);
 
   if ( props.nextMenu ) {
-    const linkClickListener = (event: any) => {
+    const linkClickListener = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       event.preventDefault();
-      props.addNestedMenuContent(<NavigationMenu nestedRoute={props.path} menuItems={props.nextMenu}/>);
-
+      props.addNestedMenuContent!(<NavigationMenu nestedRoute={props.path} menuItems={props.nextMenu}/>);
     };
     link = (<a
       style={ location.pathname.indexOf(props.path + '/') !== -1 ? {
@@ -56,7 +65,7 @@ const MenuItem: React.FC<any> = (props: any) => {
         backgroundColor: `#e1f6ff`
     }: {}}
       href={props.path}
-      onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>)=>{linkClickListener(event)}}
+      onClick={(event)=>{linkClickListener(event)}}
       >
        {linkContent}
      </a>);
