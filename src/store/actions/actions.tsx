@@ -1,5 +1,5 @@
 
-import { CHANGE_PROJECT_TITLE } from './actions-constants';
+import { CHANGE_PROJECT_TITLE } from '../actionTypes/actionTypes';
 
 export const changeProjectTitle = (title: string) => {
     return {

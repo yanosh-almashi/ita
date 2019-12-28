@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Tiles from './Tiles/Tiles';
 import styled from 'styled-components';
-import TileInterface from './Tiles/TileInterface';
+import firebase from '../../../../firebaseConfig';
+import 'firebase/firestore';
+
+const db = firebase.firestore();
 
 const StyledTitle = styled.div`
   width: 70%;
@@ -18,46 +21,25 @@ const StyledTitleH1 = styled.h1`
   }
 `;
 
-const tiles: TileInterface[] = [
-  {
-    id: '001',
-    name: 'Random4',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat culpa, eaque sequi est, sapiente eos nisi adipisci natus eum rem accusantium doloremque tempore assumenda, quam voluptate nihil iure impedit quae? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat culpa, eaque sequi est, sapiente eos nisi adipisci natus eum rem accusantium doloremque tempore assumenda, quam voluptate nihil iure impedit quae?',
-    icon: 'fa-cogs'
-  },
-  {
-    id: '002',
-    name: 'Random1',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat culpa, eaque sequi est, sapiente eos nisi adipisci natus eum rem accusantium doloremque tempore assumenda, quam voluptate nihil iure impedit quae? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat culpa, eaque sequi est, sapiente eos nisi adipisci natus eum rem accusantium doloremque tempore assumenda, quam voluptate nihil iure impedit quae?',
-    icon: 'fa-cogs'
-  },
-  {
-    id: '003',
-    name: 'Random4',
-    text: 'text',
-    icon: 'fa-cogs'
-  },
-  {
-    id: '004',
-    name: 'Random4',
-    text: 'text',
-    icon: 'fa-cogs'
-  },
-  {
-    id: '005',
-    name: 'Random2',
-    text: 'text',
-    icon: 'fa-cogs'
-  },
-  {
-    id: '006',
-    name: 'Random4',
-    text: 'text',
-    icon: 'fa-cogs'
-  },
-];
+
 
 const HomePage = () => {
+
+  const [tiles, setTiles] = useState<any[]>([]);
+
+  useEffect(() => {
+    let tmpTile: any[] = [];
+
+    db.collection("tools").get().then((querySnapshot) => {
+      querySnapshot.forEach((doc: any) => {
+        tmpTile.push(doc.data());
+      });
+      setTiles(tmpTile);
+    });
+
+      
+  }, []);
+
   return (
     <div>
       <StyledTitle>

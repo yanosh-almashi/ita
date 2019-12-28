@@ -1,42 +1,49 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as authActions from '../../../../store/authActions';
-
+import { authSignup } from '../../../../store/actions/authActions';
 import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
-import { TransitionProps } from '@material-ui/core/transitions';
+import { TextField } from '@material-ui/core';
+import styled from 'styled-components';
+import { SignupInterface } from './SignupInterface';
 
-
-
-const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+const StyledInputGroup = styled.form`
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  
+`;
+const StyledInput = styled.div`
+  margin: 12px 0px;
+`;
+const StyledSpan = styled.span`
+  margin: 12px 0px;
+  text-align: center;
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+`;
 
 interface Props {
-  onSignup: (email: string, password: string) => any,
-  token: string,
-  id: string
+  authSignup: (userData: SignupInterface) => void,
 }
 
-const Signup: React.FC<Props> = ({ onSignup, token, id }) => {
-  const [open, setOpen] = React.useState(false);
+const Signup: React.FC<Props> = (props) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [confirm, setConfirm] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [group, setGroup] = React.useState('');
 
   const onSubmitForm = (event: any) => {
     event.preventDefault();
-    onSignup(email, password);
+    if (password !== confirm) { return; }
+    const userData: SignupInterface = {
+      email: email,
+      password: password,
+      name: name,
+      group: group
+    };
+    props.authSignup(userData);
   }
 
   const inputEmailChange = (event: any) => {
@@ -46,51 +53,54 @@ const Signup: React.FC<Props> = ({ onSignup, token, id }) => {
   const inputPasswordChange = (event: any) => {
     setPassword(event.target.value);
   }
+  
+  const inputPasswordConfirmChange = (event: any) => {
+    setConfirm(event.target.value);
+  }
 
-  const handleClickState = () => {
-    console.log(token);
-    console.log(id);
+  const inputNameChange = (event: any) => {
+    setName(event.target.value);
+  }
+
+  const inputGroupChange = (event: any) => {
+    setGroup(event.target.value);
   }
 
   return(
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        SignUp
-      </Button>
-      <Button variant="outlined" color="primary" onClick={handleClickState}>
-        State
-      </Button>
-      <Dialog open={open} TransitionComponent={Transition} keepMounted onClose={handleClose} aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="alert-dialog-slide-title">{"Sign up to ITA Tools"}</DialogTitle>
-        <DialogActions>
-          <form onSubmit={ onSubmitForm }>
-            <input onChange={ inputEmailChange } type="email" placeholder="email" value={ email }/>
-            <input onChange={ inputPasswordChange } type="password" placeholder="password" value={ password }/>
-            <button>signup</button>
-          </form >
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
+        <StyledSpan>Sign up</StyledSpan>
+          <StyledInputGroup>
+            <StyledInput>
+              <TextField 
+                id="EmailSignup" label="Email" variant="outlined" onChange={ inputEmailChange } type="email" value={ email } 
+              />
+            </StyledInput>
+            <StyledInput>
+              <TextField
+                id="PasswordSignup" label="Password" variant="outlined" type="password" onChange={ inputPasswordChange } value={password}
+                autoComplete="on" 
+              />
+            </StyledInput>
+            <StyledInput>
+              <TextField
+                id="ConfirmPasswordSignup" label="Confirm password" variant="outlined" type="password"
+                onChange={ inputPasswordConfirmChange } value={ confirm } autoComplete="on" 
+              />
+            </StyledInput>
+            <StyledInput>
+              <TextField
+                id="NameSignup" label="Name" variant="outlined" onChange={ inputNameChange } type="text" value={ name } 
+              />
+            </StyledInput>
+            <StyledInput>
+              <TextField
+                id="outlined-basic" label="GroupSignup" variant="outlined" onChange={ inputGroupChange } type="text" value={ group } 
+              />
+            </StyledInput>
+            <Button onClick={ onSubmitForm } variant="contained" color="primary">SIGNUP</Button>
+          </StyledInputGroup>
     </div>
   )
 }
 
-const mapStateToProps = (state: any) => {
-  return {
-    token: state.token,
-    id: state.id
-  }
-}
-
-const mapDispatchToProps = (dispatch: any ) => {
-  return {
-    onSignup: (email: string, password: string) => dispatch(authActions.authSignup(email, password))
-  } 
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(null, { authSignup })(Signup);

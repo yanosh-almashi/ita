@@ -1,4 +1,4 @@
-import {CHANGE_PROJECT_TITLE} from './actions-constants';
+import {CHANGE_PROJECT_TITLE} from '../actionTypes/actionTypes';
 
 const initialState = {
     projectTitle: 'ITA-tools'

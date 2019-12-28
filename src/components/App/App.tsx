@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
-import { changeProjectTitle } from '../../store/actions';
+import { changeProjectTitle } from '../../store/actions/actions';
 import MenuContainer from './MenuContainer/MenuContainer';
 import ContentWrapper from './ContentWrapper/ContentWrapper';
 
@@ -22,7 +22,7 @@ const mapStateToProps = (state: any) => {
 
 const mapActionsCreators = (dispatch: any) => {
   return {
-      changeProjectTitle: bindActionCreators(changeProjectTitle, dispatch)
+    changeProjectTitle: bindActionCreators(changeProjectTitle, dispatch)
   }
 }
 
