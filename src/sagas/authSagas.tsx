@@ -2,7 +2,42 @@ import { takeLatest, call, fork, put } from 'redux-saga/effects';
 import * as actionTypes from '../store/actionTypes/actionTypes';
 import * as actions from '../store/actions/authActions';
 import * as API from '../api/signUpAPI';
-import { AuthDataInterface } from '@components/App/Auth/Signup/SignupInterface';
+import { AuthDataInterface, SignupFullDataInterface } from '@components/App/Auth/Signup/SignupInterface';
+
+function* getAuth(authData: any) {
+  const userToken: string = yield authData.getIdToken()
+    .then((token: string) => token );
+  const userId: string = authData.uid;
+  const auth: AuthDataInterface = {
+    token: userToken,
+    id: userId
+  }
+  return auth;
+}
+
+function* signupWithFullUserData(data: SignupFullDataInterface) {
+  const isSuccess: boolean = yield call(API.authSignupFullData, {
+    id: data.id,
+    email: data.email,
+    name: data.name,
+    group: data.group,
+  });
+  return isSuccess;
+}
+
+function* saveDataInState(userAuthData: AuthDataInterface) {
+  const storageUserData: AuthDataInterface = {
+    token: userAuthData.token,
+    id: userAuthData.id,
+    isAuth: userAuthData.isAuth,
+    error: userAuthData.error
+  }
+  yield put(actions.saveUserAuthData(
+    storageUserData
+  ));
+  document.cookie = `token=${storageUserData.token}`;
+  localStorage.setItem('authData', JSON.stringify(storageUserData));
+}
 
 function* signupUser(action: any) {
   try{
@@ -12,31 +47,15 @@ function* signupUser(action: any) {
       name: action.payload.name,
       group: action.payload.group,
     });
-    if (!user) { return; }
-    const userToken = yield user.getIdToken()
-    .then((token: string) => {
-      return token;
-    });
-    const userId = user.uid;
 
-    yield call(API.authSignupFullData, {
-      id: userId,
-      email: action.payload.email,
-      name: action.payload.name,
-      group: action.payload.group,
-    });
-    
-    const storageUserData: AuthDataInterface = {
-      token: userToken,
-      id: userId,
-      isAuth: true,
-      error: null
-    }
-    yield put(actions.saveUserAuthData(
-      storageUserData
-    ));
-    document.cookie = `token=${storageUserData.token}`;
-    localStorage.setItem('authData', JSON.stringify(storageUserData));
+    if (!user) { return; }
+
+    const userAuthData: AuthDataInterface = yield call(getAuth, user);
+    const isSuccess = yield call(signupWithFullUserData, { id: userAuthData.id, ...action.payload });
+
+    if(!isSuccess) { return; }
+
+    yield call(saveDataInState, {...userAuthData, error: null, isAuth: true });
   }catch(e){
     // error handle in future
   }
@@ -54,11 +73,7 @@ function* signoutUser() {
       isAuth: false,
       error: null
     };
-    yield put(actions.saveUserAuthData(
-      storageUserData
-    ));
-    document.cookie = `token=${storageUserData.token}`;
-    localStorage.setItem('authData', JSON.stringify(storageUserData));
+    yield call(saveDataInState, { ...storageUserData });
   } catch(e) {
     // error handle in future
   }

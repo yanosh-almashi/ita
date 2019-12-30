@@ -1,11 +1,12 @@
 import React from 'react';
 import HomePage from './HomePage/HomePage';
-import { Switch, Route, Redirect } from 'react-router';
+import { Switch, Route } from 'react-router';
 import ProfilePage from './ProfilePage/ProfilePage';
 import styled from 'styled-components';
 import Signup from '../Auth/Signup/Signup';
 import { connect } from 'react-redux';
 import Auth from '../Auth/Auth';
+import ProtectedRoute from '../../../HOC/ProtectedRoute';
 
 const StyledContentWrapper = styled.div`
   width: 100%;
@@ -25,11 +26,13 @@ const ContentWrapper = (props: any) => {
       <Auth />
       <Switch>
         <Route path="/" exact component={ HomePage } />
-        <Route 
-          path="/profile" 
-          render={ () => props.isAuth ? ( <ProfilePage /> ) : ( <Redirect to={{ pathname: "/" }} /> ) }
-        />
+
+        <ProtectedRoute path="/profile" redirect="/" isAuth={props.isAuth}>
+          <ProfilePage />
+        </ProtectedRoute>
+
       </Switch>
+      
       <StyledModalTest>
         <Signup />
       </StyledModalTest>
