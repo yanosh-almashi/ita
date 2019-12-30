@@ -1,7 +1,7 @@
 import { takeLatest, call, fork, put } from 'redux-saga/effects';
 import * as actionTypes from '../store/actionTypes/actionTypes';
 import * as actions from '../store/actions/authActions';
-import * as API from '../api/signUpAPI';
+import * as API from '../api/AuthApi/signupApi';
 import { AuthDataInterface, SignupFullDataInterface } from '@components/App/Auth/Signup/SignupInterface';
 
 function* getAuth(authData: any) {

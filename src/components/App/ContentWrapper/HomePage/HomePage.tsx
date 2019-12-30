@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Tiles from './Tiles/Tiles';
 import styled from 'styled-components';
-import firebase from '../../../../firebaseConfig';
-import 'firebase/firestore';
-
-const db = firebase.firestore();
+import { getTilesData } from '../../../../api/HomePageApi/HomePageApi';
 
 const StyledTitle = styled.div`
   width: 70%;
@@ -25,16 +22,13 @@ const HomePage = () => {
 
   const [tiles, setTiles] = useState<any[]>([]);
 
-  useEffect(() => {
-    let tmpTile: any[] = [];
+  const fetchTiles = async () => {
+    const tiles: any = await getTilesData();
+    setTiles(tiles);
+  }
 
-    db.collection("tools").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc: any) => {
-        tmpTile.push(doc.data());
-      });
-      setTiles(tmpTile);
-    });
-      
+  useEffect(() => {
+    fetchTiles();
   }, []);
 
   return (

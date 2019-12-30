@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import 'firebase/firestore';
-import '../firebaseConfig';
+import '../../firebaseConfig';
 import { SignupInterface, SignupFullDataInterface } from '@components/App/Auth/Signup/SignupInterface';
 const db = firebase.firestore();
 
