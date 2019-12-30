@@ -2,18 +2,11 @@ import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Signup from './Signup';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import authReducer from '../../../../store/reducers/authReducer';
-import createSagaMiddleware from 'redux-saga';
-import rootSaga from '../../../../sagas';
 
-const sagaMiddleware = createSagaMiddleware();
-
-const store = createStore(authReducer, applyMiddleware(sagaMiddleware));
-
-
-sagaMiddleware.run(rootSaga);
+const store = createStore(authReducer);
 
 afterEach(cleanup);
 
