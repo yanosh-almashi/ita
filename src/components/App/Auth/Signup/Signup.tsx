@@ -1,11 +1,12 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { authSignup } from '../../../../store/actions/authActions';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
-import { SignupInterface, SignupFormInterface } from './SignupInterface';
+import { SignupInterface } from './SignupInterface';
 import { Form } from 'react-final-form';
-import SignupInput from './SignupInputs/SignupEmail';
+import SignupInput from '../../../../HOC/AuthHOC/SignupInputHOC';
+import { emailValidation } from '../FormValidation';
 
 const SignupForm = styled.form`
   display: flex;
@@ -17,101 +18,95 @@ interface Props {
   authSignup: (userData: SignupInterface) => void,
 }
 
-const formInitial: SignupFormInterface = {
+const initialValues = {
   email: '',
   password: '',
   confirmPassword: '',
   name: '',
   group: '',
-};
-
-function reducer(state: SignupFormInterface, action: any) {
-  switch (action.type) {
-    case 'email': 
-      return { ...state, email: action.payload };
-    case 'password': 
-      return { ...state, password: action.payload };
-    case 'confirmPassword': 
-      return { ...state, confirmPassword: action.payload };
-    case 'name': 
-      return { ...state, name: action.payload };
-    case 'group': 
-      return { ...state, group: action.payload };
-    default: 
-      return state;
-  }
 }
 
-
 const Signup: React.FC<Props> = (props) => {
-  const [formState, dispatch] = useReducer(reducer, formInitial);
+  const required = (value: string) => (value ? undefined : 'Required');
+  const email = (value: string) => (emailValidation(value) ? undefined : 'Invalid email!');
+  const password = (value: string) => ( (value.length < 6) ? 'Min 6 symbols!' : undefined );
+  const composeValidators = (...validators: any) => (value: any) =>
+    validators.reduce((error: any, validator: any) => error || validator(value), undefined);
+
   
   const onSubmitForm = (form: any) => {
-
     const userData: SignupInterface = {
       email: form.email,
       password: form.password,
       name: form.name,
       group: form.group
     };
-
     props.authSignup(userData);
   }
 
+
   return(
     <div>
-      <Form onSubmit={(formObj) => { onSubmitForm(formObj) }}>
-        {({handleSubmit}) => (
-          <SignupForm onSubmit={handleSubmit}>
+      <Form 
+        onSubmit={(formObj) => { onSubmitForm(formObj) }}
+        initialValues={initialValues}
+        validate={values => {
+          const errors: any = {};
+          if (values.confirmPassword !== values.password) {
+            errors.confirmPassword = 'Passwords must match!';
+          }
+          return errors;
+        }}
+        render={({ handleSubmit }) => (
+          <SignupForm onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}>
             <SignupInput
               id="EmailSignup"
               label="Email"
               variant="outlined"
+              validate={composeValidators(required, email)}
               type="email"
               fieldName="email"
-              handleChange={ (e) => dispatch({type: 'email', payload: e.target.value} ) } 
-              value={ formState.email }
             />
             <SignupInput
               id="PasswordSignup"
               label="Password"
               variant="outlined"
+              validate={composeValidators(required, password)}
               type="password"
               fieldName="password"
-              handleChange={ (e) => dispatch({type: 'password', payload: e.target.value}) } 
-              value={ formState.password }
             />
             <SignupInput
               id="ConfirmPasswordSignup"
               label="Confirm password"
               variant="outlined"
+              validate={composeValidators(required)}
               type="password"
               fieldName="confirmPassword"
-              handleChange={ (e) => dispatch({type: 'confirmPassword', payload: e.target.value}) } 
-              value={ formState.confirmPassword }
             />
             <SignupInput
               id="NameSignup"
               label="Name"
               variant="outlined"
+              validate={composeValidators(required)}
               type="text"
               fieldName="name"
-              handleChange={ (e) => dispatch({type: 'name', payload: e.target.value}) } 
-              value={ formState.name }
             />
             <SignupInput
               id="GroupSignup"
               label="GroupSignup"
               variant="outlined"
+              validate={composeValidators(required)}
               type="text"
               fieldName="group"
-              handleChange={ (e) => dispatch({type: 'group', payload: e.target.value}) } 
-              value={ formState.group } 
-            />  
+            />
             <Button variant="contained" color="primary" type="submit" >SIGNUP</Button>
           </SignupForm>
         )}
-      </Form>
+      />
+      
     </div>
   );
 }
