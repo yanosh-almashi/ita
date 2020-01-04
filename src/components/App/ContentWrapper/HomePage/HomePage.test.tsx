@@ -1,8 +1,5 @@
-import React from 'react';
-import { render, cleanup, fireEvent, waitForElement } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import HomePage from './HomePage';
-import firebaseMock from '../../../../api/HomePageApi/__mocks__/HomePageApi';
 
 afterEach(cleanup);
 

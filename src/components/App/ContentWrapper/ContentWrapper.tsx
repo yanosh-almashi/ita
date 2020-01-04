@@ -14,6 +14,7 @@ const StyledContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-flow: column;
+  padding: 40px 0px;
 `;
 
 const StyledModalTest = styled.div`
@@ -24,6 +25,9 @@ const ContentWrapper = (props: any) => {
   return (
     <StyledContentWrapper>
       <Auth />
+      <StyledModalTest>
+        <Signup />
+      </StyledModalTest>
       <Switch>
         <Route path="/" exact component={ HomePage } />
 
@@ -33,9 +37,7 @@ const ContentWrapper = (props: any) => {
 
       </Switch>
       
-      <StyledModalTest>
-        <Signup />
-      </StyledModalTest>
+
     </StyledContentWrapper>
   )
 }
