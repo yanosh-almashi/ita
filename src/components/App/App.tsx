@@ -22,7 +22,7 @@ const mapStateToProps = (state: any) => {
 
 const mapActionsCreators = (dispatch: any) => {
   return {
-      changeProjectTitle: bindActionCreators(changeProjectTitle, dispatch)
+    changeProjectTitle: bindActionCreators(changeProjectTitle, dispatch)
   }
 }
 

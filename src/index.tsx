@@ -1,27 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
-import  App  from './components/App/App';
-import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux'; 
-import { Provider } from 'react-redux'; 
-import { rootReducer } from './store/reduces';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store/store';
+import  App  from './components/App/App';
 import { ThemeProvider, StylesProvider, withStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
+import './styles/index.css';
 
-const store = createStore(rootReducer);
 
 const theme = createMuiTheme({
   palette: {
-    primary:  { 
-      main: '#346ef3' 
+    primary:  {
+      main: '#24c3f9'
     },
-    error:  { 
-      main: '#d73c2a' 
+    error:  {
+      main: '#d73c2a'
     },
     secondary: {
-      main: '#20233f'
+      main: '#346ef3'
     }
   }
 });
@@ -33,27 +30,40 @@ const GlobalCSS = withStyles({
       borderRadius: '50px',
       fontWeight: 'bold',
       letterSpacing: '1px',
-      width: '140px'
-    },
-    '.MuiInputBase-input': {
-      height: '0px'
-    },
-    '.MuiTextField-root': {
-      height: '0px'
+      width: '140px',
+      color: '#f8f7ff',
+      "&:hover": {
+        backgroundColor: '#ffffff',
+        borderColor: '#ffffff',
+        color: '#20233f',
+      }
     },
     '.MuiOutlinedInput-input': {
-      height: '30px',
-      padding: '5px 15px',
-      width: '250px'
+      padding: '10px 15px',
+      width: '450px',
     },
     '.MuiOutlinedInput-root': {
-      borderRadius: '50px'
+      borderRadius: '50px',
     },
     '.MuiInputLabel-outlined': {
-      top: '-7px'
+      position: 'absolute',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      left: '23px',
+      fontSize: '14px',
+      color: '#20233f',
+      transition: 'all 0.2s ease-in-out',
+    },
+    '.MuiInputLabel-outlined.MuiInputLabel-shrink': {
+      transform: 'translate(0, -37px) scale(0.9)'
+    },
+
+    '.MuiOutlinedInput-root.MuiOutlinedInput-notchedOutline': {
+      borderColor: '#ffffff',
+      backgroundColor: '#ffffff',
     }
   }
-})(() => null)
+})(() => null);
 
 ReactDOM.render(
   <Provider store={ store }>
@@ -71,4 +81,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorker.unregister();

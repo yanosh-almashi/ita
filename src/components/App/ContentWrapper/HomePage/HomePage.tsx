@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Tiles from './Tiles/Tiles';
 import styled from 'styled-components';
-import TileInterface from './Tiles/TileInterface';
+import { getTilesData } from '../../../../api/home/home-page.api';
 
 const StyledTitle = styled.div`
   width: 70%;
@@ -18,46 +18,19 @@ const StyledTitleH1 = styled.h1`
   }
 `;
 
-const tiles: TileInterface[] = [
-  {
-    id: '001',
-    name: 'Random4',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat culpa, eaque sequi est, sapiente eos nisi adipisci natus eum rem accusantium doloremque tempore assumenda, quam voluptate nihil iure impedit quae? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat culpa, eaque sequi est, sapiente eos nisi adipisci natus eum rem accusantium doloremque tempore assumenda, quam voluptate nihil iure impedit quae?',
-    icon: 'fa-cogs'
-  },
-  {
-    id: '002',
-    name: 'Random1',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat culpa, eaque sequi est, sapiente eos nisi adipisci natus eum rem accusantium doloremque tempore assumenda, quam voluptate nihil iure impedit quae? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat culpa, eaque sequi est, sapiente eos nisi adipisci natus eum rem accusantium doloremque tempore assumenda, quam voluptate nihil iure impedit quae?',
-    icon: 'fa-cogs'
-  },
-  {
-    id: '003',
-    name: 'Random4',
-    text: 'text',
-    icon: 'fa-cogs'
-  },
-  {
-    id: '004',
-    name: 'Random4',
-    text: 'text',
-    icon: 'fa-cogs'
-  },
-  {
-    id: '005',
-    name: 'Random2',
-    text: 'text',
-    icon: 'fa-cogs'
-  },
-  {
-    id: '006',
-    name: 'Random4',
-    text: 'text',
-    icon: 'fa-cogs'
-  },
-];
-
 const HomePage = () => {
+
+  const [tiles, setTiles] = useState<any[]>([]);
+
+  const fetchTiles = async () => {
+    const tiles: any = await getTilesData();
+    setTiles(tiles);
+  }
+
+  useEffect(() => {
+    fetchTiles();
+  }, []);
+
   return (
     <div>
       <StyledTitle>
