@@ -1,8 +1,8 @@
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { AuthDataInterface } from '@components/App/Auth/Signup/SignupInterface';
-import authReducer from './authReducer';
-import * as actionTypes from '../actionTypes/actionTypes';
+import authReducer from './auth.reducer';
+import * as actionTypes from './auth.types';
 
 afterEach(cleanup);
 

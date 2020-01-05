@@ -1,19 +1,16 @@
-import firebase from 'firebase';
-import 'firebase/firestore';
-import '../../firebaseConfig';
+import { firestore, auth } from '../../firebase/firebase.config';
 import { SignupInterface, SignupFullDataInterface } from '@components/App/Auth/Signup/SignupInterface';
-const db = firebase.firestore();
+
 
 export const authSignup = (userData: SignupInterface) => {
-  return firebase
-    .auth()
+  return auth
     .createUserWithEmailAndPassword(userData.email, userData.password)
     .then((data: any) => data.user)
     .catch(() => null);
 };
 
 export const authSignupFullData = (fullUserData: SignupFullDataInterface) => {
-  return db
+  return firestore
     .collection('users')
     .doc(fullUserData.id)
     .set({

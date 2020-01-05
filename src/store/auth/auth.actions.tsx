@@ -1,4 +1,4 @@
-import * as actionTypes from '../actionTypes/actionTypes';
+import * as actionTypes from './auth.types';
 import { SignupInterface, AuthDataInterface } from '@components/App/Auth/Signup/SignupInterface';
 
 export const saveUserAuthData = (userData: AuthDataInterface) => {

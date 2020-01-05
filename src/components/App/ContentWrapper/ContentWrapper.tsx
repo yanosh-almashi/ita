@@ -5,7 +5,6 @@ import ProfilePage from './ProfilePage/ProfilePage';
 import styled from 'styled-components';
 import Signup from '../Auth/Signup/Signup';
 import { connect } from 'react-redux';
-import Auth from '../Auth/Auth';
 import ProtectedRoute from '../../../HOC/ProtectedRoute';
 
 const StyledContentWrapper = styled.div`
@@ -24,20 +23,15 @@ const StyledModalTest = styled.div`
 const ContentWrapper = (props: any) => {
   return (
     <StyledContentWrapper>
-      <Auth />
       <StyledModalTest>
         <Signup />
       </StyledModalTest>
       <Switch>
         <Route path="/" exact component={ HomePage } />
-
         <ProtectedRoute path="/profile" redirect="/" isAuth={props.isAuth}>
           <ProfilePage />
         </ProtectedRoute>
-
       </Switch>
-      
-
     </StyledContentWrapper>
   )
 }

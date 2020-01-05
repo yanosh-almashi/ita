@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { authSignup } from '../../../../store/actions/authActions';
+import { authSignup } from '../../../../store/auth/auth.actions';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 import { SignupInterface } from './SignupInterface';
 import { Form } from 'react-final-form';
 import SignupInput from '../../../../HOC/AuthHOC/SignupInputHOC';
-import { emailValidation } from '../FormValidation';
+import { required, email, password, composeValidators } from '../validation';
 
 const SignupForm = styled.form`
   display: flex;
@@ -27,13 +27,6 @@ const initialValues = {
 }
 
 const Signup: React.FC<Props> = (props) => {
-  const required = (value: string) => (value ? undefined : 'Required');
-  const email = (value: string) => (emailValidation(value) ? undefined : 'Invalid email!');
-  const password = (value: string) => ( (value.length < 6) ? 'Min 6 symbols!' : undefined );
-  const composeValidators = (...validators: any) => (value: any) =>
-    validators.reduce((error: any, validator: any) => error || validator(value), undefined);
-
-  
   const onSubmitForm = (form: any) => {
     const userData: SignupInterface = {
       email: form.email,

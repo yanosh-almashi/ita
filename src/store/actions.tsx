@@ -1,5 +1,5 @@
 
-import { CHANGE_PROJECT_TITLE } from '../actionTypes/actionTypes';
+import { CHANGE_PROJECT_TITLE } from './auth/auth.types';
 
 export const changeProjectTitle = (title: string) => {
     return {

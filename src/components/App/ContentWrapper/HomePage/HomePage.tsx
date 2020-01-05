@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Tiles from './Tiles/Tiles';
 import styled from 'styled-components';
-import { getTilesData } from '../../../../api/HomePageApi/HomePageApi';
+import { getTilesData } from '../../../../api/home/home-page.api';
 
 const StyledTitle = styled.div`
   width: 70%;

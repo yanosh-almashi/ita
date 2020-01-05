@@ -1,4 +1,4 @@
-import * as actionConstants from '../actionTypes/actionTypes';
+import * as actionConstants from './auth.types';
 import { AuthDataInterface } from '@components/App/Auth/Signup/SignupInterface';
 
 const authData = localStorage.getItem('authData') || JSON.stringify({
@@ -9,11 +9,12 @@ const authData = localStorage.getItem('authData') || JSON.stringify({
 });
 // eslint-disable-next-line no-useless-escape
 const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+const parsedAuthData = JSON.parse(authData);
 const initialState: AuthDataInterface = {
   token: token,
-  id: JSON.parse(authData).id || null,
-  error: JSON.parse(authData).error || null,
-  isAuth: JSON.parse(authData).isAuth || false
+  id: parsedAuthData.id || null,
+  error: parsedAuthData.error || null,
+  isAuth: parsedAuthData.isAuth || false
 };
 
 const auth = (state: AuthDataInterface): AuthDataInterface => {

@@ -1,22 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
-import  App  from './components/App/App';
-import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store/store';
+import  App  from './components/App/App';
 import { ThemeProvider, StylesProvider, withStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
-import authReducer from './store/reducers/authReducer';
-import createSagaMiddleware from 'redux-saga';
-import rootSaga from './sagas';
+import './styles/index.css';
 
-const sagaMiddleware = createSagaMiddleware();
-
-const store = createStore(authReducer, applyMiddleware(sagaMiddleware));
-
-sagaMiddleware.run(rootSaga);
 
 const theme = createMuiTheme({
   palette: {
@@ -90,4 +81,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-serviceWorker.unregister();

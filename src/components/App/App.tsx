@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { bindActionCreators } from 'redux'; 
 import { connect } from 'react-redux'; 
-import { changeProjectTitle } from '../../store/actions/actions';
+import { changeProjectTitle } from '../../store/actions';
 import MenuContainer from './MenuContainer/MenuContainer';
 import ContentWrapper from './ContentWrapper/ContentWrapper';
 

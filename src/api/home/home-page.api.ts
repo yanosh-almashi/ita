@@ -1,10 +1,7 @@
-import firebase from 'firebase';
-import 'firebase/firestore';
-import '../../firebaseConfig';
-const db = firebase.firestore();
+import { firestore } from '../../firebase/firebase.config';
 
 export async function getTilesData() {
-  const tiles = await db
+  const tiles = await firestore
     .collection("tools")
     .get()
     .then((querySnapshot) => {
