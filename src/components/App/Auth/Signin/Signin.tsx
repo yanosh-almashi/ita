@@ -1,6 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../App";
-import * as firebase from "firebase";
+import React, { FC, useEffect, useReducer, useState } from "react";
+import { bindActionCreators } from "redux";
+import { Form, Field } from "react-final-form";
+import { SigninInterface } from "./SignInInterface";
+import { InitialStateInterface } from "../../../../store/auth/initialStateInterface";
 import {
   Dialog,
   Button,
@@ -8,11 +10,15 @@ import {
   DialogContent,
   Tabs,
   Tab,
-  Typography,
-  Box,
   TextField
 } from "@material-ui/core";
 import styled from "styled-components";
+import {
+  login,
+  signOutUser,
+  verifyAuth
+} from "../../../../store/auth/actionCreators";
+import { connect } from "react-redux";
 
 const CloseIcon = styled.i`
   position: absolute;
@@ -26,110 +32,136 @@ const CloseIcon = styled.i`
   }
 `;
 
-export const SignIn: React.FC<any> = () => {
-  const Auth: any = useContext(AuthContext);
+const SignIn: React.FC<SigninInterface> = ({
+  email,
+  error,
+  token,
+  loading,
+  signOutUser,
+  verifyAuth,
+  login
+}: SigninInterface) => {
+  console.dir({ email, error, token, loading, signOutUser, verifyAuth, login });
 
-  const [email, setEmail] = useState("");
+  const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [isOpen, setOpen] = useState(false);
   const [value, setValue] = useState(0);
-  const [user, setUser] = useState();
 
-  useEffect(() =>
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        Auth.setLog(true);
-        setUser(user.email);
-      }
-    })
-  );
-  console.dir(user);
-  console.log(Auth.isLoggedIn);
-  const handleFormSubmit = (e: any) => {
-    e.preventDefault();
-    console.dir(Auth);
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(res => {
-        if (res.user) {
-          Auth.setLog(true);
-          setOpen(false);
-        }
-      })
-      .catch(error => {
-        setError(error.message);
-        console.dir(error);
-        alert("Error");
-      });
+  useEffect(() => {
+    verifyAuth();
+  });
+
+  const handleFormSubmit = (e: React.ChangeEvent<{}>) => {
+   /* e.preventDefault();*/
+    login(mail, password);
+    !error && setOpen(false);
   };
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleSignOut = (e: React.ChangeEvent<{}>) => {
+    e.preventDefault();
+    signOutUser();
+    setMail("");
+    setPassword("");
+  };
+  const handleChange = (e: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+  if (loading) {
+    return null;
+  } else {
+    return (
+      <div>
+        <div>Current user: {email}</div>
+        {!email && <button onClick={() => setOpen(true)}>Sign in</button>}
+        <button onClick={handleSignOut}>Sign out</button>
+        <Dialog open={isOpen}>
+          <Tabs
+            onChange={handleChange}
+            value={value}
+            indicatorColor="primary"
+            textColor="secondary"
+            centered
+          >
+            <Tab label="SIGN IN" />
+            <Tab label="SIGN UP" />
+          </Tabs>
+          <Form
+            onSubmit={handleFormSubmit}
+            render={({ handleSubmit }) => (
+              <form onSubmit={handleSubmit}>
+                <DialogContent>
+                  <Field name="email">
+                    {({ input, meta }) => (
+                      <div>
+                        <TextField
+                          id="outlined-basic email"
+                          label="Email"
+                          variant="outlined"
+                          type="email"
+                          name="email"
+                          value={email}
 
-  const handleSignOut = (e: any) => {
-    e.preventDefault();
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        setUser(undefined);
-        Auth.setLog(false);
-      })
-      .catch(error => {
-        setError(error.message);
-        console.dir(error);
-      });
-  };
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setMail(e.currentTarget.value)
+                          }
+                          {...input}
+                        />
+                        {meta.error && meta.touched && (
+                          <TextField error>{meta.error}</TextField>
+                        )}
+                      </div>
+                    )}
+                  </Field>
+                  <Field name="password">
+                    {({ input, meta }) => (
+                        <div>
+                    <TextField
+                      id="outlined-basic pass"
+                      label={error ? "Password isn't correct" : "Password"}
+                      variant="outlined"
+                      type="password"
+                      name="password"
+                      value={password}
 
-  return (
-    <div>
-      <div>Current user: {user}</div>
-      {!Auth.isLoggedIn && <button onClick={() => setOpen(true)}>Sign in</button>}
-      <button onClick={handleSignOut}>Sign out</button>
-      <Dialog open={isOpen}>
-        <Tabs
-          onChange={handleChange}
-          value={value}
-          indicatorColor="primary"
-          textColor="secondary"
-          centered
-        >
-          <Tab label="SIGN IN" />
-          <Tab label="SIGN UP" />
-        </Tabs>
-        <form onSubmit={handleFormSubmit}>
-          <DialogContent>
-            <TextField
-              id="outlined-basic email"
-              label="Email"
-              variant="outlined"
-              type="email"
-              name="email"
-              value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setEmail(e.currentTarget.value)
-              }
-            />
-            <TextField
-              id="outlined-basic pass"
-              label={error ? "Email or password isn't correct" : "Password"}
-              variant="outlined"
-              type="password"
-              name="password"
-              value={password}
-              onChange={(e: any) => setPassword(e.target.value)}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button variant="contained" color="primary" type="submit">
-              Submit
-            </Button>
-          </DialogActions>
-        </form>
-        <CloseIcon className="fas fa-times" onClick={() => setOpen(false)} />
-      </Dialog>
-    </div>
-  );
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setPassword(e.target.value)
+                      }
+                      {...input}
+                    />
+                          {meta.error && meta.touched && (
+                              <TextField error>{meta.error}</TextField>
+                          )}
+                        </div>
+                    )}
+                  </Field>
+                </DialogContent>
+                <DialogActions>
+                  <Button variant="contained" color="primary" type="submit">
+                    Submit
+                  </Button>
+                </DialogActions>
+              </form>
+            )}
+          />
+
+          <CloseIcon className="fas fa-times" onClick={() => setOpen(false)} />
+        </Dialog>
+      </div>
+    );
+  }
 };
+
+const mapDispatchToProps = (dispatch: any) => {
+  return bindActionCreators({ login, signOutUser, verifyAuth }, dispatch);
+};
+
+const mapStateToProps = (state: InitialStateInterface) => {
+  return {
+    error: state.userReducer.error,
+    loading: state.userReducer.loading,
+    email: state.userReducer.email,
+    token: state.userReducer.token
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

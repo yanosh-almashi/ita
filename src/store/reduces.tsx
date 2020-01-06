@@ -8,7 +8,7 @@ export interface initialStateInterface {
     projectTitle: string
 }
   
-export const rootReducer = (state: any = initialState, action: any) => {
+export const appReducer = (state: any = initialState, action: any) => {
     switch (action.type) {
         case CHANGE_PROJECT_TITLE: 
             return {...state, projectTitle: action.payload}
