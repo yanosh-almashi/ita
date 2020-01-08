@@ -41,7 +41,7 @@ describe("Connected React-Redux Component", () => {
     const closeIcon = baseElement.querySelector("i");
     expect(closeIcon).toBeInTheDocument();
   });
-  it("should sign out by clicking on button", async () => {
+  it("should sign out by clicking on button",  () => {
     const { baseElement } = component;
     const SignoutBtn = baseElement.querySelector(".signOut");
     fireEvent.click(SignoutBtn);
