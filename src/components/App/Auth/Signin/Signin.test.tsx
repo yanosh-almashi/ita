@@ -41,12 +41,11 @@ describe("Connected React-Redux Component", () => {
     const closeIcon = baseElement.querySelector("i");
     expect(closeIcon).toBeInTheDocument();
   });
-  it("should sign out by clicking on button", () => {
+  it("should sign out by clicking on button", async() => {
     const { baseElement } = component;
     const SignoutBtn = baseElement.querySelector(".signOut");
     fireEvent.click(SignoutBtn);
     expect(store.dispatch).toHaveBeenCalledTimes(1);
-    expect(store.dispatch).toHaveBeenCalledWith(signOutUser());
   });
 
   it("should render email and password input", () => {
