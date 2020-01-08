@@ -30,7 +30,7 @@ export const signInUser = (email: string, password: string) => {
           .getIdTokenResult(true)
           .then(idToken => idToken.token);
         const refreshToken = response.user.refreshToken;
-        Cookies.set("token", token, { expires: 1 / 24});
+        Cookies.set("token", token, { expires: 1 / 24 });
         Cookies.set("refreshToken", refreshToken);
         Cookies.set("uid", response.user.uid);
         dispatch(successSignin({ ...response.user, token }));

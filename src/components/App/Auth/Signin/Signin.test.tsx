@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import "@testing-library/jest-dom/extend-expect";
 import { initialState } from "../../../../store/auth/reducers";
 import SignIn from "./Signin";
-import { signInUser, signOutUser } from "../../../../store/auth/actionCreators";
+import { signInUser } from "../../../../store/auth/actionCreators";
 
 const mockStore = configureStore([]);
 afterEach(cleanup);
@@ -41,7 +41,7 @@ describe("Connected React-Redux Component", () => {
     const closeIcon = baseElement.querySelector("i");
     expect(closeIcon).toBeInTheDocument();
   });
-  it("should sign out by clicking on button", async() => {
+  it("should sign out by clicking on button", async () => {
     const { baseElement } = component;
     const SignoutBtn = baseElement.querySelector(".signOut");
     fireEvent.click(SignoutBtn);
@@ -66,13 +66,13 @@ describe("Connected React-Redux Component", () => {
 
     expect(email.value).toEqual("softserve@gmail");
     expect(password.value).toEqual("123serve");
-      expect.assertions(2);
-      try {
-          await signInUser("softserve@gmail", "123serve");
-      } catch (e) {
-          expect(e).toEqual({
-              error: 'User not found',
-          });
-      }
+    expect.assertions(2);
+    try {
+      await signInUser("softserve@gmail", "123serve");
+    } catch (e) {
+      expect(e).toEqual({
+        error: "User not found"
+      });
+    }
   });
 });

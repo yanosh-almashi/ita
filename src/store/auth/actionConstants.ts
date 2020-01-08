@@ -1,3 +1,3 @@
-export const SIGNIN_SUCCESSFUL = 'SIGNIN_SUCCESSFUL';
-export const SIGNIN_ERROR = 'SIGNIN_ERROR';
-export const SIGNOUT = 'SIGNOUT';
+export const SIGNIN_SUCCESSFUL = "SIGNIN_SUCCESSFUL";
+export const SIGNIN_ERROR = "SIGNIN_ERROR";
+export const SIGNOUT = "SIGNOUT";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
 import { SigninInterface } from "./Interfaces/SignInInterface";
@@ -40,15 +40,7 @@ const initialValues: UserForm = {
   password: ""
 };
 
-const SignIn = ({
-  uid,
-  error,
-  token,
-  signOutUser,
-  signInUser
-}: SigninInterface) => {
-  console.dir({ uid, token, error, signOutUser, signInUser });
-
+const SignIn = ({ uid, error, signOutUser, signInUser }: SigninInterface) => {
   const [isOpen, setOpen] = useState(true);
   const [value, setValue] = useState(0);
 
@@ -85,7 +77,9 @@ const SignIn = ({
           <Tab label="SIGN UP" />
         </Tabs>
         <Form
-          onSubmit={formObj => {handleFormSubmit(formObj)}}
+          onSubmit={formObj => {
+            handleFormSubmit(formObj);
+          }}
           initialValues={initialValues}
           render={({ handleSubmit }) => (
             <SigninForm
