@@ -1,3 +1,5 @@
+import {ReactElement} from "react";
+
 export interface ItemsInterface {
     name: string;
     icon: string;
@@ -5,3 +7,4 @@ export interface ItemsInterface {
     nextMenu?: ItemsInterface[];
 }
 
+export type NestedMenuType = ReactElement | null;
