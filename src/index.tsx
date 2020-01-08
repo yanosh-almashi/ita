@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
+
 import  App  from './components/App/App';
-import * as serviceWorker from './serviceWorker';
+
 import { Provider } from 'react-redux';
 import rootReducer from './store/auth/reducers';
 import { BrowserRouter } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { ThemeProvider, StylesProvider, withStyles } from '@material-ui/core/sty
 import { createMuiTheme } from '@material-ui/core/styles';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk'
+import './styles/index.css';
 
 const middleware = applyMiddleware(thunkMiddleware);
 const store = createStore(rootReducer, middleware);
@@ -92,8 +93,7 @@ ReactDOM.render(
       </ThemeProvider>
 
     </BrowserRouter>
-  </Provider>,
+  </Provider>, 
   document.getElementById('root')
 );
 
-serviceWorker.unregister();

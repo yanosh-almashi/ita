@@ -1,4 +1,4 @@
-import {CHANGE_PROJECT_TITLE} from './actions-constants';
+import {CHANGE_PROJECT_TITLE} from './auth/auth.types';
 
 const initialState = {
     projectTitle: 'ITA-tools'

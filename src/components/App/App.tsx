@@ -1,12 +1,11 @@
-import React from "react";
-import "./App.css";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { changeProjectTitle } from "../../store/actions";
-import MenuContainer from "./MenuContainer/MenuContainer";
-import ContentWrapper from "./ContentWrapper/ContentWrapper";
-import SignIn from "./Auth/Signin/Signin";
-
+import React from 'react';
+import './App.css';
+import { bindActionCreators } from 'redux'; 
+import { connect } from 'react-redux';
+import SignIn from '../App/Auth/Signin/Signin'
+import { changeProjectTitle } from '../../store/actions';
+import MenuContainer from './MenuContainer/MenuContainer';
+import ContentWrapper from './ContentWrapper/ContentWrapper';
 
 const App = () => {
   return (
@@ -17,6 +16,7 @@ const App = () => {
     </div>
   );
 };
+
 
 const mapStateToProps = (state: any) => {
   return { projectTitle: state.projectTitle };
