@@ -23,42 +23,25 @@ export const menuItems: ItemsInterface[] = [
     path: '/tools',
     nextMenu: [
       {
-        name: "home1",
-        icon: "fas fa-home",
-        path: "/random1"
+        name: "rem",
+        icon: "far fa-address-book",
+        path: "/rem"
       },
       {
-        name: "profile1",
-        icon: "fas fa-user",
-        path: "/profile1"
+        name: "schedule",
+        icon: "far fa-calendar-alt",
+        path: "/schedule"
       },
       {
-        name: "tools1",
-        icon: "fas fa-wrench",
-        path: '/tools1'
+        name: "randomaizer",
+        icon: "fas fa-random",
+        path: "/random"
       }
-    ]
-  },
-  {
-    name: "tools-new",
-    icon: "fas fa-wrench",
-    path: '/tools-new',
-    nextMenu: [
+      ,
       {
-        name: "home1-new",
-        icon: "fas fa-home",
-        path: "/random1-new"
-      },
-
-      {
-        name: "tools1-new",
-        icon: "fas fa-wrench",
-        path: '/tools1-new'
-      },
-      {
-        name: "profile1-new",
-        icon: "fas fa-user",
-        path: "/profile1-new"
+        name: "todo",
+        icon: "far fa-list-alt",
+        path: "/todo"
       }
     ]
   }
@@ -83,14 +66,12 @@ const StyledMenuContainer = styled.div`
 `;
 
 const MenuContainer = () => {
-  const [nestedMenuContent, addNestedMenuCgontent] = useState<ReactElement>();
+  const [nestedMenuContent, addNestedMenuContent] = useState<ReactElement>();
   const [initialNestedMenu, addInitialNestedMenu] = useState<Array<ReactElement>>([]);
 
   useEffect(() => {
     menuItems.forEach((item: any, i: number) => {
       if ( item.nextMenu ) {
-        console.log(item.nextMenu);
-
         addInitialNestedMenu((prevState) => {
           return [
             ...prevState,
@@ -118,12 +99,11 @@ const MenuContainer = () => {
         <Chat />
       </StyledContainer>
       { nestedMenuContent ?
-        <StyledContainer>
-          {nestedMenuContent}
-        </StyledContainer> :
+          <StyledContainer>
+            {nestedMenuContent}
+          </StyledContainer> :
         (<Switch>
             {initialNestedMenu.map((item: ReactElement) => {
-              console.log(item);
               return item;
             })}
         </Switch>) }

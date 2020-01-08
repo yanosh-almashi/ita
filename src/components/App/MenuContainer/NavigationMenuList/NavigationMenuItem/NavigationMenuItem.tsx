@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
-import {NavLink, useLocation} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import NavigationMenu from '../NavigationMenuList';
 import Tooltip from '@material-ui/core/Tooltip';
 import {ItemsInterface} from "@components/App/MenuContainer/types/types";
@@ -15,8 +15,8 @@ interface Props {
 }
 
 const MenuItem: React.FC<Props> = (props: Props) => {
-  let location = useLocation();
-  // const [nestedMenuOpened, nestedMenuOpenedListenter] = useState();
+  const [toggler, setToggler] = useState<boolean>(false);
+
   const Item = styled.li`
     list-style-type: none; 
     font-size: 0; 
@@ -51,31 +51,33 @@ const MenuItem: React.FC<Props> = (props: Props) => {
   let link;
   let linkContent = (<>
     <MenuItemIcon className={props.icon} />
-    {props.nextMenu && <ArrowSubmenu className="fas fa-chevron-down" />}
+    {props.nextMenu && <ArrowSubmenu className={toggler ? "fas fa-chevron-right" : "fas fa-chevron-down"} />}
   </>);
 
   if ( props.nextMenu ) {
     const linkClickListener = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       event.preventDefault();
       props.addNestedMenuContent!(<NavigationMenu nestedRoute={props.path} menuItems={props.nextMenu}/>);
+      setToggler(!toggler);
+        console.log(toggler)
     };
-    link = (<a
-      style={ location.pathname.indexOf(props.path + '/') !== -1 ? {
-        color: `#24c0fd`,
-        backgroundColor: `#e1f6ff`
-    }: {}}
-      href={props.path}
+    link = (<NavLink
+        activeStyle={{
+            color: `#24c0fd`,
+            backgroundColor: `#e1f6ff`
+        }}
+      to={props.path}
       onClick={(event)=>{linkClickListener(event)}}
       >
        {linkContent}
-     </a>);
+     </NavLink>);
   } else {
     const linkClickListener = () => {
-      if ( props.addNestedMenuContent) {
-        props.addNestedMenuContent('');
-      }
+        if (props.addNestedMenuContent) {
+            props.addNestedMenuContent('');
+        }
     };
-    link = ( <NavLink
+    link = (<NavLink
       to={props.path}
       activeStyle={{
          color: `#24c0fd`,
