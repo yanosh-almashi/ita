@@ -8,10 +8,10 @@ import ContentWrapper from "./ContentWrapper/ContentWrapper";
 import SignIn from "./Auth/Signin/Signin";
 
 
-const App = (props: any) => {
+const App = () => {
   return (
     <div className="App">
-      <SignIn {...props}/>
+      <SignIn/>
       <MenuContainer />
       <ContentWrapper />
     </div>

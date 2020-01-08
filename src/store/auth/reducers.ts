@@ -1,54 +1,39 @@
 import { combineReducers } from 'redux'
-import {LOGIN, LOGIN_ERROR, LOGIN_SUCCESSFUL, LOGOUT, VERIFY_SUCCESS} from './actionConstants'
+import { SIGNIN_ERROR, SIGNIN_SUCCESSFUL, SIGNOUT} from './actionConstants'
 import {appReducer} from "../reduces";
 import { UserInterface } from "./initialStateInterface";
 import Cookies from "js-cookie";
 
-console.dir(Cookies.get('token'));
 
+let token = Cookies.get('token') || Cookies.get('refreshToken');
+const id = Cookies.get('uid');
 
-const token = Cookies.get('token');
-const initialState: UserInterface = {
-  uid: null,
+export const initialState: UserInterface = {
+  uid: id || null,
   token: token || null,
-  email: null,
-  error: null,
-  isAuth: false,
-  loading: true
+  error: null
 };
 
-console.dir(initialState);
-const userReducer = (state = initialState, action: any) => {
+export const userReducer = (state = initialState, action: any) => {
+    console.log(action.type);
     switch (action.type) {
-        case LOGIN:
-            return  {
-                ...state
-            };
-        case LOGIN_SUCCESSFUL:
+        case SIGNIN_SUCCESSFUL:
             return {
                 ...state,
                 token: action.payload.token || state.token,
-                email: action.payload.email,
-                uid: action.payload.uid,
-                loading: false
+                uid: action.payload.uid || state.uid,
+                error: null
             };
-        case LOGIN_ERROR:
+        case SIGNIN_ERROR:
             return {
                 ...state,
                 error: action.payload,
-                loading: false
             };
-        case LOGOUT:
+        case SIGNOUT:
             return {
                 ...state = initialState,
                 token: null,
-                loading: false
-            };
-        case VERIFY_SUCCESS:
-            return {
-                ...state,
-                error: null,
-                loading: false
+                uid: null
             };
         default:
             return state

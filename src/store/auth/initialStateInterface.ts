@@ -3,10 +3,7 @@ export interface InitialStateInterface {
 }
 
 export interface UserInterface {
-    uid: null,
+    uid: string | null,
     token: string | null,
-    email: null,
-    error: null,
-    isAuth: boolean,
-    loading: boolean
+    error: null
 }

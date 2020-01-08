@@ -1,91 +1,56 @@
-import {
-  LOGIN,
-  LOGIN_ERROR,
-  LOGIN_SUCCESSFUL,
-  LOGOUT,
-  VERIFY_SUCCESS
-} from "./actionConstants";
+import { SIGNIN_ERROR, SIGNIN_SUCCESSFUL, SIGNOUT } from "./actionConstants";
 import { Firebase } from "../../components/App/Auth/firebase.config";
 import Cookies from "js-cookie";
-import {SigninInterface} from "@components/App/Auth/Signin/SignInInterface";
-import {UserInterface} from "./initialStateInterface";
 
-
-const requestLogin = () => {
+export const successSignin = (user: any) => {
   return {
-    type: LOGIN
-  };
-};
-
-export const receiveLogin = (user: any) => {
-  return {
-    type: LOGIN_SUCCESSFUL,
+    type: SIGNIN_SUCCESSFUL,
     payload: user
   };
 };
 
-const errorLogin = (err: Error) => {
+const errorSignin = (err: Error) => {
   return {
-    type: LOGIN_ERROR,
+    type: SIGNIN_ERROR,
     payload: err
   };
 };
 
-const verifySuccess = () => {
-  return {
-    type: VERIFY_SUCCESS
-  };
-};
-
-export const login = (email: string, password: string) => {
-  console.dir(email, password);
-
+export const signInUser = (email: string, password: string) => {
   return async (dispatch: any) => {
     try {
-      dispatch(requestLogin());
       const response = await Firebase.auth().signInWithEmailAndPassword(
         email,
         password
       );
-      console.dir(response.user);
+
       if (response.user) {
-        let token = await response.user
-          .getIdToken(true)
-          .then(idToken => idToken);
-        Cookies.set('token', token);
-        dispatch(receiveLogin({...response.user, token}));
+        console.dir(response.user.getIdTokenResult());
+        const token = await response.user
+          .getIdTokenResult(true)
+          .then(idToken => idToken.token);
+        const refreshToken = response.user.refreshToken;
+        Cookies.set("token", token, { expires: 1 / 24});
+        Cookies.set("refreshToken", refreshToken);
+        Cookies.set("uid", response.user.uid);
+        dispatch(successSignin({ ...response.user, token }));
       }
     } catch (err) {
-      dispatch(errorLogin(err.message));
+      dispatch(errorSignin(err.message));
     }
   };
 };
-
 export const signOutUser = () => {
   return (dispatch: any) => {
     Firebase.auth()
       .signOut()
       .then(() => {
-       Cookies.remove('token');
+        Cookies.remove("token");
+        Cookies.remove("refreshToken");
+        Cookies.remove("uid");
         dispatch({
-          type: LOGOUT
+          type: SIGNOUT
         });
       });
-  };
-};
-export const verifyAuth = () => {
-  return async (dispatch: any) => {
-    try {
-      await Firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          dispatch(receiveLogin(user));
-        } else {
-          dispatch(verifySuccess());
-        }
-      });
-    } catch (e) {
-      console.log(e);
-      return null;
-    }
   };
 };

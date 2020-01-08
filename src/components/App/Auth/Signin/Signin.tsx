@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { bindActionCreators } from "redux";
 import { Form, Field } from "react-final-form";
-import { SigninInterface } from "./SignInInterface";
+import { SigninInterface } from "./Interfaces/SignInInterface";
 import { InitialStateInterface } from "../../../../store/auth/initialStateInterface";
 import {
   Dialog,
@@ -13,12 +13,9 @@ import {
   TextField
 } from "@material-ui/core";
 import styled from "styled-components";
-import {
-  login,
-  signOutUser,
-  verifyAuth
-} from "../../../../store/auth/actionCreators";
+import { signInUser, signOutUser } from "../../../../store/auth/actionCreators";
 import { connect } from "react-redux";
+import { UserForm } from "@components/App/Auth/Signin/Interfaces/UserFormInterface";
 
 const CloseIcon = styled.i`
   position: absolute;
@@ -32,135 +29,129 @@ const CloseIcon = styled.i`
   }
 `;
 
-const SignIn: React.FC<SigninInterface> = ({
-  email,
+const SigninForm = styled.form`
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const initialValues: UserForm = {
+  email: "",
+  password: ""
+};
+
+const SignIn = ({
+  uid,
   error,
   token,
-  loading,
   signOutUser,
-  verifyAuth,
-  login
+  signInUser
 }: SigninInterface) => {
-  console.dir({ email, error, token, loading, signOutUser, verifyAuth, login });
+  console.dir({ uid, token, error, signOutUser, signInUser });
 
-  const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(true);
   const [value, setValue] = useState(0);
 
-  useEffect(() => {
-    verifyAuth();
-  });
-
-  const handleFormSubmit = (e: React.ChangeEvent<{}>) => {
-   /* e.preventDefault();*/
-    login(mail, password);
-    !error && setOpen(false);
+  const handleFormSubmit = (formObj: UserForm) => {
+    signInUser(formObj.email, formObj.password);
   };
+
   const handleSignOut = (e: React.ChangeEvent<{}>) => {
     e.preventDefault();
     signOutUser();
-    setMail("");
-    setPassword("");
   };
+
   const handleChange = (e: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
-  if (loading) {
-    return null;
-  } else {
-    return (
-      <div>
-        <div>Current user: {email}</div>
-        {!email && <button onClick={() => setOpen(true)}>Sign in</button>}
-        <button onClick={handleSignOut}>Sign out</button>
-        <Dialog open={isOpen}>
-          <Tabs
-            onChange={handleChange}
-            value={value}
-            indicatorColor="primary"
-            textColor="secondary"
-            centered
-          >
-            <Tab label="SIGN IN" />
-            <Tab label="SIGN UP" />
-          </Tabs>
-          <Form
-            onSubmit={handleFormSubmit}
-            render={({ handleSubmit }) => (
-              <form onSubmit={handleSubmit}>
-                <DialogContent>
-                  <Field name="email">
-                    {({ input, meta }) => (
-                      <div>
-                        <TextField
-                          id="outlined-basic email"
-                          label="Email"
-                          variant="outlined"
-                          type="email"
-                          name="email"
-                          value={email}
-
-                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            setMail(e.currentTarget.value)
-                          }
-                          {...input}
-                        />
-                        {meta.error && meta.touched && (
-                          <TextField error>{meta.error}</TextField>
-                        )}
-                      </div>
-                    )}
-                  </Field>
-                  <Field name="password">
-                    {({ input, meta }) => (
-                        <div>
+  return (
+    <div>
+      <div>Current user: {uid}</div>
+      <button className="signIn" onClick={() => setOpen(true)}>
+        Sign in
+      </button>
+      <button className="signOut" onClick={handleSignOut}>
+        Sign out
+      </button>
+      <Dialog open={isOpen}>
+        <Tabs
+          onChange={handleChange}
+          value={value}
+          indicatorColor="primary"
+          textColor="secondary"
+          centered
+        >
+          <Tab label="SIGN IN" />
+          <Tab label="SIGN UP" />
+        </Tabs>
+        <Form
+          onSubmit={formObj => {handleFormSubmit(formObj)}}
+          initialValues={initialValues}
+          render={({ handleSubmit }) => (
+            <SigninForm
+              onSubmit={e => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+            >
+              <DialogContent>
+                <Field name="email">
+                  {({ input }) => (
                     <TextField
+                      id="outlined-basic email"
+                      label="Email"
+                      className="input"
+                      variant="outlined"
+                      type="email"
+                      name="email"
+                      {...input}
+                    />
+                  )}
+                </Field>
+                <Field name="password">
+                  {({ input }) => (
+                    <TextField
+                      className="input"
                       id="outlined-basic pass"
-                      label={error ? "Password isn't correct" : "Password"}
+                      label={
+                        error ? "Email or password isn't correct" : "Password"
+                      }
                       variant="outlined"
                       type="password"
                       name="password"
-                      value={password}
-
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setPassword(e.target.value)
-                      }
                       {...input}
                     />
-                          {meta.error && meta.touched && (
-                              <TextField error>{meta.error}</TextField>
-                          )}
-                        </div>
-                    )}
-                  </Field>
-                </DialogContent>
-                <DialogActions>
-                  <Button variant="contained" color="primary" type="submit">
-                    Submit
-                  </Button>
-                </DialogActions>
-              </form>
-            )}
-          />
-
-          <CloseIcon className="fas fa-times" onClick={() => setOpen(false)} />
-        </Dialog>
-      </div>
-    );
-  }
+                  )}
+                </Field>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  className="submit"
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </DialogActions>
+            </SigninForm>
+          )}
+        />
+        <CloseIcon className="fas fa-times" onClick={() => setOpen(false)} />
+      </Dialog>
+    </div>
+  );
 };
 
 const mapDispatchToProps = (dispatch: any) => {
-  return bindActionCreators({ login, signOutUser, verifyAuth }, dispatch);
+  return bindActionCreators({ signInUser, signOutUser }, dispatch);
 };
 
 const mapStateToProps = (state: InitialStateInterface) => {
   return {
-    error: state.userReducer.error,
-    loading: state.userReducer.loading,
-    email: state.userReducer.email,
-    token: state.userReducer.token
+    token: state.userReducer.token,
+    uid: state.userReducer.uid,
+    error: state.userReducer.error
   };
 };
 
