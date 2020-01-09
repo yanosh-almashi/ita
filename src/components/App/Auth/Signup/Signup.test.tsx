@@ -4,7 +4,7 @@ import '@testing-library/jest-dom/extend-expect';
 import Signup from './Signup';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import authReducer from '../../../../store/auth/auth.reducer';
+import authReducer from '../../../../store/auth/authReducer';
 
 const store = createStore(authReducer);
 

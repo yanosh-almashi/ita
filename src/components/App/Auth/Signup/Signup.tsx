@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { authSignup } from '../../../../store/auth/auth.actions';
+import { authSignup } from '../../../../store/auth/actionCreators';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 import { SignupInterface } from './SignupInterface';
 import { Form } from 'react-final-form';
-import SignupInput from '../../../../HOC/AuthHOC/SignupInputHOC';
+import InputValidate from '../../../../HOC/AuthHOC/InputValidateHOC';
 import { required, email, password, composeValidators } from '../validation';
 
 const SignupForm = styled.form`
@@ -55,7 +55,7 @@ const Signup: React.FC<Props> = (props) => {
             e.preventDefault();
             handleSubmit();
           }}>
-            <SignupInput
+            <InputValidate
               id="EmailSignup"
               label="Email"
               variant="outlined"
@@ -63,7 +63,7 @@ const Signup: React.FC<Props> = (props) => {
               type="email"
               fieldName="email"
             />
-            <SignupInput
+            <InputValidate
               id="PasswordSignup"
               label="Password"
               variant="outlined"
@@ -71,7 +71,7 @@ const Signup: React.FC<Props> = (props) => {
               type="password"
               fieldName="password"
             />
-            <SignupInput
+            <InputValidate
               id="ConfirmPasswordSignup"
               label="Confirm password"
               variant="outlined"
@@ -79,7 +79,7 @@ const Signup: React.FC<Props> = (props) => {
               type="password"
               fieldName="confirmPassword"
             />
-            <SignupInput
+            <InputValidate
               id="NameSignup"
               label="Name"
               variant="outlined"
@@ -87,7 +87,7 @@ const Signup: React.FC<Props> = (props) => {
               type="text"
               fieldName="name"
             />
-            <SignupInput
+            <InputValidate
               id="GroupSignup"
               label="GroupSignup"
               variant="outlined"

@@ -3,7 +3,6 @@ import HomePage from './HomePage/HomePage';
 import { Switch, Route } from 'react-router';
 import ProfilePage from './ProfilePage/ProfilePage';
 import styled from 'styled-components';
-import Signup from '../Auth/Signup/Signup';
 import { connect } from 'react-redux';
 import ProtectedRoute from '../../../HOC/ProtectedRoute';
 
@@ -24,7 +23,6 @@ const ContentWrapper = (props: any) => {
   return (
     <StyledContentWrapper>
       <StyledModalTest>
-        <Signup />
       </StyledModalTest>
       <Switch>
         <Route path="/" exact component={ HomePage } />

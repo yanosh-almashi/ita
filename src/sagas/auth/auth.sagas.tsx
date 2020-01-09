@@ -1,16 +1,19 @@
 import { takeLatest, call, fork, put } from 'redux-saga/effects';
-import * as actionTypes from '../../store/auth/auth.types';
-import * as actions from '../../store/auth/auth.actions';
+import * as actionTypes from '../../store/auth/actionConstants';
+import * as actions from '../../store/auth/actionCreators';
 import * as API from '../../api/auth/signup.api';
 import { AuthDataInterface, SignupFullDataInterface } from '@components/App/Auth/Signup/SignupInterface';
+import { createUserCoockies } from '../../components/App/Auth/AuthUtils';
 
 function* getAuth(authData: any) {
   const userToken: string = yield authData.getIdToken()
     .then((token: string) => token );
   const userId: string = authData.uid;
+  const refreshToken: string = authData.refreshToken;
   const auth: AuthDataInterface = {
     token: userToken,
-    id: userId
+    refreshToken: refreshToken,
+    uid: userId
   }
   return auth;
 }
@@ -25,18 +28,18 @@ function* signupWithFullUserData(data: SignupFullDataInterface) {
   return isSuccess;
 }
 
-function* saveDataInState(userAuthData: AuthDataInterface) {
+function* saveDataInState(userAuthData: any) {
   const storageUserData: AuthDataInterface = {
     token: userAuthData.token,
-    id: userAuthData.id,
-    isAuth: userAuthData.isAuth,
-    error: userAuthData.error
+    uid: userAuthData.id,
+    refreshToken: userAuthData.refreshToken
   }
   yield put(actions.saveUserAuthData(
     storageUserData
   ));
-  document.cookie = `token=${storageUserData.token}`;
-  localStorage.setItem('authData', JSON.stringify(storageUserData));
+  
+  if (!storageUserData.token || !storageUserData.uid || !storageUserData.refreshToken) { return; }
+  createUserCoockies(storageUserData.token, storageUserData.refreshToken, storageUserData.uid);
 }
 
 function* signupUser(action: any) {
@@ -51,7 +54,7 @@ function* signupUser(action: any) {
     if (!user) { return; }
 
     const userAuthData: AuthDataInterface = yield call(getAuth, user);
-    const isSuccess = yield call(signupWithFullUserData, { id: userAuthData.id, ...action.payload });
+    const isSuccess = yield call(signupWithFullUserData, { id: userAuthData.uid, ...action.payload });
 
     if(!isSuccess) { return; }
 
@@ -65,27 +68,8 @@ function* watchSignupUser() {
   yield takeLatest(actionTypes.AUTH_SIGNUP, signupUser);
 }
 
-function* signoutUser() {
-  try {
-    const storageUserData: AuthDataInterface = {
-      token: null,
-      id: null,
-      isAuth: false,
-      error: null
-    };
-    yield call(saveDataInState, { ...storageUserData });
-  } catch(e) {
-    // error handle in future
-  }
-}
-
-function* watchSignoutUser() {
-  yield takeLatest(actionTypes.AUTH_SIGNOUT, signoutUser);
-}
-
 const authSagas = [
-  fork(watchSignupUser),
-  fork(watchSignoutUser),
+  fork(watchSignupUser)
 ];
 
 export default authSagas;

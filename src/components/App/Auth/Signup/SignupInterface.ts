@@ -14,9 +14,8 @@ export interface SignupFullDataInterface {
 
 export interface AuthDataInterface {
   token: string | null;
-  id: string | null;
-  error?: any;
-  isAuth?: boolean;
+  uid: string | null;
+  refreshToken: string | null;
 }
 
 export interface SignupFormInterface {

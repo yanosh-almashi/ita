@@ -1,4 +1,4 @@
-import { userReducer as reducer } from "./reducers";
+import { authReducer as reducer } from "./authReducer";
 import * as types from "./actionConstants";
 import { UserInterface } from "./initialStateInterface";
 
@@ -11,6 +11,16 @@ const initialState: UserInterface = {
 describe("user auth reducer", () => {
   it("should return the initial state", () => {
     expect(reducer({ ...initialState }, {})).toEqual({ ...initialState });
+  });
+  
+  it('success', () => {
+    const action = { type: types.AUTH_SUCCESSFUL,  payload: { token: 'token', id: 'id', isAuth: true } }
+    expect(reducer(initialState, action)).toEqual({
+      token: 'token',
+      id: 'id',
+      error: null,
+      isAuth: true
+    });
   });
 
   it("sign in successfully", () => {

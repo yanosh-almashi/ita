@@ -3,7 +3,7 @@ import configureStore, { MockStore } from "redux-mock-store";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
 import "@testing-library/jest-dom/extend-expect";
-import { initialState } from "../../../../store/auth/reducers";
+import { initialState } from "../../../../store/auth/authReducer";
 import SignIn from "./Signin";
 import { signInUser } from "../../../../store/auth/actionCreators";
 

@@ -20,12 +20,11 @@ const InputError = styled.div`
   margin-bottom: -10px;
   padding-top: 5px;
   font-size: 12px;
-  padding-left: 20px;
   color: #d73c2a;
   text-align: center;
 `;
 
-const SignupInput: React.FC<Props> = ({ fieldName, id, label, validate, type }) => (
+const InputValidate: React.FC<Props> = ({ fieldName, id, label, validate, type }) => (
   <Input>
     <Field 
       name={ fieldName }
@@ -51,4 +50,4 @@ const SignupInput: React.FC<Props> = ({ fieldName, id, label, validate, type }) 
   </Input>
 );
 
-export default SignupInput;
+export default InputValidate;

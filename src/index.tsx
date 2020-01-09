@@ -4,27 +4,31 @@ import ReactDOM from 'react-dom';
 import  App  from './components/App/App';
 
 import { Provider } from 'react-redux';
-import rootReducer from './store/auth/reducers';
+import rootReducer from './store/rootReducer';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, StylesProvider, withStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk'
 import './styles/index.css';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas/index.sagas';
 
-const middleware = applyMiddleware(thunkMiddleware);
-const store = createStore(rootReducer, middleware);
+const sagaMiddleware = createSagaMiddleware();
+const middleware = [sagaMiddleware, thunkMiddleware];
+const store = createStore(rootReducer, applyMiddleware(...middleware));
+sagaMiddleware.run(rootSaga);
 
 const theme = createMuiTheme({
   palette: {
     primary:  {
-      main: '#24c0fd'
+      main: '#24c3f9'
     },
     error:  {
       main: '#d73c2a'
     },
     secondary: {
-      main: '#20233f'
+      main: '#24c3f9'
     }
   }
 });
@@ -38,46 +42,36 @@ const GlobalCSS = withStyles({
       letterSpacing: '1px',
       width: '140px',
       color: '#f8f7ff',
-      margin: '20px auto'
+      "&:hover": {
+        backgroundColor: '#ffffff',
+        borderColor: '#ffffff',
+        color: '#20233f',
+      }
     },
-    '.MuiInputBase-input': {
-      height: '0px'
+    '.MuiOutlinedInput-input': {
+      padding: '10px 15px',
+      width: '450px',
     },
     '.MuiOutlinedInput-root': {
-      borderRadius: '50px'
+      borderRadius: '50px',
     },
     '.MuiInputLabel-outlined': {
       position: 'absolute',
-      top: '14px',
+      top: '50%',
+      transform: 'translateY(-50%)',
       left: '23px',
       fontSize: '14px',
       color: '#20233f',
-      transform: 'none',
       transition: 'all 0.2s ease-in-out',
     },
     '.MuiInputLabel-outlined.MuiInputLabel-shrink': {
-      transform: 'translate(0, -35px) scale(0.9)'
+      transform: 'translate(0, -37px) scale(0.9)'
     },
-    '.MuiTextField-root': {
-      height: '0px',
-      margin: '40px auto',
-      width: '90%'
-    },
-    '.MuiOutlinedInput-input': {
-      height: '30px',
-      padding: '5px 15px',
-      width: '100%'
-    },
-    '.PrivateNotchedOutline-root-135': {
-      top: '0px'
-    },
-    '.MuiDialogContent-root:first-child': {
-      paddingTop: '0px'
-    },
-    '.MuiDialogContent-root': {
-      textAlign: 'center',
-      position: 'relative'
-    },
+
+    '.MuiOutlinedInput-root.MuiOutlinedInput-notchedOutline': {
+      borderColor: '#ffffff',
+      backgroundColor: '#ffffff',
+    }
   }
 })(() => null);
 

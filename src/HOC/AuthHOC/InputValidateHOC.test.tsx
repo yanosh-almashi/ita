@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import SignupInput from './SignupInputHOC';
+import SignupInput from './InputValidateHOC';
 import { Form } from 'react-final-form';
 
 afterEach(cleanup);

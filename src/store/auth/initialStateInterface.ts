@@ -1,5 +1,5 @@
 export interface InitialStateInterface {
-    userReducer: UserInterface
+    authReducer: UserInterface
 }
 
 export interface UserInterface {
