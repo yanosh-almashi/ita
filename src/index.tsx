@@ -9,7 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, StylesProvider, withStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk'
+import thunkMiddleware from 'redux-thunk';
 import './styles/index.css';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas/index.sagas';
