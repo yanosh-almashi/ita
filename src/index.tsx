@@ -3,14 +3,10 @@ import ReactDOM from 'react-dom';
 import './styles/index.css';
 import  App  from './components/App/App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux'; 
-import { Provider } from 'react-redux'; 
-import { rootReducer } from './store/reduces';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, StylesProvider, withStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const store = createStore(rootReducer);
 
 const theme = createMuiTheme({
   palette: {
@@ -56,7 +52,7 @@ const GlobalCSS = withStyles({
 })(() => null)
 
 ReactDOM.render(
-  <Provider store={ store }>
+ 
     <BrowserRouter>
     
       <ThemeProvider theme={theme}>
@@ -66,8 +62,7 @@ ReactDOM.render(
         </StylesProvider>
       </ThemeProvider>
 
-    </BrowserRouter>
-  </Provider>, 
+    </BrowserRouter>,
   document.getElementById('root')
 );
 
