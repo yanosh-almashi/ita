@@ -12,12 +12,15 @@ describe("user auth reducer", () => {
   it("should return the initial state", () => {
     expect(reducer({ ...initialState }, {})).toEqual({ ...initialState });
   });
-  
-  it('success', () => {
-    const action = { type: types.AUTH_SUCCESSFUL,  payload: { token: 'token', uid: 'id' } }
+
+  it("success", () => {
+    const action = {
+      type: types.AUTH_SUCCESSFUL,
+      payload: { token: "token", uid: "id" }
+    };
     expect(reducer(initialState, action)).toEqual({
-      token: 'token',
-      uid: 'id',
+      token: "token",
+      uid: "id",
       error: null
     });
   });

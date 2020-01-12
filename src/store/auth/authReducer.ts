@@ -1,4 +1,9 @@
-import { SIGNIN_SUCCESSFUL, SIGNOUT, AUTH_SUCCESSFUL, SIGNIN_ERROR } from "./actionConstants";
+import {
+  SIGNIN_SUCCESSFUL,
+  SIGNOUT,
+  AUTH_SUCCESSFUL,
+  SIGNIN_ERROR
+} from "./actionConstants";
 import { UserInterface } from "./initialStateInterface";
 import Cookies from "js-cookie";
 
@@ -11,22 +16,21 @@ export const initialState: UserInterface = {
   error: null
 };
 
-
 export const authReducer = (state = initialState, action: any) => {
   switch (action.type) {
-  case AUTH_SUCCESSFUL:
-    return {
-      ...state,
-      token: action.payload.token || state.token,
-      uid: action.payload.uid || state.uid
-    }
+    case AUTH_SUCCESSFUL:
+      return {
+        ...state,
+        token: action.payload.token || state.token,
+        uid: action.payload.uid || state.uid
+      };
 
-  case SIGNIN_ERROR:
-    return {
-      ...state,
-      error: action.payload
-    }
-      
+    case SIGNIN_ERROR:
+      return {
+        ...state,
+        error: action.payload
+      };
+
     case SIGNIN_SUCCESSFUL:
       return {
         ...state,
@@ -45,7 +49,5 @@ export const authReducer = (state = initialState, action: any) => {
       return state;
   }
 };
-
-
 
 export default authReducer;

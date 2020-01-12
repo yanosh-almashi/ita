@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Dialog,
-  DialogContent,
   makeStyles,
   Tabs,
   Box,
@@ -11,9 +10,11 @@ import {
 } from "@material-ui/core";
 import styled from "styled-components";
 import Signup from "./Signup/Signup";
-import Signin from "./Signin/Signin";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import SignIn from "./Signin/Signin";
+import { signOutUser } from "../../../store/auth/actionCreators";
+import { SigninInterface } from "@components/App/Auth/Signin/Interfaces/SignInInterface";
 
 const CloseIcon = styled.i`
   position: absolute;
@@ -62,10 +63,15 @@ const useStyles = makeStyles({
   }
 });
 
-const AuthPopUp = () => {
+const AuthPopUp = ({ signOutUser }: any) => {
   const classes = useStyles();
   const [isOpen, setOpen] = useState(true);
   const [value, setValue] = useState(0);
+
+  const handleSignOut = (e: React.ChangeEvent<{}>) => {
+    e.preventDefault();
+    signOutUser();
+  };
 
   const handleChange = (e: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -96,9 +102,15 @@ const AuthPopUp = () => {
           </TabPanel>
         </div>
         <CloseIcon className="fas fa-times" onClick={() => setOpen(false)} />
+        <button onClick={handleSignOut} className="signOut">
+          Sign out
+        </button>
       </Dialog>
     </div>
   );
 };
 
-export default AuthPopUp;
+const mapDispatchToProps = (dispatch: any) => {
+  return bindActionCreators({ signOutUser }, dispatch);
+};
+export default connect(null, mapDispatchToProps)(AuthPopUp);

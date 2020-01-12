@@ -24,27 +24,9 @@ describe("Connected React-Redux Component", () => {
     );
   });
 
-  it("should render with given state from Redux store", () => {
-    expect(component).toMatchSnapshot();
-  });
-
   it("should render buttons", () => {
     const { getByText } = component;
-    expect(getByText("Sign in")).toBeInTheDocument();
-    expect(getByText("Sign out")).toBeInTheDocument();
-    expect(getByText("Submit")).toBeInTheDocument();
-  });
-
-  it("should close the window by clicking on icon", () => {
-    const { baseElement } = component;
-    const closeIcon = baseElement.querySelector("i");
-    expect(closeIcon).toBeInTheDocument();
-  });
-  it("should sign out by clicking on button",  () => {
-    const { baseElement } = component;
-    const SignoutBtn = baseElement.querySelector(".signOut");
-    fireEvent.click(SignoutBtn);
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(getByText("SignIn")).toBeInTheDocument();
   });
 
   it("should render email and password input", () => {
