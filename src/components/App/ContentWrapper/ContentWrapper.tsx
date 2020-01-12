@@ -19,14 +19,16 @@ const StyledModalTest = styled.div`
   margin-top: 100px;
 `;
 
+
 const ContentWrapper = (props: any) => {
+
   return (
     <StyledContentWrapper>
       <StyledModalTest>
       </StyledModalTest>
       <Switch>
         <Route path="/" exact component={ HomePage } />
-        <ProtectedRoute path="/profile" redirect="/" isAuth={props.isAuth}>
+        <ProtectedRoute path="/profile" redirect="/" isAuth={!!props.id}>
           <ProfilePage />
         </ProtectedRoute>
       </Switch>
@@ -36,8 +38,7 @@ const ContentWrapper = (props: any) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    isAuth: state.isAuth,
-    id: state.id
+    id: state.authReducer.uid
   }
 }
 
