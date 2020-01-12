@@ -2,7 +2,7 @@ import { authReducer as reducer } from "./authReducer";
 import * as types from "./actionConstants";
 import { UserInterface } from "./initialStateInterface";
 
-const initialState: any = {
+const initialState: UserInterface = {
   uid: null,
   token: null,
   error: null

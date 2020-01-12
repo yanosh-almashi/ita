@@ -22,7 +22,7 @@ const initialValues: UserForm = {
   password: ""
 };
 
-const SignIn = ({ uid, error, signOutUser, signInUser }: SigninInterface) => {
+const SignIn = ({ uid, signOutUser, signInUser }: SigninInterface) => {
 
   const handleFormSubmit = (formObj: UserForm) => {
     signInUser(formObj.email, formObj.password);
@@ -49,7 +49,6 @@ const SignIn = ({ uid, error, signOutUser, signInUser }: SigninInterface) => {
                 handleSubmit();
               }}
             >
-             
              <InputValidate
               id="EmailSignin"
               label="Email"

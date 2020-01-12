@@ -14,8 +14,7 @@ describe("Connected React-Redux Component", () => {
   let component: any;
   beforeEach(() => {
     store = mockStore({
-      userReducer: { ...initialState },
-      appReducer: { projectTitle: "ITA-tools" }
+      authReducer: { ...initialState }
     });
     store.dispatch = jest.fn();
     component = render(
