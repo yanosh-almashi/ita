@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router';
-import ProfilePage from './ProfilePage/ProfilePage';
 import styled from 'styled-components';
+
+const ProfilePage = lazy(() => import('./ProfilePage/ProfilePage'));
 
 const StyledContentWrapper = styled.div`
   width: 100%;
@@ -14,7 +15,9 @@ const ContentWrapper = () => {
   return (
     <StyledContentWrapper>
       <Switch>
-        <Route path="/profile" component={ ProfilePage } />2
+        <Suspense fallback={<div>Loading...</div>}>
+          <Route path="/profile" component={ ProfilePage } />
+        </Suspense>
       </Switch>
     </StyledContentWrapper>
   )
