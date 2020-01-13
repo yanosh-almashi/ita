@@ -15,7 +15,7 @@ export const authSignupFullData = (fullUserData: SignupFullDataInterface) => {
   const threeMonth = 7889400000;
   return db
     .collection('users')
-    .doc(fullUserData.id)
+    .doc(fullUserData.uid)
     .set({
       email: fullUserData.email,
       name: fullUserData.name,

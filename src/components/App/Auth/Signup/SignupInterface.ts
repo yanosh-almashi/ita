@@ -6,7 +6,7 @@ export interface SignupInterface {
 }
 
 export interface SignupFullDataInterface {
-  id?: string;
+  uid?: string;
   email?: string;
   name?: string;
   group?: string;
@@ -18,10 +18,3 @@ export interface AuthDataInterface {
   refreshToken: string | null;
 }
 
-export interface SignupFormInterface {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  name: string;
-  group: string;
-}

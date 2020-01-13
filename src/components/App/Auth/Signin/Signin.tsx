@@ -22,8 +22,7 @@ const initialValues: UserForm = {
   password: ""
 };
 
-const SignIn = ({ uid, token, error, signInUser }: SigninInterface) => {
-    console.log(uid, token)
+const SignIn = ({ error, signInUser }: SigninInterface) => {
   const handleFormSubmit = (formObj: UserForm) => {
     signInUser(formObj.email, formObj.password);
   };
@@ -84,8 +83,6 @@ const mapDispatchToProps = (dispatch: any) => {
 
 const mapStateToProps = (state: InitialStateInterface) => {
   return {
-    token: state.authReducer.token,
-    uid: state.authReducer.uid,
     error: state.authReducer.error
   };
 };

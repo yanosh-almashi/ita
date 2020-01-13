@@ -20,7 +20,7 @@ function* getAuth(authData: any) {
 
 function* signupWithFullUserData(data: SignupFullDataInterface) {
   const isSuccess: boolean = yield call(API.authSignupFullData, {
-    id: data.id,
+    uid: data.uid,
     email: data.email,
     name: data.name,
     group: data.group,
@@ -31,7 +31,7 @@ function* signupWithFullUserData(data: SignupFullDataInterface) {
 function* saveDataInState(userAuthData: any) {
   const storageUserData: AuthDataInterface = {
     token: userAuthData.token,
-    uid: userAuthData.id,
+    uid: userAuthData.uid,
     refreshToken: userAuthData.refreshToken
   }
   yield put(actions.saveUserAuthData(
@@ -54,7 +54,7 @@ function* signupUser(action: any) {
     if (!user) { return; }
 
     const userAuthData: AuthDataInterface = yield call(getAuth, user);
-    const isSuccess = yield call(signupWithFullUserData, { id: userAuthData.uid, ...action.payload });
+    const isSuccess = yield call(signupWithFullUserData, { uid: userAuthData.uid, ...action.payload });
 
     if(!isSuccess) { return; }
 
