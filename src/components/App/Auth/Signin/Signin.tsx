@@ -22,7 +22,8 @@ const initialValues: UserForm = {
   password: ""
 };
 
-const SignIn = ({ error, signInUser }: SigninInterface) => {
+const SignIn = ({ uid, token, error, signInUser }: SigninInterface) => {
+    console.log(uid, token)
   const handleFormSubmit = (formObj: UserForm) => {
     signInUser(formObj.email, formObj.password);
   };
