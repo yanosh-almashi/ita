@@ -11,80 +11,17 @@ import {
   StylesProvider,
   withStyles
 } from "@material-ui/core/styles";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { theme } from "./index.style";
 import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import "./styles/index.css";
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas/index.sagas";
-
+import { GlobalCSS } from "./index.style";
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware, thunkMiddleware];
 const store = createStore(rootReducer, applyMiddleware(...middleware));
 sagaMiddleware.run(rootSaga);
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#24c3f9"
-    },
-    error: {
-      main: "#d73c2a"
-    },
-    secondary: {
-      main: "#24c3f9"
-    }
-  }
-});
-
-const GlobalCSS = withStyles({
-  "@global": {
-    ".MuiButton-contained": {
-      fontSize: "14px",
-      borderRadius: "50px",
-      fontWeight: "bold",
-      letterSpacing: "1px",
-      width: "140px",
-      margin: "0 auto",
-      color: "#f8f7ff",
-      "&:hover": {
-        backgroundColor: "#ffffff",
-        borderColor: "#ffffff",
-        color: "#20233f"
-      }
-    },
-    ".MuiOutlinedInput-input": {
-      padding: "10px 15px",
-      width: "450px"
-    },
-    ".MuiOutlinedInput-root": {
-      borderRadius: "50px"
-    },
-    ".MuiInputLabel-outlined": {
-      position: "absolute",
-      top: "50%",
-      transform: "translateY(-50%)",
-      left: "23px",
-      fontSize: "14px",
-      color: "#20233f",
-      transition: "all 0.2s ease-in-out"
-    },
-    ".MuiInputLabel-outlined.MuiInputLabel-shrink": {
-      transform: "translate(0, -37px) scale(0.9)"
-    },
-
-    ".MuiOutlinedInput-root.MuiOutlinedInput-notchedOutline": {
-      borderColor: "#ffffff",
-      backgroundColor: "#ffffff"
-    },
-    ".MuiAppBar-colorDefault": {
-      backgroundColor: "#ffffff"
-    },
-    ".MuiTabs-flexContainer": {
-      marginLeft: "100px"
-    }
-  }
-})(() => null);
 
 ReactDOM.render(
   <Provider store={store}>

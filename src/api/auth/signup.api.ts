@@ -12,7 +12,7 @@ export const authSignup = (userData: SignupInterface) => {
 
 export const authSignupFullData = (fullUserData: SignupFullDataInterface) => {
   const time = new Date().getTime();
-  const threeMonth = 7889400000;
+  const threeMonth = 3 * 30 * 24* 60 * 60 * 1000;
   return db
     .collection('users')
     .doc(fullUserData.uid)

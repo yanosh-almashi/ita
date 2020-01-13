@@ -77,7 +77,6 @@ const AuthPopUp = ({ signOutUser }: any) => {
     setValue(newValue);
   };
   return (
-    <div>
       <Dialog open={isOpen}>
         <div className={classes.root}>
           <AppBar position="static" color="default">
@@ -106,7 +105,6 @@ const AuthPopUp = ({ signOutUser }: any) => {
           Sign out
         </button>
       </Dialog>
-    </div>
   );
 };
 

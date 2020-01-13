@@ -3,7 +3,7 @@ import * as actionTypes from '../../store/auth/actionConstants';
 import * as actions from '../../store/auth/actionCreators';
 import * as API from '../../api/auth/signup.api';
 import { AuthDataInterface, SignupFullDataInterface } from '@components/App/Auth/Signup/SignupInterface';
-import { createUserCoockies } from '../../components/App/Auth/AuthUtils';
+import { createUserInformation } from '../../components/App/Auth/AuthUtils';
 
 function* getAuth(authData: any) {
   const userToken: string = yield authData.getIdToken()
@@ -39,7 +39,7 @@ function* saveDataInState(userAuthData: any) {
   ));
   
   if (!storageUserData.token || !storageUserData.uid || !storageUserData.refreshToken) { return; }
-  createUserCoockies(storageUserData.token, storageUserData.refreshToken, storageUserData.uid);
+  createUserInformation(storageUserData.token, storageUserData.refreshToken, storageUserData.uid);
 }
 
 function* signupUser(action: any) {

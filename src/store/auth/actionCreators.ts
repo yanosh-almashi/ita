@@ -6,8 +6,8 @@ import {
 import { SIGNIN_SUCCESSFUL, SIGNIN_ERROR, SIGNOUT } from "./actionConstants";
 import { Firebase } from "../../components/App/Auth/firebase.config";
 import {
-  createUserCoockies,
-  deleteUserCookies
+  createUserInformation,
+  deleteUserInformation
 } from "../../components/App/Auth/AuthUtils";
 
 export const successSignin = (user: any) => {
@@ -38,7 +38,7 @@ export const signInUser = (email: string, password: string) => {
           .getIdTokenResult(true)
           .then(idToken => idToken.token);
         const refreshToken = response.user.refreshToken;
-        createUserCoockies(token, refreshToken, response.user.uid);
+        createUserInformation(token, refreshToken, response.user.uid);
         dispatch(successSignin({ ...response.user, token }));
       }
     } catch (err) {
@@ -51,7 +51,7 @@ export const signOutUser = () => {
     Firebase.auth()
       .signOut()
       .then(() => {
-        deleteUserCookies();
+        deleteUserInformation();
         dispatch({
           type: SIGNOUT
         });
