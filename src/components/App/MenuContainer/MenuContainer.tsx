@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import NavigationMenu from './NavigationMenuList/NavigationMenuList';
-import Logo from './Logo/Logo';
-import Chat from './Chat/Chat';
+import React, { useState, useEffect, ReactElement } from "react";
+import NavigationMenu from "./NavigationMenuList/NavigationMenuList";
+import Logo from "./Logo/Logo";
+import Chat from "./Chat/Chat";
 import styled from "styled-components";
-import {Route, Switch} from 'react-router-dom';
+import { ItemsInterface } from "./types/types";
+import { Route, Switch } from "react-router-dom";
 
-export const menuItems = [
+export const menuItems: ItemsInterface[] = [
   {
     name: "home",
     icon: "fas fa-home",
@@ -19,45 +20,27 @@ export const menuItems = [
   {
     name: "tools",
     icon: "fas fa-wrench",
-    path: '/tools',
+    path: "/tools",
     nextMenu: [
       {
-        name: "home1",
-        icon: "fas fa-home",
-        path: "/random1"
+        name: "rem",
+        icon: "far fa-address-book",
+        path: "/rem"
       },
       {
-        name: "profile1",
-        icon: "fas fa-user",
-        path: "/profile1"
+        name: "schedule",
+        icon: "far fa-calendar-alt",
+        path: "/schedule"
       },
       {
-        name: "tools1",
-        icon: "fas fa-wrench",
-        path: '/tools1'
-      }
-    ]
-  },
-  {
-    name: "tools-new",
-    icon: "fas fa-wrench",
-    path: '/tools-new',
-    nextMenu: [
-      {
-        name: "home1-new",
-        icon: "fas fa-home",
-        path: "/random1-new"
-      },
-
-      {
-        name: "tools1-new",
-        icon: "fas fa-wrench",
-        path: '/tools1-new'
+        name: "randomaizer",
+        icon: "fas fa-random",
+        path: "/random"
       },
       {
-        name: "profile1-new",
-        icon: "fas fa-user",
-        path: "/profile1-new"
+        name: "todo",
+        icon: "far fa-list-alt",
+        path: "/todo"
       }
     ]
   }
@@ -74,7 +57,7 @@ const StyledContainer = styled.div`
   background-color: #fefefe;
   border-right: 2px solid #f8f8f9;
   color: #9ba6b2;
-  box-shadow: 10px 0px 15px -15px rgba(0,0,0,0.72);
+  box-shadow: 10px 0px 15px -15px rgba(0, 0, 0, 0.72);
 `;
 
 const StyledMenuContainer = styled.div`
@@ -82,26 +65,34 @@ const StyledMenuContainer = styled.div`
 `;
 
 const MenuContainer = () => {
-  const [nestedMenuContent, addNestedMenuContent] = useState();
-  const [initialNestedMenu, addInitialNestedMenu] = useState<Array<any>>([]);
-  // const logo = React.createRef();
+  const [nestedMenuContent, addNestedMenuContent] = useState<ReactElement>();
+  const [initialNestedMenu, addInitialNestedMenu] = useState<Array<ReactElement>>([]);
+
+  const addMenu = (elem: ReactElement) => {
+    addNestedMenuContent(elem);
+  };
 
   useEffect(() => {
-    menuItems.forEach((item: any, i: number) => {
-      if ( item.nextMenu ) {
-
-        addInitialNestedMenu((prevState) => {
+    menuItems.forEach((item: ItemsInterface, i: number) => {
+      if (item.nextMenu) {
+        addInitialNestedMenu(prevState => {
           return [
             ...prevState,
-            (
-              <Route key={i} path={item.path} render={() => {
+            <Route
+              key={i + item.name}
+              path={item.path}
+              render={() => {
                 return (
-                <StyledContainer>
-                  <NavigationMenu nestedRoute={item.path} menuItems={item.nextMenu}/>
-                </StyledContainer>)
-              }}/>
-            )
-          ]
+                  <StyledContainer>
+                    <NavigationMenu
+                      nestedRoute={item.path}
+                      menuItems={item.nextMenu!}
+                    />
+                  </StyledContainer>
+                );
+              }}
+            />
+          ];
         });
       }
     });
@@ -110,24 +101,23 @@ const MenuContainer = () => {
   return (
     <StyledMenuContainer>
       <StyledContainer>
-        <div> 
-          <Logo/> 
-          <NavigationMenu addNestedMenuContent={addNestedMenuContent}  menuItems={menuItems}/> 
+        <div>
+          <Logo />
+          <NavigationMenu addNestedMenu={addMenu} menuItems={menuItems} />
         </div>
         <Chat />
       </StyledContainer>
-      { nestedMenuContent ?
-        <StyledContainer>
-          {nestedMenuContent}
-        </StyledContainer> :
-        (<Switch>
-            {initialNestedMenu.map((item: any) => {
-              console.log(item);
-              return item;
-            })}
-        </Switch>) }
+      {nestedMenuContent ? (
+        <StyledContainer>{nestedMenuContent}</StyledContainer>
+      ) : (
+        <Switch>
+          {initialNestedMenu.map((item: ReactElement) => {
+            return item;
+          })}
+        </Switch>
+      )}
     </StyledMenuContainer>
-  )
+  );
 };
 
 export default MenuContainer;
