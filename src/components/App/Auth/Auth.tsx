@@ -14,7 +14,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import SignIn from "./Signin/Signin";
 import { signOutUser } from "../../../store/auth/actionCreators";
-import {InitialStateInterface} from "../../../store/auth/initialStateInterface";
+
 
 const CloseIcon = styled.i`
   position: absolute;
