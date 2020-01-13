@@ -1,74 +1,101 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './styles/index.css';
-import  App  from './components/App/App';
-import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux'; 
-import { Provider } from 'react-redux'; 
-import { rootReducer } from './store/reduces';
-import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider, StylesProvider, withStyles } from '@material-ui/core/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
+import React from "react";
+import ReactDOM from "react-dom";
 
-const store = createStore(rootReducer);
+import App from "./components/App/App";
+
+import { Provider } from "react-redux";
+import rootReducer from "./store/rootReducer";
+import { BrowserRouter } from "react-router-dom";
+import {
+  ThemeProvider,
+  StylesProvider,
+  withStyles
+} from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { createStore, applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
+import "./styles/index.css";
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "./sagas/index.sagas";
+
+const sagaMiddleware = createSagaMiddleware();
+const middleware = [sagaMiddleware, thunkMiddleware];
+const store = createStore(rootReducer, applyMiddleware(...middleware));
+sagaMiddleware.run(rootSaga);
 
 const theme = createMuiTheme({
   palette: {
-    primary:  { 
-      main: '#346ef3' 
+    primary: {
+      main: "#24c3f9"
     },
-    error:  { 
-      main: '#d73c2a' 
+    error: {
+      main: "#d73c2a"
     },
     secondary: {
-      main: '#20233f'
+      main: "#24c3f9"
     }
   }
 });
 
 const GlobalCSS = withStyles({
-  '@global': {
-    '.MuiButton-contained': {
-      fontSize: '14px',
-      borderRadius: '50px',
-      fontWeight: 'bold',
-      letterSpacing: '1px',
-      width: '140px'
+  "@global": {
+    ".MuiButton-contained": {
+      fontSize: "14px",
+      borderRadius: "50px",
+      fontWeight: "bold",
+      letterSpacing: "1px",
+      width: "140px",
+      margin: "0 auto",
+      color: "#f8f7ff",
+      "&:hover": {
+        backgroundColor: "#ffffff",
+        borderColor: "#ffffff",
+        color: "#20233f"
+      }
     },
-    '.MuiInputBase-input': {
-      height: '0px'
+    ".MuiOutlinedInput-input": {
+      padding: "10px 15px",
+      width: "450px"
     },
-    '.MuiTextField-root': {
-      height: '0px'
+    ".MuiOutlinedInput-root": {
+      borderRadius: "50px"
     },
-    '.MuiOutlinedInput-input': {
-      height: '30px',
-      padding: '5px 15px',
-      width: '250px'
+    ".MuiInputLabel-outlined": {
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      left: "23px",
+      fontSize: "14px",
+      color: "#20233f",
+      transition: "all 0.2s ease-in-out"
     },
-    '.MuiOutlinedInput-root': {
-      borderRadius: '50px'
+    ".MuiInputLabel-outlined.MuiInputLabel-shrink": {
+      transform: "translate(0, -37px) scale(0.9)"
     },
-    '.MuiInputLabel-outlined': {
-      top: '-7px'
+
+    ".MuiOutlinedInput-root.MuiOutlinedInput-notchedOutline": {
+      borderColor: "#ffffff",
+      backgroundColor: "#ffffff"
+    },
+    ".MuiAppBar-colorDefault": {
+      backgroundColor: "#ffffff"
+    },
+    ".MuiTabs-flexContainer": {
+      marginLeft: "100px"
     }
   }
-})(() => null)
+})(() => null);
 
 ReactDOM.render(
-  <Provider store={ store }>
+  <Provider store={store}>
     <BrowserRouter>
-    
       <ThemeProvider theme={theme}>
         <StylesProvider>
           <GlobalCSS />
-          <App/>
+          <App />
         </StylesProvider>
       </ThemeProvider>
-
     </BrowserRouter>
-  </Provider>, 
-  document.getElementById('root')
+  </Provider>,
+  document.getElementById("root")
 );
-
-serviceWorker.unregister();
