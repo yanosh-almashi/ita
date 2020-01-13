@@ -48,7 +48,6 @@ const MenuItem: React.FC<any> = (props: any) => {
     const linkClickListener = (event: any) => {
       event.preventDefault();
       props.addNestedMenuContent(<NavigationMenu nestedRoute={props.path} menuItems={props.nextMenu}/>);
-
     };
     link = (<a
       style={ location.pathname.indexOf(props.path + '/') !== -1 ? {
@@ -74,8 +73,7 @@ const MenuItem: React.FC<any> = (props: any) => {
      }}
      onClick={linkClickListener}>
        {linkContent}
-     </NavLink>
-     );
+     </NavLink>);
   }
 
   return (

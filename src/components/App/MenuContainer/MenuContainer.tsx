@@ -84,11 +84,11 @@ const StyledMenuContainer = styled.div`
 const MenuContainer = () => {
   const [nestedMenuContent, addNestedMenuContent] = useState();
   const [initialNestedMenu, addInitialNestedMenu] = useState<Array<any>>([]);
+  // const logo = React.createRef();
 
   useEffect(() => {
     menuItems.forEach((item: any, i: number) => {
       if ( item.nextMenu ) {
-        console.log(item.nextMenu);
 
         addInitialNestedMenu((prevState) => {
           return [
@@ -110,9 +110,9 @@ const MenuContainer = () => {
   return (
     <StyledMenuContainer>
       <StyledContainer>
-        <div>
-          <Logo />
-          <NavigationMenu addNestedMenuContent={addNestedMenuContent}  menuItems={menuItems}/>
+        <div> 
+          <Logo/> 
+          <NavigationMenu addNestedMenuContent={addNestedMenuContent}  menuItems={menuItems}/> 
         </div>
         <Chat />
       </StyledContainer>
