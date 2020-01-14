@@ -9,3 +9,8 @@ body {
 .App {
   display: flex;
 }
+
+legend {
+  display: none;
+}
+

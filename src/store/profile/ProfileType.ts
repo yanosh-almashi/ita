@@ -1,0 +1,4 @@
+export const profileTypes = {
+  GET_PROFILE_DATA: 'GET_PROFILE_DATA',
+  SAVE_PROFILE_DATA: 'SAVE_PROFILE_DATA',
+};

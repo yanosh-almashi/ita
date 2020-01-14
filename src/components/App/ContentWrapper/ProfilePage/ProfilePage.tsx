@@ -10,8 +10,21 @@ import {
   ProfileSummaryInnerItem
 } from './ProfilePageStyles';
 import Chart from '../Chart/Chart';
+import { getProfileData } from '../../../../store/profile/ProfileActions';
+import { connect } from 'react-redux';
 
-const ProfilePage = () => {
+interface Props {
+  getData: () => void,
+  profileData: any
+}
+
+const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
+  
+  React.useEffect(() => {
+    getData();
+    console.log(profileData);
+  });
+
   return (
     <ProfileContainer>
       <ProfileAvatarContainer>
@@ -63,4 +76,12 @@ const ProfilePage = () => {
   )
 }
 
-export default ProfilePage;
+const mapStateToProps = (state: any) => ({
+  profileData: state.profileReducer.profileData
+})
+
+const mapDispatchToProps = (dispatch: any) => ({
+  getData: () => dispatch(getProfileData())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

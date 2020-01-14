@@ -12,7 +12,7 @@ export const ProfileContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 30px;
   width: 100%;
-  padding: 40px;
+  padding: 0px 50px;
 `;
 
 export const ProfileAvatarContainer = styled.div`
