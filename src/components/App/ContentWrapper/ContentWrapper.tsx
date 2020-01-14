@@ -32,6 +32,7 @@ const ContentWrapper = (props: any) => {
         <ProtectedRoute path="/profile" redirect="/" isAuth={!!props.id}>
           <ProfilePage />
         </ProtectedRoute>
+        <Route path="/randomizer" component={ MultilineTextFields } />
       </Switch>
     </StyledContentWrapper>
   )
