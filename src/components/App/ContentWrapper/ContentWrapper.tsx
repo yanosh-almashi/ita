@@ -2,6 +2,7 @@ import React from 'react';
 import HomePage from './HomePage/HomePage';
 import { Switch, Route } from 'react-router';
 import ProfilePage from './ProfilePage/ProfilePage';
+import MultilineTextFields from '../Randomizer/Randomizer';
 import styled from 'styled-components';
 
 const StyledContentWrapper = styled.div`
