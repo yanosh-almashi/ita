@@ -52,7 +52,7 @@ export default function MultilineTextFields() {
   {
     resultArray = value.split('\n');
   
-      let currentIndex = resultArray.length, temporaryValue, randomIndex;
+      let currentIndex = resultArray.length, temporaryValue, randomIndex, resultIndex;
     
       // While there remain elements to shuffle...
       while (0 !== currentIndex) {
@@ -66,7 +66,8 @@ export default function MultilineTextFields() {
         resultArray[currentIndex] = resultArray[randomIndex];
         resultArray[randomIndex] = temporaryValue;
       }
-      setResult(resultArray[0]);
+      resultIndex = Math.floor(Math.random() * resultArray.length);
+      setResult(resultArray[resultIndex]);
   }
 
   return (
