@@ -13,4 +13,4 @@ export const deleteUserInformation = () => {
   Cookies.remove(TOKEN);
   Cookies.remove(REFRESH_TOKEN);
   Cookies.remove(UID);
-}
+};

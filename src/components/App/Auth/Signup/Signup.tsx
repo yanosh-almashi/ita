@@ -1,12 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { authSignup } from '../../../../store/auth/actionCreators';
-import Button from '@material-ui/core/Button';
-import styled from 'styled-components';
-import { SignupInterface } from './SignupInterface';
-import { Form } from 'react-final-form';
-import InputValidate from '../../../../HOC/AuthHOC/InputValidateHOC';
-import { required, email, password, composeValidators } from '../validation';
+import React from "react";
+import { connect } from "react-redux";
+import { authSignup } from "../../../../store/auth/actionCreators";
+import Button from "@material-ui/core/Button";
+import styled from "styled-components";
+import { SignupInterface } from "./SignupInterface";
+import { Form } from "react-final-form";
+import InputValidate from "../../../../HOC/AuthHOC/InputValidateHOC";
+import { required, email, password, composeValidators } from "../validation";
 
 const SignupForm = styled.form`
   display: flex;
@@ -15,18 +15,18 @@ const SignupForm = styled.form`
 `;
 
 interface Props {
-  authSignup: (userData: SignupInterface) => void,
+  authSignup: (userData: SignupInterface) => void;
 }
 
 const initialValues = {
-  email: '',
-  password: '',
-  confirmPassword: '',
-  name: '',
-  group: '',
-}
+  email: "",
+  password: "",
+  confirmPassword: "",
+  name: "",
+  group: ""
+};
 
-const Signup: React.FC<Props> = (props) => {
+const Signup: React.FC<Props> = props => {
   const onSubmitForm = (form: any) => {
     const userData: SignupInterface = {
       email: form.email,
@@ -35,26 +35,29 @@ const Signup: React.FC<Props> = (props) => {
       group: form.group
     };
     props.authSignup(userData);
-  }
+  };
 
-
-  return(
+  return (
     <div>
-      <Form 
-        onSubmit={(formObj) => { onSubmitForm(formObj) }}
+      <Form
+        onSubmit={formObj => {
+          onSubmitForm(formObj);
+        }}
         initialValues={initialValues}
         validate={values => {
           const errors: any = {};
           if (values.confirmPassword !== values.password) {
-            errors.confirmPassword = 'Passwords must match!';
+            errors.confirmPassword = "Passwords must match!";
           }
           return errors;
         }}
         render={({ handleSubmit }) => (
-          <SignupForm onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}>
+          <SignupForm
+            onSubmit={e => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
             <InputValidate
               id="EmailSignup"
               label="Email"
@@ -95,16 +98,14 @@ const Signup: React.FC<Props> = (props) => {
               type="text"
               fieldName="group"
             />
-            <Button variant="contained" color="primary" type="submit" >SIGNUP</Button>
+            <Button variant="contained" color="primary" type="submit">
+              SIGNUP
+            </Button>
           </SignupForm>
         )}
       />
-      
     </div>
   );
-}
+};
 
-export default connect(
-  null, 
-  { authSignup }
-)(Signup);
+export default connect(null, { authSignup })(Signup);
