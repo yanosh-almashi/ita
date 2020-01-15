@@ -21,8 +21,6 @@ export const GlobalCSS = withStyles({
       borderRadius: "50px",
       fontWeight: "bold",
       letterSpacing: "1px",
-      width: "140px",
-      margin: "0 auto",
       color: "#f8f7ff",
       "&:hover": {
         backgroundColor: "#ffffff",

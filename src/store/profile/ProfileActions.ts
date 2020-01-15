@@ -10,3 +10,7 @@ export const saveProfileData = (data: any) => {
     payload: data
   };
 };
+
+export const changeProfileSummaryWindow = () => ({
+  type: profileTypes.CHANGE_PROFILE_SUMMARY_WINDOW
+})

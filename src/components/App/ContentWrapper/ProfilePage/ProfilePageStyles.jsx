@@ -57,3 +57,15 @@ export const ProfileTitleContainer = styled.h3`
   color: #20233f;
   font-size: 25px;
 `;
+
+export const ProfileEditContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+`;
+
+export const ProfileEditForm = styled.form`
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+`;

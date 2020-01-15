@@ -7,11 +7,17 @@ import {
   ProfileProgressContainer,
   ProfileTitleContainer,
   ProfileSummaryItem,
-  ProfileSummaryInnerItem
+  ProfileSummaryInnerItem,
+  ProfileEditContainer,
+  ProfileEditForm
 } from './ProfilePageStyles';
 import Chart from '../Chart/Chart';
 import { getProfileData } from '../../../../store/profile/ProfileActions';
 import { connect } from 'react-redux';
+import InputValidate from '../../../../HOC/AuthHOC/InputValidateHOC';
+import { Button } from '@material-ui/core';
+import { composeValidators, required } from '../../../App/Auth/validation';
+import { Form } from 'react-final-form';
 
 interface Props {
   getData: () => void,
@@ -31,6 +37,7 @@ const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
         <ProfileTitleContainer>Profile Avatar</ProfileTitleContainer>
 
       </ProfileAvatarContainer>
+
       <ProfileSummaryContainer>
         <ProfileTitleContainer>Profile Summary</ProfileTitleContainer>
         <div>
@@ -63,6 +70,41 @@ const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
           </ProfileSummaryItem>
 
         </div>
+        <ProfileEditContainer>
+        <Form
+        onSubmit={(formObj: any) => {
+
+        }}
+        render={({ handleSubmit }: any) => (
+          <ProfileEditForm
+            onSubmit={(e: any) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
+            <InputValidate
+              id="Name"
+              label="Name"
+              variant="outlined"
+              validate={composeValidators(required)}
+              type="text"
+              fieldName="name"
+            />
+            <InputValidate
+              id="Group"
+              label="Group"
+              variant="outlined"
+              validate={composeValidators(required)}
+              type="text"
+              fieldName="group"
+            />
+            <Button variant="contained" color="primary" type="submit">
+              UPDATE PROFILE
+            </Button>
+          </ProfileEditForm>
+        )}
+      />
+        </ProfileEditContainer> 
       </ProfileSummaryContainer>
 
       <ProfileProgressContainer>
