@@ -37,27 +37,37 @@ const RandomResultsContainer = styled.div`
  border-bottom: 1px solid #dedde3;
  color: #20233f;
  font-size: 25px;`;
- 
- 
-// const useStyles = makeStyles((theme: Theme) =>
-//   createStyles({
-//     root: {
-//       "& .MuiTextField-root": {
-//         margin: theme.spacing(1),
-//         width: 400,
-//       },
-//     },
-//   }),
-// );
 
- //const MultilineTextFields = () =>{
 export default function MultilineTextFields() {
-  //const classes = useStyles();
-  const [value, setValue] = React.useState('Controlled');
+
+  const [value, setValue] = React.useState('Your result will be here');
+  const [result, setResult] = React.useState();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
+
+  let resultArray = [];
+  const randomize = () =>
+  {
+    resultArray = value.split('\n');
+  
+      let currentIndex = resultArray.length, temporaryValue, randomIndex;
+    
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+    
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+    
+        // And swap it with the current element.
+        temporaryValue = resultArray[currentIndex];
+        resultArray[currentIndex] = resultArray[randomIndex];
+        resultArray[randomIndex] = temporaryValue;
+      }
+      setResult(resultArray[0]);
+  }
 
   return (
   <StyledRandom>
@@ -69,21 +79,20 @@ export default function MultilineTextFields() {
             rows="10"
             defaultValue=" "
             variant="outlined"
+            onChange={handleChange}
             />
-            <Button variant="contained" color="primary">
+            <Button variant="contained" color="primary" onClick={randomize}>
             Randomize
             </Button>
         </RandomControlContainer>
         <div className="result_container">
         <RandomTitleContainer>Result area</RandomTitleContainer>
-        <RandomResultsContainer>Result area</RandomResultsContainer>
-        
+        <RandomResultsContainer>{result}</RandomResultsContainer>
         </div>
     </StyledRandom>
   );
 }
 
-//export default MultilineTextFields;
 
 
 
