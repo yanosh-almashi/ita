@@ -33,7 +33,6 @@ export const signInUser = (email: string, password: string) => {
       );
 
       if (response.user) {
-        console.dir(response.user.getIdTokenResult());
         const token = await response.user
           .getIdTokenResult(true)
           .then(idToken => idToken.token);

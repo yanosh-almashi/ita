@@ -17,4 +17,3 @@ export interface AuthDataInterface {
   uid: string | null;
   refreshToken: string | null;
 }
-
