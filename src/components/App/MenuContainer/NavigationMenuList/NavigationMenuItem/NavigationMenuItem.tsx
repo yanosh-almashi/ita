@@ -1,26 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import NavigationMenu from "../NavigationMenuList";
 import Tooltip from "@material-ui/core/Tooltip";
 import {
-  ItemsInterface,
-  NestedMenuType
+    ItemsInterface,
+    NestedMenuType
 } from "@components/App/MenuContainer/types/types";
 
 interface Props {
-  name: string;
-  icon: string;
-  nextMenu: ItemsInterface[];
-  isNestedItem: string;
-  addNestedMenu?(elem: NestedMenuType): void;
-  path: string;
+    name: string;
+    icon: string;
+    nextMenu: ItemsInterface[];
+    isNestedItem?: string;
+    addNestedMenu?(elem: NestedMenuType): void;
+    path: string;
+    active: boolean;
+    setActive(elem: boolean): void
 }
 
 const MenuItem: React.FC<Props> = (props: Props) => {
-  const [toggler, setToggler] = useState<boolean>(false);
-
-  const Item = styled.li`
+    const Item = styled.li`
     list-style-type: none;
     font-size: 0;
     padding: 8px;
@@ -38,85 +38,64 @@ const MenuItem: React.FC<Props> = (props: Props) => {
     }
     & a:hover {
       background-color: #e1f6ff;
-    }
-  `;
+    }`;
 
-  const MenuItemIcon = styled.i`
-    font-size: 20px;
-  `;
+    const MenuItemIcon = styled.i`
+    font-size: 20px;`;
 
-  const ArrowSubmenu = styled.i`
+    const ArrowSubmenu = styled.i`
     position: absolute;
     font-size: 11px;
     right: 0;
     margin-top: 8px;
-    color: #9ba6b2;
-  `;
+    color: ${props.active ? "#24c0fd" : "#9ba6b2"};`;
 
-  let link;
-  let linkContent = (
-    <>
-      <MenuItemIcon className={props.icon} />
-      {props.nextMenu && (
-        <ArrowSubmenu
-          className={toggler ? "fas fa-chevron-right" : "fas fa-chevron-down"}
-        />
-      )}
-    </>
-  );
 
-  if (props.nextMenu) {
-    const linkClickListener = (
-      event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-    ) => {
-      event.preventDefault();
-      props.addNestedMenu!(
-        <NavigationMenu nestedRoute={props.path} menuItems={props.nextMenu} />
-      );
-      setToggler(!toggler);
-      console.log(toggler);
-    };
-    link = (
-      <NavLink
-        activeStyle={{
-          color: `#24c0fd`,
-          backgroundColor: `#e1f6ff`
-        }}
-        to={props.path}
-        onClick={event => {
-          linkClickListener(event);
-        }}
-      >
-        {linkContent}
-      </NavLink>
-    );
-  } else {
     const linkClickListener = () => {
-      if (props.addNestedMenu) {
-        props.addNestedMenu(null);
-      }
-    };
-    link = (
-      <NavLink
-        to={props.path}
-        activeStyle={{
-          color: `#24c0fd`,
-          backgroundColor: `#e1f6ff`
-        }}
-        onClick={linkClickListener}
-      >
-        {linkContent}
-      </NavLink>
-    );
-  }
+        if (props.nextMenu) {
+            props.addNestedMenu!(
+                <NavigationMenu nestedRoute={props.path} menuItems={props.nextMenu} />
+            );
+            props.setActive(true);
+        }
 
-  return (
-    <Item>
-      <Tooltip title={props.name} placement="right" arrow>
-        {link}
-      </Tooltip>
-    </Item>
-  );
+        if (!props.isNestedItem && !props.nextMenu && props.active) {
+            props.addNestedMenu!(null);
+            props.setActive(false);
+        }
+    };
+
+    let linkContent = (
+        <>
+            <MenuItemIcon className={props.icon} />
+            {props.nextMenu && (
+                <ArrowSubmenu
+                    className={props.active ? "fas fa-chevron-right" : "fas fa-chevron-down"}
+                />
+            )}
+        </>
+    );
+
+    let link = (
+        <NavLink
+            activeStyle={{
+                color: `#24c0fd`,
+                backgroundColor: `#e1f6ff`
+            }}
+            to={props.path}
+            onClick={linkClickListener}
+        >
+            {linkContent}
+        </NavLink>
+    );
+
+    return (
+        <Item>
+            <Tooltip title={props.name} placement="right" arrow>
+                {link}
+            </Tooltip>
+        </Item>
+    );
 };
 
 export default MenuItem;
