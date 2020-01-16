@@ -26,10 +26,16 @@ interface Props {
 
 const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
   
+  
+
   React.useEffect(() => {
+    console.log('1111');
     getData();
-    console.log(profileData);
-  });
+  }, []);
+  console.log(profileData);
+  if (!profileData) {
+    return <div>Loading</div>
+  }
 
   return (
     <ProfileContainer>
@@ -42,30 +48,30 @@ const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
         <ProfileTitleContainer>Profile Summary</ProfileTitleContainer>
         <div>
           <ProfileSummaryItem>
-            1. Months:
+            1. Name:
             <ProfileSummaryInnerItem>
-              2/3
+            { profileData.name }
             </ProfileSummaryInnerItem>
           </ProfileSummaryItem>
 
           <ProfileSummaryItem>
-            2. Reports:
+            2. Group:
             <ProfileSummaryInnerItem>
-              3
+            { profileData.group }
             </ProfileSummaryInnerItem>
           </ProfileSummaryItem>
 
           <ProfileSummaryItem>
             3. Finished tasks:
             <ProfileSummaryInnerItem>
-              6
+            { profileData.tasks.resolvedTasks }
             </ProfileSummaryInnerItem>
           </ProfileSummaryItem>
 
           <ProfileSummaryItem>
             4. Failed tasks:
             <ProfileSummaryInnerItem>
-              2
+              { profileData.tasks.failedTasks }
             </ProfileSummaryInnerItem>
           </ProfileSummaryItem>
 

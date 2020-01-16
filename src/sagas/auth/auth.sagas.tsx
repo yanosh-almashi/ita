@@ -83,10 +83,6 @@ function* signupUser(action: any) {
   }
 }
 
-function* watchSignupUser() {
+export function* watchSignupUser() {
   yield takeLatest(actionTypes.AUTH_SIGNUP, signupUser);
 }
-
-const authSagas = [fork(watchSignupUser)];
-
-export default authSagas;
