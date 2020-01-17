@@ -5,8 +5,7 @@ import { saveProfileData } from '../../store/profile/ProfileActions';
 import Cookies from "js-cookie";
 
 function getData(data: any) {
-  const user = data.data()
-  return user;
+  return data.data();
 }
 
 function* getProfileDataAsync() {

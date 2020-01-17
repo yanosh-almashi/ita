@@ -10,6 +10,7 @@ import Chart from '../Chart/Chart';
 import { getProfileData } from '../../../../store/profile/ProfileActions';
 import { connect } from 'react-redux';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
+import ProfileAvatar from './ProfileAvatar/ProfileAvatar';
 
 interface Props {
   getData: () => void,
@@ -18,9 +19,11 @@ interface Props {
 
 const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
   
+  
   React.useEffect(() => {
     getData();
-  });
+    // eslint-disable-next-line
+  }, []);
   
   if (!profileData) {
     return <div>Loading</div>
@@ -30,8 +33,9 @@ const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
     <ProfileContainer>
       <ProfileAvatarContainer>
         <ProfileTitleContainer>Profile Avatar</ProfileTitleContainer>
-
       </ProfileAvatarContainer>
+
+      <ProfileAvatar name={profileData.name} group={profileData.group}/>
 
       <ProfileInfo profileData={profileData} />
 
@@ -51,7 +55,7 @@ const mapStateToProps = (state: any) => ({
 })
 
 const mapDispatchToProps = (dispatch: any) => ({
-  getData: () => dispatch(getProfileData())
+  getData: () => dispatch(getProfileData()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

@@ -1,17 +1,21 @@
 import { profileTypes } from "./ProfileType";
 
 export const initialState = {
-  profileData: null
+  profileData: null,
+  windowStatus: true
 };
 
 export const profileReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case profileTypes.SAVE_PROFILE_DATA:
-      console.log('SAVE_from_reducer');
-      console.log(action.payload);
       return {
         ...state,
         profileData: action.payload
+      }
+    case profileTypes.CHANGE_PROFILE_SUMMARY_WINDOW:
+      return {
+        ...state,
+        windowStatus: !state.windowStatus
       }
     default:
       return state;

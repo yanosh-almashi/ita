@@ -17,7 +17,10 @@ export const ProfileContainer = styled.div`
 
 export const ProfileAvatarContainer = styled.div`
   grid-column: 1/2;
-  grid-row: 1/3;
+  grid-row: 1/2;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
   ${ProfileItem}
 `;
 
@@ -68,4 +71,37 @@ export const ProfileEditForm = styled.form`
   display: flex;
   flex-flow: column;
   align-items: flex-start;
+`;
+
+export const ProfileAvatarImage = styled.img`
+  background-color: #24c3f9;
+  border-radius: 100%;
+  height: 200px;
+  width: 200px;
+`;
+
+export const ProfileSwipeButton = styled.button`
+  width: 100%;
+  padding: 8px 0px;
+  margin: 13px 0px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  border: 1px solid #24c3f9;
+  background-color: #fff;
+  border-radius: 50px;
+  outline: none;
+`;
+
+export const ProfileTitleName = styled.h3`
+  font-size: 20px;
+  padding-top: 10px;
+  font-weight: 700;
+`;
+
+export const ProfileTitleGroup = styled.span`
+  font-size: 18px;
+  padding-top: 10px;
+  font-weight: 400;
 `;

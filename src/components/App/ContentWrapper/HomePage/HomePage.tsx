@@ -20,7 +20,7 @@ const StyledTitleH1 = styled.h1`
 
 const HomePage = () => {
 
-  const [tiles, setTiles] = useState<any[]>([]);
+  const [tiles, setTiles] = useState([]);
 
   const fetchTiles = async () => {
     const tiles: any = await getTilesData();

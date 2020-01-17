@@ -4,6 +4,12 @@ import ProfileInfo from './ProfileInfo';
 import "@testing-library/jest-dom/extend-expect";
 import ProfileInfoInterface from "./ProfileInfoInterface";
 
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import rootReducer from "../../../../../store/rootReducer";
+
+const store = createStore(rootReducer);
+
 afterEach(cleanup);
 
 const fakeInfo: ProfileInfoInterface = {
@@ -24,24 +30,23 @@ const fakeInfo: ProfileInfoInterface = {
 
 describe("AuthPopUp", () => {
 
+  const setup = () => {
+    const utils = render(
+      <Provider store={store}>
+        <ProfileInfo profileData={fakeInfo}/>
+      </Provider>
+    );
+    return utils;
+  };
+
   it('Render user info', () => {
-      const { getByText } = render( <ProfileInfo profileData={fakeInfo}/> );
+      const { getByText } = setup();
       expect(getByText('Student')).toBeInTheDocument();
       expect(getByText('WebUI')).toBeInTheDocument();
     })
 
   it('Render title', () => {
-      const { getByText } = render( <ProfileInfo profileData={fakeInfo}/> );
+      const { getByText } = setup();
       expect(getByText('Profile Summary')).toBeInTheDocument();
-    })
-
-    it('Render edit form', () => {
-      const { container, getByText } = render( <ProfileInfo profileData={fakeInfo}/> );
-      const inputItemEmail = container.querySelector('input[name="name"]');
-      const inputItemPassword = container.querySelector('input[name="group"]');
-
-      expect(inputItemEmail).toBeInTheDocument();
-      expect(inputItemPassword).toBeInTheDocument();
-      expect(getByText('UPDATE PROFILE')).toBeInTheDocument();
     })
 });

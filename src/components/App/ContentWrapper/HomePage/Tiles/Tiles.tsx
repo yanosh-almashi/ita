@@ -28,7 +28,7 @@ const Tiles: React.FC<Props> = ({ tiles }) => {
     <div className="tiles-container">
       <StyledTiles>
         {
-          tiles.map((tile: any) => <TileItem tile={tile} key={tile.id} />)
+          tiles.map((tile: TileInterface) => <TileItem tile={tile} key={tile.id} />)
         }
       </StyledTiles>
     </div>

@@ -1,7 +1,6 @@
 import { profileTypes } from "./ProfileType";
 
 export const getProfileData = () => {
-  console.log('GET_PROF_DATA')
   return { type: profileTypes.GET_PROFILE_DATA };
 };
 
