@@ -13,16 +13,19 @@ import InputValidate from '../../../../../HOC/AuthHOC/InputValidateHOC';
 import { Button } from '@material-ui/core';
 import ProfileInfoInterface from './ProfileInfoInterface';
 import { connect } from 'react-redux';
+import { db } from '../../../../../firebase/firebase.config';
 
 interface Props {
   profileData: ProfileInfoInterface,
-  windowStatus: boolean
+  windowStatus: boolean,
+  uid: string
 }
 
 const ProfileInfo: React.FC<Props> = (props) => {
   const { 
     profileData, 
-    windowStatus } = props;
+    windowStatus,
+    uid } = props;
 
   const profileInfo = (
     <div>
@@ -59,8 +62,11 @@ const ProfileInfo: React.FC<Props> = (props) => {
   const profileEdit = (
     <ProfileEditContainer>
       <Form
-      onSubmit={() => {
-        // Handler in progress
+      onSubmit={(formObj) => {
+        console.log(formObj);
+        db.collection('users').doc(uid).set({
+          ...formObj
+      }, { merge: true }).then(data => console.log(data))
       }}
       render={({ handleSubmit }: any) => (
         <ProfileEditForm
@@ -105,7 +111,8 @@ const ProfileInfo: React.FC<Props> = (props) => {
 }
 
 const mapStateToProps = (state: any) => ({
-  windowStatus: state.profileReducer.windowStatus
+  windowStatus: state.profileReducer.windowStatus,
+  uid: state.authReducer.uid,
 })
 
 export default connect(mapStateToProps)(ProfileInfo);
