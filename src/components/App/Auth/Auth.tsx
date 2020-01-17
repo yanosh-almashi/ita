@@ -19,7 +19,7 @@ const CloseIcon = styled.i`
 `;
 
 const AuthPopUp = ({ signOutUser }: any) => {
-  const [isOpen, setOpen] = useState(true);
+  const [isOpen, setOpen] = useState(false);
 
   const handleSignOut = (e: React.ChangeEvent<{}>) => {
     e.preventDefault();

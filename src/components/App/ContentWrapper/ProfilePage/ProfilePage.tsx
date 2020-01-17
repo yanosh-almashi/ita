@@ -18,6 +18,7 @@ import InputValidate from '../../../../HOC/AuthHOC/InputValidateHOC';
 import { Button } from '@material-ui/core';
 import { composeValidators, required } from '../../../App/Auth/validation';
 import { Form } from 'react-final-form';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 interface Props {
   getData: () => void,
@@ -26,13 +27,10 @@ interface Props {
 
 const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
   
-  
-
   React.useEffect(() => {
-    console.log('1111');
     getData();
   }, []);
-  console.log(profileData);
+  
   if (!profileData) {
     return <div>Loading</div>
   }
@@ -44,74 +42,7 @@ const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
 
       </ProfileAvatarContainer>
 
-      <ProfileSummaryContainer>
-        <ProfileTitleContainer>Profile Summary</ProfileTitleContainer>
-        <div>
-          <ProfileSummaryItem>
-            1. Name:
-            <ProfileSummaryInnerItem>
-            { profileData.name }
-            </ProfileSummaryInnerItem>
-          </ProfileSummaryItem>
-
-          <ProfileSummaryItem>
-            2. Group:
-            <ProfileSummaryInnerItem>
-            { profileData.group }
-            </ProfileSummaryInnerItem>
-          </ProfileSummaryItem>
-
-          <ProfileSummaryItem>
-            3. Finished tasks:
-            <ProfileSummaryInnerItem>
-            { profileData.tasks.resolvedTasks }
-            </ProfileSummaryInnerItem>
-          </ProfileSummaryItem>
-
-          <ProfileSummaryItem>
-            4. Failed tasks:
-            <ProfileSummaryInnerItem>
-              { profileData.tasks.failedTasks }
-            </ProfileSummaryInnerItem>
-          </ProfileSummaryItem>
-
-        </div>
-        <ProfileEditContainer>
-        <Form
-        onSubmit={(formObj: any) => {
-
-        }}
-        render={({ handleSubmit }: any) => (
-          <ProfileEditForm
-            onSubmit={(e: any) => {
-              e.preventDefault();
-              handleSubmit();
-            }}
-          >
-            <InputValidate
-              id="Name"
-              label="Name"
-              variant="outlined"
-              validate={composeValidators(required)}
-              type="text"
-              fieldName="name"
-            />
-            <InputValidate
-              id="Group"
-              label="Group"
-              variant="outlined"
-              validate={composeValidators(required)}
-              type="text"
-              fieldName="group"
-            />
-            <Button variant="contained" color="primary" type="submit">
-              UPDATE PROFILE
-            </Button>
-          </ProfileEditForm>
-        )}
-      />
-        </ProfileEditContainer> 
-      </ProfileSummaryContainer>
+      <ProfileInfo profileData={profileData} />
 
       <ProfileProgressContainer>
         <ProfileTitleContainer>Profile Progress</ProfileTitleContainer>
