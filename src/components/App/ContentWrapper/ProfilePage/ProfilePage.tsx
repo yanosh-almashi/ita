@@ -3,21 +3,12 @@ import './ProfilePageStyles';
 import { 
   ProfileContainer, 
   ProfileAvatarContainer, 
-  ProfileSummaryContainer,
   ProfileProgressContainer,
   ProfileTitleContainer,
-  ProfileSummaryItem,
-  ProfileSummaryInnerItem,
-  ProfileEditContainer,
-  ProfileEditForm
 } from './ProfilePageStyles';
 import Chart from '../Chart/Chart';
 import { getProfileData } from '../../../../store/profile/ProfileActions';
 import { connect } from 'react-redux';
-import InputValidate from '../../../../HOC/AuthHOC/InputValidateHOC';
-import { Button } from '@material-ui/core';
-import { composeValidators, required } from '../../../App/Auth/validation';
-import { Form } from 'react-final-form';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 interface Props {
@@ -29,7 +20,7 @@ const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
   
   React.useEffect(() => {
     getData();
-  }, []);
+  });
   
   if (!profileData) {
     return <div>Loading</div>

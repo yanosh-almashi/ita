@@ -1,4 +1,4 @@
-import { takeLatest, call, fork, put } from "redux-saga/effects";
+import { takeLatest, call, put } from "redux-saga/effects";
 import * as actionTypes from "../../store/auth/actionConstants";
 import * as actions from "../../store/auth/actionCreators";
 import * as API from "../../api/auth/signup.api";

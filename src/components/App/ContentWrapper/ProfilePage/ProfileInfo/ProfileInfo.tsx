@@ -1,7 +1,5 @@
 import React from 'react';
 import { 
-  ProfileContainer, 
-  ProfileAvatarContainer, 
   ProfileSummaryContainer,
   ProfileTitleContainer,
   ProfileSummaryItem,
@@ -56,7 +54,7 @@ const ProfileInfo: React.FC<Props> = ({ profileData }) => {
         </div>
         <ProfileEditContainer>
         <Form
-        onSubmit={(formObj: any) => {
+        onSubmit={() => {
 
         }}
         render={({ handleSubmit }: any) => (

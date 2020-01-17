@@ -1,4 +1,4 @@
-import { takeLatest, call, fork, put } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import { profileTypes } from '../../store/profile/ProfileType';
 import { db } from '../../components/App/Auth/firebase.config';
 import { saveProfileData } from '../../store/profile/ProfileActions';
@@ -14,7 +14,7 @@ function* getProfileDataAsync() {
     const dataRef = db.collection('users').doc(Cookies.get("uid"));
     const data = yield dataRef.get();
     const userData = yield call(getData, data);
-    yield put(saveProfileData(userData));
+  yield put(saveProfileData(userData));
   } catch(err) {
 
   }
