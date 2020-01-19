@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 const ProfileItem = css`
   background-color: #fff;
-  box-shadow: 2px 10px 31px -10px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
   padding: 25px;
   border-radius: 15px;
 `;

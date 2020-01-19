@@ -14,18 +14,29 @@ import { Button } from '@material-ui/core';
 import ProfileInfoInterface from './ProfileInfoInterface';
 import { connect } from 'react-redux';
 import { db } from '../../../../../firebase/firebase.config';
+import { getProfileData } from '../../../../../store/profile/ProfileActions';
 
 interface Props {
   profileData: ProfileInfoInterface,
   windowStatus: boolean,
-  uid: string
+  uid: string,
+  getData: () => void
 }
 
 const ProfileInfo: React.FC<Props> = (props) => {
   const { 
     profileData, 
     windowStatus,
-    uid } = props;
+    uid,
+    getData } = props;
+
+  const updateData = (formObj: any) => {
+    db
+    .collection('users')
+    .doc(uid)
+    .set({ ...formObj }, { merge: true })
+    .then(() => getData());
+  }
 
   const profileInfo = (
     <div>
@@ -63,10 +74,7 @@ const ProfileInfo: React.FC<Props> = (props) => {
     <ProfileEditContainer>
       <Form
       onSubmit={(formObj) => {
-        console.log(formObj);
-        db.collection('users').doc(uid).set({
-          ...formObj
-      }, { merge: true }).then(data => console.log(data))
+        updateData(formObj);
       }}
       render={({ handleSubmit }: any) => (
         <ProfileEditForm
@@ -115,4 +123,8 @@ const mapStateToProps = (state: any) => ({
   uid: state.authReducer.uid,
 })
 
-export default connect(mapStateToProps)(ProfileInfo);
+const mapDispatchToProps = (dispatch: any) => ({
+  getData: () => dispatch(getProfileData()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileInfo);
