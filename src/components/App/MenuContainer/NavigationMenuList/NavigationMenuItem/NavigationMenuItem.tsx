@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import NavigationMenu from "../NavigationMenuList";
@@ -65,6 +65,26 @@ const MenuItem: React.FC<Props> = (props: Props) => {
         }
     };
 
+    const useOutsideAlerter = (ref: any) => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        const handleClickOutside = (event: { target: any; }) => {
+          if (ref.current && !ref.current.contains(event.target) ) {
+            alert("You clicked outside of me!");
+          }
+        }
+      
+        useEffect(() => {
+          // Bind the event listener
+          document.addEventListener("mousedown", handleClickOutside);
+          return () => {
+            // Unbind the event listener on clean up
+            document.removeEventListener("mousedown", handleClickOutside);
+          };
+        });
+      }
+
     let linkContent = (
         <>
             <MenuItemIcon className={props.icon} />
@@ -88,9 +108,11 @@ const MenuItem: React.FC<Props> = (props: Props) => {
             {linkContent}
         </NavLink>
     );
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
 
     return (
-        <Item>
+        <Item >
             <Tooltip title={props.name} placement="right" arrow>
                 {link}
             </Tooltip>
