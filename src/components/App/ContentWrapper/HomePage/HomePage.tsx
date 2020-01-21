@@ -8,7 +8,7 @@ const HomePage = () => {
       <div>----HomePage</div>
       <Tiles />
     </div>
-  )
-}
+  );
+};
 
 export default HomePage;

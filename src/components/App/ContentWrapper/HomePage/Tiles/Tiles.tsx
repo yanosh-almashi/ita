@@ -8,7 +8,7 @@ const Tiles = () => {
       <div>--------Tiles</div>
       <TileItem />
     </div>
-  )
-}
+  );
+};
 
 export default Tiles;

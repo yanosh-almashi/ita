@@ -6,7 +6,7 @@ const Chat = () => {
     <div>
       <p>Chat</p>
     </div>
-  )
-}
+  );
+};
 
 export default Chat;

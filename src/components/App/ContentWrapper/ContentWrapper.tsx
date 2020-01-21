@@ -6,14 +6,14 @@ import ProfilePage from './ProfilePage/ProfilePage';
 
 const ContentWrapper = () => {
   return (
-    <div className='content-wrapper'>
+    <div className="content-wrapper">
       <div>ContentWrapper</div>
       <Switch>
-        <Route path="/" exact component={ HomePage } />
-        <Route path="/profile" component={ ProfilePage } />
+        <Route path="/" exact component={HomePage} />
+        <Route path="/profile" component={ProfilePage} />
       </Switch>
     </div>
-  )
-}
+  );
+};
 
 export default ContentWrapper;

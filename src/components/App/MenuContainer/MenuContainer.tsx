@@ -1,46 +1,46 @@
-import React, { useState, useEffect, ReactElement } from "react";
-import NavigationMenu from "./NavigationMenuList/NavigationMenuList";
-import Logo from "./Logo/Logo";
-import Chat from "./Chat/Chat";
-import styled from "styled-components";
-import { ItemsInterface } from "./types/types";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import React, { useState, useEffect, ReactElement } from 'react';
+import NavigationMenu from './NavigationMenuList/NavigationMenuList';
+import Logo from './Logo/Logo';
+import Chat from './Chat/Chat';
+import styled from 'styled-components';
+import { ItemsInterface } from './types/types';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 export const menuItems: ItemsInterface[] = [
   {
-    name: "home",
-    icon: "fas fa-home",
-    path: "/random"
+    name: 'home',
+    icon: 'fas fa-home',
+    path: '/random'
   },
   {
-    name: "profile",
-    icon: "fas fa-user",
-    path: "/profile"
+    name: 'profile',
+    icon: 'fas fa-user',
+    path: '/profile'
   },
   {
-    name: "tools",
-    icon: "fas fa-wrench",
-    path: "/tools",
+    name: 'tools',
+    icon: 'fas fa-wrench',
+    path: '/tools',
     nextMenu: [
       {
-        name: "rem",
-        icon: "far fa-address-book",
-        path: "/rem"
+        name: 'rem',
+        icon: 'far fa-address-book',
+        path: '/rem'
       },
       {
-        name: "schedule",
-        icon: "far fa-calendar-alt",
-        path: "/schedule"
+        name: 'schedule',
+        icon: 'far fa-calendar-alt',
+        path: '/schedule'
       },
       {
-        name: "randomaizer",
-        icon: "fas fa-random",
-        path: "/random"
+        name: 'randomaizer',
+        icon: 'fas fa-random',
+        path: '/random'
       },
       {
-        name: "todo",
-        icon: "far fa-list-alt",
-        path: "/todo"
+        name: 'todo',
+        icon: 'far fa-list-alt',
+        path: '/todo'
       }
     ]
   }
@@ -66,7 +66,9 @@ const StyledMenuContainer = styled.div`
 
 const MenuContainer = () => {
   const [nestedMenuContent, addNestedMenuContent] = useState<ReactElement>();
-  const [initialNestedMenu, addInitialNestedMenu] = useState<Array<ReactElement>>([]);
+  const [initialNestedMenu, addInitialNestedMenu] = useState<
+    Array<ReactElement>
+  >([]);
 
   const addMenu = (elem: ReactElement) => {
     addNestedMenuContent(elem);
@@ -99,28 +101,28 @@ const MenuContainer = () => {
   }, []);
 
   return (
-      <BrowserRouter>
-        <StyledMenuContainer data-testid="menu-container">
-          <StyledContainer>
-            <div>
-              <Logo />
-              <NavigationMenu addNestedMenu={addMenu} menuItems={menuItems} />
-            </div>
-            <Chat />
-          </StyledContainer>
-          {nestedMenuContent ? (
-              <StyledContainer>{nestedMenuContent}</StyledContainer>
-          ) : (
-              <Switch>
-                <BrowserRouter>
-                  {initialNestedMenu.map((item: ReactElement) => {
-                    return item;
-                  })}
-                </BrowserRouter>
-              </Switch>
-          )}
-        </StyledMenuContainer>
-      </BrowserRouter>
+    <BrowserRouter>
+      <StyledMenuContainer data-testid="menu-container">
+        <StyledContainer>
+          <div>
+            <Logo />
+            <NavigationMenu addNestedMenu={addMenu} menuItems={menuItems} />
+          </div>
+          <Chat />
+        </StyledContainer>
+        {nestedMenuContent ? (
+          <StyledContainer>{nestedMenuContent}</StyledContainer>
+        ) : (
+          <Switch>
+            <BrowserRouter>
+              {initialNestedMenu.map((item: ReactElement) => {
+                return item;
+              })}
+            </BrowserRouter>
+          </Switch>
+        )}
+      </StyledMenuContainer>
+    </BrowserRouter>
   );
 };
 
