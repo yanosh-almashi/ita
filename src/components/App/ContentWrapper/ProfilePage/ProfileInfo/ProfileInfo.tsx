@@ -15,6 +15,7 @@ import ProfileInfoInterface from './ProfileInfoInterface';
 import { connect } from 'react-redux';
 import { db } from '../../../../../firebase/firebase.config';
 import { getProfileData } from '../../../../../store/profile/ProfileActions';
+import FileUpload from '../../../../../components/FileUpload/FileUpload';
 
 interface Props {
   profileData: ProfileInfoInterface,
@@ -105,7 +106,8 @@ const ProfileInfo: React.FC<Props> = (props) => {
         </ProfileEditForm>
       )}
     />
-    </ProfileEditContainer> 
+    <FileUpload putFile={() => {}} path="u"/>
+    </ProfileEditContainer>
   );
 
   return (

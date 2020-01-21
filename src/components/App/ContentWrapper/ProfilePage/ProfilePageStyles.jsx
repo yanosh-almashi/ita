@@ -63,7 +63,6 @@ export const ProfileTitleContainer = styled.h3`
 
 export const ProfileEditContainer = styled.div`
   display: flex;
-  flex-flow: column;
   align-items: flex-start;
 `;
 

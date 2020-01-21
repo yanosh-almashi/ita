@@ -13,12 +13,14 @@ import { changeProfileSummaryWindow } from '../../../../../store/profile/Profile
 interface Props {
   name: string;
   group: string;
-  windowStatus: boolean
+  windowStatus: boolean,
+  url: string,
   changeProfileSummaryWindow: () => void,
 }
 
 const ProfileAvatar: React.FC<Props> = (props) => {
-  const { 
+  const {
+    url,
     name, 
     group, 
     changeProfileSummaryWindow, 
@@ -28,7 +30,7 @@ const ProfileAvatar: React.FC<Props> = (props) => {
     <ProfileAvatarContainer>
       <ProfileTitleContainer>Profile Avatar</ProfileTitleContainer>
       <ProfileAvatarImage 
-        src="https://media-exp2.licdn.com/dms/image/C4D03AQHrET7kILmAXg/profile-displayphoto-shrink_200_200/0?e=1584576000&v=beta&t=6YQmC2IJ9grgB9FICDQvvlCYvRgyzErzsGH2jph3fKM" 
+        src={url || ''}
       />
       <ProfileTitleName>{ name }</ProfileTitleName>
       <ProfileTitleGroup>{ group }</ProfileTitleGroup>

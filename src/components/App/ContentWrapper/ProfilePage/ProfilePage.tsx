@@ -35,7 +35,7 @@ const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
         <ProfileTitleContainer>Profile Avatar</ProfileTitleContainer>
       </ProfileAvatarContainer>
 
-      <ProfileAvatar name={profileData.name} group={profileData.group}/>
+      <ProfileAvatar name={profileData.name} group={profileData.group} url={profileData.userAvatarUrl}/>
 
       <ProfileInfo profileData={profileData} />
 
