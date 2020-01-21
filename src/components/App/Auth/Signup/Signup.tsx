@@ -7,6 +7,8 @@ import { SignupInterface } from "./SignupInterface";
 import { Form } from "react-final-form";
 import InputValidate from "../../../../HOC/AuthHOC/InputValidateHOC";
 import { required, email, password, composeValidators } from "../validation";
+import FileUpload from "../../../../components/FileUpload/FileUpload";
+import { putFile } from "../../../../api/profile/ProfileApi";
 
 const SignupForm = styled.form`
   display: flex;
@@ -27,18 +29,27 @@ const initialValues = {
 };
 
 const Signup: React.FC<Props> = props => {
+
+  const {
+    authSignup
+  } = props;
+
   const onSubmitForm = (form: any) => {
     const userData: SignupInterface = {
       email: form.email,
       password: form.password,
       name: form.name,
-      group: form.group
+      group: form.group,
     };
-    props.authSignup(userData);
+    authSignup(userData);
   };
 
   return (
     <div>
+      <FileUpload 
+        putFile={putFile}
+        path="avatars"
+      />
       <Form
         onSubmit={formObj => {
           onSubmitForm(formObj);
@@ -92,7 +103,7 @@ const Signup: React.FC<Props> = props => {
             />
             <InputValidate
               id="GroupSignup"
-              label="GroupSignup"
+              label="Group"
               variant="outlined"
               validate={composeValidators(required)}
               type="text"

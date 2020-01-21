@@ -53,10 +53,14 @@ export const GlobalCSS = withStyles({
       backgroundColor: "#ffffff"
     },
     ".MuiAppBar-colorDefault": {
-      backgroundColor: "#ffffff"
+      backgroundColor: "transparent"
     },
     ".MuiTabs-flexContainer": {
       marginLeft: "100px"
+    },
+    ".MuiPaper-elevation4": {
+      boxShadow: "none",
+      borderBottom: "1px solid #24c3f9"
     }
   }
 })(() => null);

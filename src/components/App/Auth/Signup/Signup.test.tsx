@@ -4,9 +4,9 @@ import "@testing-library/jest-dom/extend-expect";
 import Signup from "./Signup";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import authReducer from "../../../../store/auth/authReducer";
+import rootReducer from "../../../../store/rootReducer";
 
-const store = createStore(authReducer);
+const store = createStore(rootReducer);
 
 afterEach(cleanup);
 
@@ -30,7 +30,7 @@ describe("Signup", () => {
     const { container } = setup();
     const inputItems = container.querySelectorAll("input");
 
-    expect(inputItems).toHaveLength(5);
+    expect(inputItems).toHaveLength(6);
   });
 
   it("Should render email input", () => {
