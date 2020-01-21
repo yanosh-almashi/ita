@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { profileTypes } from '../../store/profile/ProfileType';
-import { db } from '../../components/App/Auth/firebase.config';
+import { db } from '../../firebase/firebase.config';
 import { saveProfileData } from '../../store/profile/ProfileActions';
 import Cookies from "js-cookie";
 

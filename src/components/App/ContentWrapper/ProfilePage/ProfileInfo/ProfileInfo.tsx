@@ -13,16 +13,30 @@ import InputValidate from '../../../../../HOC/AuthHOC/InputValidateHOC';
 import { Button } from '@material-ui/core';
 import ProfileInfoInterface from './ProfileInfoInterface';
 import { connect } from 'react-redux';
+import { db } from '../../../../../firebase/firebase.config';
+import { getProfileData } from '../../../../../store/profile/ProfileActions';
 
 interface Props {
   profileData: ProfileInfoInterface,
-  windowStatus: boolean
+  windowStatus: boolean,
+  uid: string,
+  getData: () => void
 }
 
 const ProfileInfo: React.FC<Props> = (props) => {
   const { 
     profileData, 
-    windowStatus } = props;
+    windowStatus,
+    uid,
+    getData } = props;
+
+  const updateData = (formObj: any) => {
+    db
+    .collection('users')
+    .doc(uid)
+    .set({ ...formObj }, { merge: true })
+    .then(() => getData());
+  }
 
   const profileInfo = (
     <div>
@@ -59,8 +73,8 @@ const ProfileInfo: React.FC<Props> = (props) => {
   const profileEdit = (
     <ProfileEditContainer>
       <Form
-      onSubmit={() => {
-        // Handler in progress
+      onSubmit={(formObj) => {
+        updateData(formObj);
       }}
       render={({ handleSubmit }: any) => (
         <ProfileEditForm
@@ -105,7 +119,12 @@ const ProfileInfo: React.FC<Props> = (props) => {
 }
 
 const mapStateToProps = (state: any) => ({
-  windowStatus: state.profileReducer.windowStatus
+  windowStatus: state.profileReducer.windowStatus,
+  uid: state.authReducer.uid,
 })
 
-export default connect(mapStateToProps)(ProfileInfo);
+const mapDispatchToProps = (dispatch: any) => ({
+  getData: () => dispatch(getProfileData()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileInfo);

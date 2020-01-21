@@ -4,7 +4,7 @@ import {
   AuthDataInterface
 } from "@components/App/Auth/Signup/SignupInterface";
 import { SIGNIN_SUCCESSFUL, SIGNIN_ERROR, SIGNOUT } from "./actionConstants";
-import { Firebase } from "../../components/App/Auth/firebase.config";
+import { Firebase } from "../../firebase/firebase.config";
 import {
   createUserInformation,
   deleteUserInformation
