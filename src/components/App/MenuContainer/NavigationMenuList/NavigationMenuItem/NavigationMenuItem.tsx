@@ -12,11 +12,11 @@ interface Props {
     name: string;
     icon: string;
     nextMenu: ItemsInterface[];
-    isNestedItem?: string;
-    addNestedMenu?(elem: NestedMenuType): void;
     path: string;
     active: boolean;
     setActive(elem: boolean): void;
+    isNestedItem?: string;
+    addNestedMenu?(elem: NestedMenuType): void;    
 }
 
 const MenuItem: React.FC<Props> = (props: Props) => {
@@ -65,25 +65,7 @@ const MenuItem: React.FC<Props> = (props: Props) => {
         }
     };
 
-    const useOutsideAlerter = (ref: any) => {
-        /**
-         * Alert if clicked on outside of element
-         */
-        const handleClickOutside = (event: { target: any; }) => {
-          if (ref.current && !ref.current.contains(event.target) ) {
-            alert("You clicked outside of me!");
-          }
-        }
-      
-        useEffect(() => {
-          // Bind the event listener
-          document.addEventListener("mousedown", handleClickOutside);
-          return () => {
-            // Unbind the event listener on clean up
-            document.removeEventListener("mousedown", handleClickOutside);
-          };
-        });
-      }
+   
 
     let linkContent = (
         <>
@@ -108,8 +90,6 @@ const MenuItem: React.FC<Props> = (props: Props) => {
             {linkContent}
         </NavLink>
     );
-    const wrapperRef = useRef(null);
-    useOutsideAlerter(wrapperRef);
 
     return (
         <Item >
