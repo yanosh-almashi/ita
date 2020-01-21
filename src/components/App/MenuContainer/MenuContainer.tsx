@@ -4,7 +4,7 @@ import Logo from './Logo/Logo';
 import Chat from './Chat/Chat';
 import styled from 'styled-components';
 import { ItemsInterface } from './types/types';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {Route, Switch } from 'react-router-dom';
 
 export const menuItems: ItemsInterface[] = [
   {
@@ -101,7 +101,6 @@ const MenuContainer = () => {
   }, []);
 
   return (
-    <BrowserRouter>
       <StyledMenuContainer data-testid="menu-container">
         <StyledContainer>
           <div>
@@ -111,18 +110,15 @@ const MenuContainer = () => {
           <Chat />
         </StyledContainer>
         {nestedMenuContent ? (
-          <StyledContainer>{nestedMenuContent}</StyledContainer>
+            <StyledContainer>{nestedMenuContent}</StyledContainer>
         ) : (
-          <Switch>
-            <BrowserRouter>
+            <Switch>
               {initialNestedMenu.map((item: ReactElement) => {
                 return item;
               })}
-            </BrowserRouter>
-          </Switch>
+            </Switch>
         )}
       </StyledMenuContainer>
-    </BrowserRouter>
   );
 };
 

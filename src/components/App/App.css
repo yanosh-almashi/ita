@@ -10,12 +10,15 @@ body {
   display: flex;
 }
 
-<<<<<<< HEAD
 .form {
   padding: 60px 0px;
 }
-=======
+
 legend {
   display: none;
 }
->>>>>>> develop
+
+ul {
+  margin: 0;
+  padding: 0;
+}
