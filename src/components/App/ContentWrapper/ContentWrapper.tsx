@@ -16,6 +16,8 @@ const StyledContentWrapper = styled.div`
 `;
 
 const ContentWrapper = (props: any) => {
+  console.log(props.id);
+  console.log(!!props.id);
   return (
     <StyledContentWrapper>
       <Switch>
@@ -23,7 +25,7 @@ const ContentWrapper = (props: any) => {
         <ProtectedRoute path="/profile" redirect="/" isAuth={!!props.id}>
           <ProfilePage />
         </ProtectedRoute>
-        <ProtectedRoute path="/auth" redirect="/" isAuth={!!props.id}>
+        <ProtectedRoute path="/auth" redirect="/" isAuth={!props.id}>
           <Auth />
         </ProtectedRoute> 
       </Switch>

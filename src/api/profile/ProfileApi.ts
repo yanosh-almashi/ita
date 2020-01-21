@@ -28,9 +28,10 @@ export const putFile = (file: any, path: string, name: string, uid: string) => {
   const metadata = {
     contentType: 'image/*',
   };
+
   const putName: string = `${name}-${uid}`;
   firebase.storage().ref(path).child(putName).put(file, metadata)
-    .then((url: any) => {
-      console.log(url);
+    .then((data: any) => {
+      console.log(data);
     });
 }
