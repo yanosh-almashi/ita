@@ -27,28 +27,28 @@ const ProfileInfo: React.FC<Props> = (props) => {
   const profileInfo = (
     <div>
       <ProfileSummaryItem>
-        1. Name:
+        <span>1. Name:</span>
         <ProfileSummaryInnerItem>
         { profileData.name }
         </ProfileSummaryInnerItem>
       </ProfileSummaryItem>
 
       <ProfileSummaryItem>
-        2. Group:
+        <span>2. Group:</span>
         <ProfileSummaryInnerItem>
         { profileData.group }
         </ProfileSummaryInnerItem>
       </ProfileSummaryItem>
 
       <ProfileSummaryItem>
-        3. Finished tasks:
+        <span>3. Finished tasks:</span>
         <ProfileSummaryInnerItem>
         { profileData.tasks.resolvedTasks }
         </ProfileSummaryInnerItem>
       </ProfileSummaryItem>
 
       <ProfileSummaryItem>
-        4. Failed tasks:
+        <span>4. Failed tasks:</span>
         <ProfileSummaryInnerItem>
           { profileData.tasks.failedTasks }
         </ProfileSummaryInnerItem>

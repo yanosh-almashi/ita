@@ -1,5 +1,6 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import { ChartContainer } from './ChartStyles';
 
 const dataChart = {
   data: {
@@ -31,7 +32,7 @@ const Chart = () => {
   }
   
   return (
-    <div style={{ position: "relative", height: "350px", width: "90%", margin: '0 auto' }}>
+    <ChartContainer>
       <Line
         options={{
           responsive: true,
@@ -48,7 +49,7 @@ const Chart = () => {
         }}
         data={getChartData}
       />
-    </div>
+    </ChartContainer>
   );
 }
 

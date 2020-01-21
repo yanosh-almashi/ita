@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './ProfilePageStyles';
 import { 
   ProfileContainer, 
@@ -6,11 +6,11 @@ import {
   ProfileProgressContainer,
   ProfileTitleContainer,
 } from './ProfilePageStyles';
-import Chart from '../Chart/Chart';
 import { getProfileData } from '../../../../store/profile/ProfileActions';
 import { connect } from 'react-redux';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import ProfileAvatar from './ProfileAvatar/ProfileAvatar';
+import Chart from '../Chart/Chart';
 
 interface Props {
   getData: () => void,
@@ -20,13 +20,13 @@ interface Props {
 const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
   
   
-  React.useEffect(() => {
+  useEffect(() => {
     getData();
     // eslint-disable-next-line
   }, []);
   
   if (!profileData) {
-    return <div>Loading</div>
+    return <div>Loading</div>;
   }
 
   return (
@@ -41,9 +41,7 @@ const ProfilePage: React.FC<Props> = ({ getData, profileData }) => {
 
       <ProfileProgressContainer>
         <ProfileTitleContainer>Profile Progress</ProfileTitleContainer>
-        <div>
           <Chart />
-        </div>
       </ProfileProgressContainer>
 
     </ProfileContainer>
