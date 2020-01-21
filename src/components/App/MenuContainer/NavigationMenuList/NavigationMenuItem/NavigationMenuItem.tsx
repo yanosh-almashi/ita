@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import NavigationMenu from "../NavigationMenuList";
 import Tooltip from "@material-ui/core/Tooltip";
 import {
@@ -16,7 +16,7 @@ interface Props {
     addNestedMenu?(elem: NestedMenuType): void;
     path: string;
     active: boolean;
-    setActive(elem: boolean): void
+    setActive(elem: boolean): void;
 }
 
 const MenuItem: React.FC<Props> = (props: Props) => {

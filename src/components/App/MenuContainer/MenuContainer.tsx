@@ -4,7 +4,7 @@ import Logo from "./Logo/Logo";
 import Chat from "./Chat/Chat";
 import styled from "styled-components";
 import { ItemsInterface } from "./types/types";
-import { Route, Switch } from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 export const menuItems: ItemsInterface[] = [
   {
@@ -99,24 +99,28 @@ const MenuContainer = () => {
   }, []);
 
   return (
-    <StyledMenuContainer>
-      <StyledContainer>
-        <div>
-          <Logo />
-          <NavigationMenu addNestedMenu={addMenu} menuItems={menuItems} />
-        </div>
-        <Chat />
-      </StyledContainer>
-      {nestedMenuContent ? (
-        <StyledContainer>{nestedMenuContent}</StyledContainer>
-      ) : (
-        <Switch>
-          {initialNestedMenu.map((item: ReactElement) => {
-            return item;
-          })}
-        </Switch>
-      )}
-    </StyledMenuContainer>
+      <BrowserRouter>
+        <StyledMenuContainer data-testid="menu-container">
+          <StyledContainer>
+            <div>
+              <Logo />
+              <NavigationMenu addNestedMenu={addMenu} menuItems={menuItems} />
+            </div>
+            <Chat />
+          </StyledContainer>
+          {nestedMenuContent ? (
+              <StyledContainer>{nestedMenuContent}</StyledContainer>
+          ) : (
+              <Switch>
+                <BrowserRouter>
+                  {initialNestedMenu.map((item: ReactElement) => {
+                    return item;
+                  })}
+                </BrowserRouter>
+              </Switch>
+          )}
+        </StyledMenuContainer>
+      </BrowserRouter>
   );
 };
 
