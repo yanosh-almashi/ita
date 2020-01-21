@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   ProfileSummaryContainer,
   ProfileTitleContainer,
@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import { db } from '../../../../../firebase/firebase.config';
 import { getProfileData } from '../../../../../store/profile/ProfileActions';
 import FileUpload from '../../../../../components/FileUpload/FileUpload';
+import { putFile, getFileTypes } from '../../../../../api/profile/ProfileApi';
 
 interface Props {
   profileData: ProfileInfoInterface,
@@ -25,18 +26,28 @@ interface Props {
 }
 
 const ProfileInfo: React.FC<Props> = (props) => {
+
+  const [avatar, setAvatar] = useState(null);
+  console.log(avatar);
   const { 
     profileData, 
     windowStatus,
     uid,
     getData } = props;
 
-  const updateData = (formObj: any) => {
+  const updateData = async (formObj: any) => {
+    if (avatar) {
+      putFile(avatar, getFileTypes.avatar.path, getFileTypes.avatar.name, uid);
+    }
     db
     .collection('users')
     .doc(uid)
     .set({ ...formObj }, { merge: true })
     .then(() => getData());
+  }
+
+  const handleFile = (file: any) => {
+    setAvatar(file);
   }
 
   const profileInfo = (
@@ -106,7 +117,7 @@ const ProfileInfo: React.FC<Props> = (props) => {
         </ProfileEditForm>
       )}
     />
-    <FileUpload putFile={() => {}} path="u"/>
+    <FileUpload putFile={handleFile}/>
     </ProfileEditContainer>
   );
 

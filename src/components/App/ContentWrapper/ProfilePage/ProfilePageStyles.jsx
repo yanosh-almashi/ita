@@ -63,7 +63,8 @@ export const ProfileTitleContainer = styled.h3`
 
 export const ProfileEditContainer = styled.div`
   display: flex;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const ProfileEditForm = styled.form`
