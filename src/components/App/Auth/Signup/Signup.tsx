@@ -8,7 +8,6 @@ import { Form } from "react-final-form";
 import InputValidate from "../../../../HOC/AuthHOC/InputValidateHOC";
 import { required, email, password, composeValidators } from "../validation";
 import FileUpload from "../../../../components/FileUpload/FileUpload";
-import { putFile, getFileTypes } from "../../../../api/profile/ProfileApi";
 
 const SignupForm = styled.form`
   display: flex;
