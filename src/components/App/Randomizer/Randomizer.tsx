@@ -1,32 +1,60 @@
 import React from 'react';
 import styled from 'styled-components';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
+import './ListItem.css'
+
 
 const StyledRandom = styled.div`
+
+@media screen and (min-width: 1280px)
+ {
+  max-width: 1280px;
+  margin: 0 auto;
+ }
+  
+height: 100%;
+  position: relative;
   width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 40px 50px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
+  padding-top: 48px;
+  width: 50%;
+  
 `;
 
-const RandomControlContainer = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
+const MainHeader = styled.div`
+  padding-top: 5px;
+  width: 100%;
 `;
-const RandomResultsContainer = styled.div`
-  width: 300px;
-  height: 300px;
+
+
+const AreaWrapper = styled.div`
   display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #24c3f9;
+  flex-flow: row nowrap;
 `;
+
+const NavWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 48px;
+  width: 100%;
+`;
+
+const StyledButton = styled.div`
+  width: 100%;
+`;
+const StyledInput = styled.div`
+  width: 50%;
+`;
+
+
  const RandomTitleContainer = styled.h3`
  padding-bottom: 10px;
  text-align-last: left;
@@ -38,11 +66,6 @@ const RandomResultsContainer = styled.div`
  color: #20233f;
  font-size: 25px;
  `;
-
- const ResultUnmarkedList = styled.ul`
- list-style: none;
- `;
-
 
 
  interface SomeInterface{
@@ -99,37 +122,129 @@ export default function MultilineTextFields() {
     setResult( [...arr]);
   }
   return (
-  <StyledRandom>
-        <RandomControlContainer>
-            <RandomTitleContainer>Random control</RandomTitleContainer>
-            <TextField
-            id="outlined-multiline-static"
-            multiline
-            rows="10"
-            defaultValue=" "
-            variant="outlined"
-            onChange={handleChange}
-            />
-            <Input type="number" color="primary" onChange={handleInputChange}></Input>
-            <Button variant="contained" color="primary" onClick={randomize}>
-            Randomize
-            </Button>
-        </RandomControlContainer>
-        <div className="result_container">
-        <RandomTitleContainer>Result area</RandomTitleContainer>
-        <RandomResultsContainer>
-          <ResultUnmarkedList>
-            {result.map((item) => {
-              return <li key={item.id}>{item.value}</li>     
-              })
-            }
-          </ResultUnmarkedList>
-        </RandomResultsContainer>
-        </div>
+  
+  <StyledRandom id="main">
+            <MainHeader>
+              <AreaWrapper>
+              <NavWrapper>   
+                <Button id="RandomizeButton" variant="contained" color="primary" onClick={randomize} >
+                 Randomize
+                </Button>
+                <Input id="RandomizeInput" type="number" color="primary" onChange={handleInputChange} placeholder="Please type number of results you want. Default value is 1" ></Input>
+              
+                </NavWrapper> 
+                <TextField
+                id="outlined-multiline-static"
+                multiline
+                rows="10"
+                defaultValue=" "
+                variant="outlined"
+                fullWidth={true}
+                onChange={handleChange}
+                />
+                <TextField
+                id="outlined-multiline-static2"
+                multiline
+                rows="10"
+                defaultValue=" "
+                variant="outlined"
+                fullWidth={true}
+                value={result.map((item) => {
+                  return item.value + "\n"
+                  })}
+                />
+                <div className="result_container">
+              
+                </div>
+                
+                </AreaWrapper>
+              </MainHeader>
+     
     </StyledRandom>
+    
   );
 }
 
 
 
 
+
+// (
+//   <StyledRandom>
+//         <RandomControlContainer>
+//             <RandomTitleContainer>Random control</RandomTitleContainer>
+//             <TextField
+//             id="outlined-multiline-static"
+//             multiline
+//             rows="10"
+//             defaultValue=" "
+//             variant="outlined"
+//             onChange={handleChange}
+//             />
+//             <Input type="number" color="primary" onChange={handleInputChange}></Input>
+//             <Button variant="contained" color="primary" onClick={randomize}>
+//             Randomize
+//             </Button>
+//         </RandomControlContainer>
+//         <div className="result_container">
+//         <RandomTitleContainer>Result area</RandomTitleContainer>
+
+
+//         <RandomResultsContainer>
+//           <ResultUnmarkedList>
+//             {result.map((item) => {
+//               return <li key={item.id}>{item.value}</li>     
+//               })
+//             }
+//           </ResultUnmarkedList>
+//         </RandomResultsContainer>
+//         </div>
+//     </StyledRandom>
+//   );
+
+
+
+
+
+
+// <StyledRandom>
+// <RandomControlContainer>
+//         {/* <RandomTitleContainer>Random control</RandomTitleContainer> */}
+        
+//         <MainHeader>
+//           <AreaWrapper>
+//           <NavWrapper>
+//             <TextField
+//             id="outlined-multiline-static"
+//             multiline
+//             rows="10"
+//             defaultValue=" "
+//             variant="outlined"
+//             fullWidth={true}
+//             onChange={handleChange}
+//             />
+//             <div className="result_container">
+//             {/* <RandomTitleContainer>Result area</RandomTitleContainer> */}
+//             {/* <RandomResultsContainer> */}
+//               <ul className="theList">
+//                 {result.map((item) => {
+//                   return <li key={item.id}>{item.value}</li>     
+//                   })
+//                 }
+//               </ul>
+//             {/* </RandomResultsContainer> */}
+//             </div>
+//             </NavWrapper>
+//             </AreaWrapper>
+//           </MainHeader>
+//   </RandomControlContainer>
+//   <StyledInput>
+//         <Input type="number" color="primary" onChange={handleInputChange}></Input>
+//         </StyledInput>
+
+//         <Button variant="contained" color="primary" onClick={randomize}>
+//         Randomize
+//         </Button>
+// </StyledRandom>
+
+// );
