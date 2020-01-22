@@ -1,28 +1,24 @@
- /* .theList li{
+ .theList li{
     color: #333;
     background-color: rgba(255, 255, 255, .5);
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 20px 10px;
+    margin-bottom: 5px;
     border-radius: 5px;
     list-style: none;
-    transition: background-color .2s ease-out;
+    
 } 
-
   .theList li:hover {
     background-color: #24c3f9;
     cursor: pointer;
 } 
-
  ul.theList{
     padding: 0;
-} */
-
+}
 .MuiInput-root {
     position: relative;
     height: 48px;
     width: 50%;
 }
-
 @media screen and (min-width: 720px) {
     #outlined-multiline-static {
         display: flex;
@@ -30,9 +26,12 @@
         width: 100%;
         border-radius: 1px;
         margin-bottom: 5px;
+        border-top-left-radius: "0 !important";
+        border-top-right-radius: "0";
+        border-bottom-right-radius: "0";
+        border-bottom-left-radius: "inherit";
     }
 }
-
 @media screen and (min-width: 720px) {
     #outlined-multiline-static2 {
         display: flex;
@@ -59,6 +58,5 @@
     margin-bottom: -10px;
     padding-top: 5px;
     font-size: 14px;
-    text-align: center;
-    
+    text-align: center; 
 }
