@@ -24,26 +24,25 @@ const InputError = styled.div`
   text-align: center;
 `;
 
-const InputValidate: React.FC<Props> = ({ fieldName, id, label, validate, type }) => (
+const InputValidate: React.FC<Props> = ({
+  fieldName,
+  id,
+  label,
+  validate,
+  type
+}) => (
   <Input>
-    <Field 
-      name={ fieldName }
-      validate={validate}
-    >
+    <Field name={fieldName} validate={validate}>
       {({ input, meta }) => (
         <div>
-          <TextField 
-            variant="outlined" 
+          <TextField
+            variant="outlined"
             id={id}
-            label={ label }
+            label={label}
             type={type}
-            { ...input }
+            {...input}
           />
-          {
-            meta.error && 
-            meta.touched &&
-            <InputError>{meta.error}</InputError>
-          }
+          {meta.error && meta.touched && <InputError>{meta.error}</InputError>}
         </div>
       )}
     </Field>

@@ -1,12 +1,12 @@
-import React from "react";
-import { connect } from "react-redux";
-import { authSignup } from "../../../../store/auth/actionCreators";
-import Button from "@material-ui/core/Button";
-import styled from "styled-components";
-import { SignupInterface } from "./SignupInterface";
-import { Form } from "react-final-form";
-import InputValidate from "../../../../HOC/AuthHOC/InputValidateHOC";
-import { required, email, password, composeValidators } from "../validation";
+import React from 'react';
+import { connect } from 'react-redux';
+import { authSignup } from '../../../../store/auth/actionCreators';
+import Button from '@material-ui/core/Button';
+import styled from 'styled-components';
+import { SignupInterface } from './SignupInterface';
+import { Form } from 'react-final-form';
+import InputValidate from '../../../../HOC/AuthHOC/InputValidateHOC';
+import { required, email, password, composeValidators } from '../validation';
 
 const SignupForm = styled.form`
   display: flex;
@@ -19,11 +19,11 @@ interface Props {
 }
 
 const initialValues = {
-  email: "",
-  password: "",
-  confirmPassword: "",
-  name: "",
-  group: ""
+  email: '',
+  password: '',
+  confirmPassword: '',
+  name: '',
+  group: ''
 };
 
 const Signup: React.FC<Props> = props => {
@@ -47,7 +47,7 @@ const Signup: React.FC<Props> = props => {
         validate={values => {
           const errors: any = {};
           if (values.confirmPassword !== values.password) {
-            errors.confirmPassword = "Passwords must match!";
+            errors.confirmPassword = 'Passwords must match!';
           }
           return errors;
         }}

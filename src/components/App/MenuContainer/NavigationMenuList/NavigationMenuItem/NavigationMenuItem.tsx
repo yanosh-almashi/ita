@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Item, MenuItemIcon, ArrowSubmenu } from './NavigationMenuItemStyles';
 import { NavLink } from 'react-router-dom';
 import NavigationMenu from '../NavigationMenuList';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -8,7 +8,7 @@ import {
   NestedMenuType
 } from '@components/App/MenuContainer/types/types';
 
-interface Props {
+export interface Props {
   name: string;
   icon: string;
   nextMenu: ItemsInterface[];
@@ -20,39 +20,6 @@ interface Props {
 }
 
 const MenuItem: React.FC<Props> = (props: Props) => {
-  const Item = styled.li`
-    list-style-type: none;
-    font-size: 0;
-    padding: 8px;
-    text-align: center;
-    margin: auto;
-    position: relative;
-    & a {
-      color: #9ba6b2;
-      display: block;
-      width: 40px;
-      padding: 10px;
-      border-radius: 8px;
-      position: relative;
-      margin: 0 auto;
-    }
-    & a:hover {
-      background-color: #e1f6ff;
-    }
-  `;
-
-  const MenuItemIcon = styled.i`
-    font-size: 20px;
-  `;
-
-  const ArrowSubmenu = styled.i`
-    position: absolute;
-    font-size: 11px;
-    right: 0;
-    margin-top: 8px;
-    color: ${props.active ? '#24c0fd' : '#9ba6b2'};
-  `;
-
   const linkClickListener = () => {
     if (props.nextMenu) {
       props.addNestedMenu!(
@@ -75,6 +42,7 @@ const MenuItem: React.FC<Props> = (props: Props) => {
           className={
             props.active ? 'fas fa-chevron-right' : 'fas fa-chevron-down'
           }
+          {...props}
         />
       )}
     </>

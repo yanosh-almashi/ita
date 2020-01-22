@@ -4,7 +4,6 @@ import '@testing-library/jest-dom/extend-expect';
 afterEach(cleanup);
 
 describe('Home page', () => {
-
   // it('Should render main title', () => {
   //   const { getByText } = render(
   //     <HomePage />
@@ -20,7 +19,7 @@ describe('Home page', () => {
   //   expect(titleTag).toBeInTheDocument();
   // });
 
-it('Fetch tiles from API', () => {
+  it('Fetch tiles from API', () => {
     expect(true).toBeTruthy();
   });
 
@@ -32,5 +31,4 @@ it('Fetch tiles from API', () => {
   //   const homePageContainer = container.querySelector('.tiles-container');
   //   expect(homePageContainer).toBeTruthy();
   // });
-
 });

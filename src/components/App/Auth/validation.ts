@@ -3,13 +3,13 @@ const emailValidation = (email: string): boolean => {
   return regExp.test(email);
 };
 
-export const required = (value: string) => (value ? undefined : "Required");
+export const required = (value: string) => (value ? undefined : 'Required');
 
 export const email = (value: string) =>
-  emailValidation(value) ? undefined : "Invalid email!";
+  emailValidation(value) ? undefined : 'Invalid email!';
 
 export const password = (value: string) =>
-  value.length < 6 ? "Min 6 symbols!" : undefined;
+  value.length < 6 ? 'Min 6 symbols!' : undefined;
 
 export const composeValidators = (...validators: any) => (value: any) =>
   validators.reduce(

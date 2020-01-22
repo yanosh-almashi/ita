@@ -7,10 +7,10 @@ import '@testing-library/jest-dom';
 describe('Test menu container', () => {
   it('render without crashing', () => {
     const { container } = render(
-        <BrowserRouter>
-          <MenuContainer />
-        </BrowserRouter>
-        );
+      <BrowserRouter>
+        <MenuContainer />
+      </BrowserRouter>
+    );
     expect(
       container.querySelector('[data-testid="menu-container"]')
     ).not.toBeNull();

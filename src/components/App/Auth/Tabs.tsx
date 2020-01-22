@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   AppBar,
   Box,
@@ -6,9 +6,9 @@ import {
   Tab,
   Tabs,
   Typography
-} from "@material-ui/core";
-import SignIn from "./Signin/Signin";
-import Signup from "./Signup/Signup";
+} from '@material-ui/core';
+import SignIn from './Signin/Signin';
+import Signup from './Signup/Signup';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -36,7 +36,7 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: any) {
   return {
     id: `scrollable-auto-tab-${index}`,
-    "aria-controls": `scrollable-auto-tabpanel-${index}`
+    'aria-controls': `scrollable-auto-tabpanel-${index}`
   };
 }
 

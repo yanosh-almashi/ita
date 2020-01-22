@@ -19,27 +19,24 @@ const StyledModalTest = styled.div`
   margin-top: 100px;
 `;
 
-
 const ContentWrapper = (props: any) => {
-
   return (
     <StyledContentWrapper>
-      <StyledModalTest>
-      </StyledModalTest>
+      <StyledModalTest></StyledModalTest>
       <Switch>
-        <Route path="/" exact component={ HomePage } />
+        <Route path="/" exact component={HomePage} />
         <ProtectedRoute path="/profile" redirect="/" isAuth={!!props.id}>
           <ProfilePage />
         </ProtectedRoute>
       </Switch>
     </StyledContentWrapper>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state: any) => {
   return {
     id: state.authReducer.uid
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, null)(ContentWrapper);

@@ -24,22 +24,18 @@ const tiles: TileInterface[] = [
     name: 'Random',
     text: 'text',
     icon: 'fa-cogs'
-  },
+  }
 ];
 
 describe('Tiles', () => {
-
   it('Should render 3 tiles', () => {
-
     const { container } = render(
-        <BrowserRouter>
-          <Tiles tiles = { tiles } />
-        </BrowserRouter>
+      <BrowserRouter>
+        <Tiles tiles={tiles} />
+      </BrowserRouter>
     );
 
     const tileInTilesContainer = container.querySelectorAll('.tiles__tile');
     expect(tileInTilesContainer).toHaveLength(3);
-
   });
-
 });

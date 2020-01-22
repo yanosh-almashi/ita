@@ -1,12 +1,12 @@
-import { takeLatest, call, fork, put } from "redux-saga/effects";
-import * as actionTypes from "../../store/auth/actionConstants";
-import * as actions from "../../store/auth/actionCreators";
-import * as API from "../../api/auth/signup.api";
+import { takeLatest, call, fork, put } from 'redux-saga/effects';
+import * as actionTypes from '../../store/auth/actionConstants';
+import * as actions from '../../store/auth/actionCreators';
+import * as API from '../../api/auth/signup.api';
 import {
   AuthDataInterface,
   SignupFullDataInterface
-} from "@components/App/Auth/Signup/SignupInterface";
-import { createUserInformation } from "../../components/App/Auth/AuthUtils";
+} from '@components/App/Auth/Signup/SignupInterface';
+import { createUserInformation } from '../../components/App/Auth/AuthUtils';
 
 function* getAuth(authData: any) {
   const userToken: string = yield authData
