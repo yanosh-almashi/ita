@@ -2,6 +2,7 @@ import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import Tiles from './Tiles';
 import TileInterface from './TileInterface';
+import { BrowserRouter } from 'react-router-dom';
 
 afterEach(cleanup);
 
@@ -29,9 +30,11 @@ const tiles: TileInterface[] = [
 describe('Tiles', () => {
 
   it('Should render 3 tiles', () => {
-    
+
     const { container } = render(
-      <Tiles tiles = { tiles } />
+        <BrowserRouter>
+          <Tiles tiles = { tiles } />
+        </BrowserRouter>
     );
 
     const tileInTilesContainer = container.querySelectorAll('.tiles__tile');

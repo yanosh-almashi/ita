@@ -29,7 +29,7 @@ const Tiles: React.FC<Props> = ({ tiles }) => {
     <div className="tiles-container">
       <StyledTiles>
         {
-            tiles.map((tile: any) => <Link to={`tools/${tile.name.toLowerCase()}`} > <TileItem tile={tile} key={tile.id} /> </Link>)
+            tiles.map((tile: any) => <Link to={`tools/${tile.name.toLowerCase()}`} key={tile.id}> <TileItem tile={tile} /> </Link>)
         }
       </StyledTiles>
     </div>
