@@ -7,6 +7,17 @@ import Input from '@material-ui/core/Input';
 import './ListItem.css'
 
 
+
+const useStyles = makeStyles({
+  root: {
+    borderTopLeftRadius: "0 !important" ,
+    borderTopRightRadius: "0",
+    borderBottomRightRadius: "0",
+    borderBottomLeftRdius: "inherit"
+  },
+});
+
+
 const StyledRandom = styled.div`
 
 @media screen and (min-width: 1280px)
@@ -25,6 +36,8 @@ height: 100%;
   box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
   padding-top: 48px;
   width: 50%;
+  background-color: #fff;
+  
   
 `;
 
@@ -47,25 +60,30 @@ const NavWrapper = styled.div`
   width: 100%;
 `;
 
-const StyledButton = styled.div`
-  width: 100%;
-`;
-const StyledInput = styled.div`
-  width: 50%;
+const ResultArea = styled.div`
+  
 `;
 
 
- const RandomTitleContainer = styled.h3`
- padding-bottom: 10px;
- text-align-last: left;
- display: flex;
- justify-content: space-between;
- align-items: center;
- margin: 0 auto 30px auto;
- border-bottom: 1px solid #dedde3;
- color: #20233f;
- font-size: 25px;
- `;
+// const StyledButton = styled.div`
+//   width: 100%;
+// `;
+// const StyledInput = styled.div`
+//   width: 50%;
+// `;
+
+
+//  const RandomTitleContainer = styled.h3`
+//  padding-bottom: 10px;
+//  text-align-last: left;
+//  display: flex;
+//  justify-content: space-between;
+//  align-items: center;
+//  margin: 0 auto 30px auto;
+//  border-bottom: 1px solid #dedde3;
+//  color: #20233f;
+//  font-size: 25px;
+//  `;
 
 
  interface SomeInterface{
@@ -74,10 +92,11 @@ const StyledInput = styled.div`
  }
 export default function MultilineTextFields() {
 
+
   const [value, setValue] = React.useState('Your result will be here');
   const [result, setResult] = React.useState<SomeInterface[]>([]);
   const [inputValue, setInputValue]= React.useState(1);;
-  
+  const classes = useStyles();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
@@ -135,6 +154,8 @@ export default function MultilineTextFields() {
                 </NavWrapper> 
                 <TextField
                 id="outlined-multiline-static"
+                
+                
                 multiline
                 rows="10"
                 defaultValue=" "
@@ -142,17 +163,12 @@ export default function MultilineTextFields() {
                 fullWidth={true}
                 onChange={handleChange}
                 />
-                <TextField
-                id="outlined-multiline-static2"
-                multiline
-                rows="10"
-                defaultValue=" "
-                variant="outlined"
-                fullWidth={true}
-                value={result.map((item) => {
-                  return item.value + "\n"
-                  })}
-                />
+                <ResultArea>
+
+                </ResultArea>
+
+
+
                 <div className="result_container">
               
                 </div>
@@ -167,7 +183,17 @@ export default function MultilineTextFields() {
 
 
 
-
+// <TextField
+// id="outlined-multiline-static2"
+// multiline
+// rows="10"
+// defaultValue=" "
+// variant="outlined"
+// fullWidth={true}
+// value={result.map((item) => {
+//   return item.value + "\n"
+//   })}
+// />
 
 // (
 //   <StyledRandom>

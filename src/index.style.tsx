@@ -16,6 +16,7 @@ export const theme = createMuiTheme({
 
 export const GlobalCSS = withStyles({
   "@global": {
+    
     ".MuiButton-contained": {
       fontSize: "14px",
       borderRadius: "50px",
