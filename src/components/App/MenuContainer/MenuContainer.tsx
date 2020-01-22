@@ -25,12 +25,12 @@ export const menuItems: ItemsInterface[] = [
       {
         name: 'rem',
         icon: 'far fa-address-book',
-        path: '/rem'
+        path: '/planner'
       },
       {
         name: 'schedule',
         icon: 'far fa-calendar-alt',
-        path: '/schedule'
+        path: '/chicken'
       },
       {
         name: 'randomaizer',
@@ -40,7 +40,7 @@ export const menuItems: ItemsInterface[] = [
       {
         name: 'todo',
         icon: 'far fa-list-alt',
-        path: '/todo'
+        path: '/sosna'
       }
     ]
   }

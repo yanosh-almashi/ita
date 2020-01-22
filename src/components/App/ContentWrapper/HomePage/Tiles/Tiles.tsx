@@ -2,6 +2,7 @@ import React from 'react';
 import TileItem from './TileItem/TileItem';
 import styled from 'styled-components';
 import TileInterface from './TileInterface';
+import {Link} from 'react-router-dom';
 
 const StyledTiles = styled.div`
   display: grid;
@@ -28,7 +29,7 @@ const Tiles: React.FC<Props> = ({ tiles }) => {
     <div className="tiles-container">
       <StyledTiles>
         {
-          tiles.map((tile: any) => <TileItem tile={tile} key={tile.id} />)
+            tiles.map((tile: any) => <Link to={`tools/${tile.name.toLowerCase()}`} > <TileItem tile={tile} key={tile.id} /> </Link>)
         }
       </StyledTiles>
     </div>
