@@ -77,13 +77,14 @@ function* signupUser(action: any) {
     if (!isSuccess) {
       return;
     }
-    putFile(
+    yield call(saveDataInState, { ...userAuthData, error: null, isAuth: true });
+    if (!action.payload.file) { return; }
+    yield putFile(
       action.payload.file, 
-      getFileTypes.avatar.path, 
+      getFileTypes.avatar.path,
       getFileTypes.avatar.name, 
       userAuthData.uid || ''
     );
-    yield call(saveDataInState, { ...userAuthData, error: null, isAuth: true });
   } catch (e) {
     // error handle in future
   }

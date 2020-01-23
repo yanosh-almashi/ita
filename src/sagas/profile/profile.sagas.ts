@@ -16,8 +16,7 @@ function* getProfileDataAsync() {
     const userData = yield call(getData, data);
     const userAvatarUrl = yield getFile(getFileTypes.avatar.path, getFileTypes.avatar.name, Cookies.get("uid") || '');
     
-    console.log(userAvatarUrl);
-  yield put(saveProfileData({ ...userData, userAvatarUrl }));
+    yield put(saveProfileData({ ...userData, userAvatarUrl }));
   } catch(err) {
 
   }

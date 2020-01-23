@@ -16,8 +16,6 @@ const StyledContentWrapper = styled.div`
 `;
 
 const ContentWrapper = (props: any) => {
-  console.log(props.id);
-  console.log(!!props.id);
   return (
     <StyledContentWrapper>
       <Switch>

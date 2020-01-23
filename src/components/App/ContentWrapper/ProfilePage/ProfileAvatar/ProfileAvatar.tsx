@@ -9,6 +9,7 @@ import {
 } from '../ProfilePageStyles';
 import { connect } from 'react-redux';
 import { changeProfileSummaryWindow } from '../../../../../store/profile/ProfileActions';
+import Img from '../../../../../assets/images/ava.jpg';
 
 interface Props {
   name: string;
@@ -30,7 +31,7 @@ const ProfileAvatar: React.FC<Props> = (props) => {
     <ProfileAvatarContainer>
       <ProfileTitleContainer>Profile Avatar</ProfileTitleContainer>
       <ProfileAvatarImage 
-        src={url || ''}
+        src={url || Img}
       />
       <ProfileTitleName>{ name }</ProfileTitleName>
       <ProfileTitleGroup>{ group }</ProfileTitleGroup>
