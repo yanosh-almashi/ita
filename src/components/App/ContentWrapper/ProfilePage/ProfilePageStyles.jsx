@@ -12,7 +12,11 @@ export const ProfileContainer = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 30px;
   width: 100%;
-  padding: 0px 50px;
+  padding: 50px;
+
+  @media (max-width: 1300px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const ProfileAvatarContainer = styled.div`
@@ -22,10 +26,19 @@ export const ProfileAvatarContainer = styled.div`
   flex-flow: column;
   align-items: center;
   ${ProfileItem}
+
+  @media (max-width: 1300px) {
+    grid-column: 1/1;
+    grid-row: 1;
+  }
 `;
 
 export const ProfileSummaryContainer = styled.div`
   grid-column: 2/5;
+
+  @media (max-width: 1300px) {
+    grid-column: 1/1;
+  }
   ${ProfileItem}
 `;
 
@@ -47,6 +60,10 @@ export const ProfileSummaryInnerItem = styled.span`
 export const ProfileProgressContainer = styled.div`
   grid-column: 2/5;
   ${ProfileItem}
+
+  @media (max-width: 1300px) {
+    grid-column: 1/1;
+  }
 `;
 
 export const ProfileTitleContainer = styled.h3`
@@ -63,8 +80,12 @@ export const ProfileTitleContainer = styled.h3`
 
 export const ProfileEditContainer = styled.div`
   display: flex;
-  flex-flow: column;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 1300px) {
+    flex-flow: column-reverse;
+  }
 `;
 
 export const ProfileEditForm = styled.form`

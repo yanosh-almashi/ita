@@ -7,6 +7,7 @@ import {
   SignupFullDataInterface
 } from "@components/App/Auth/Signup/SignupInterface";
 import { createUserInformation } from "../../components/App/Auth/AuthUtils";
+import { putFile, getFileTypes } from "../../api/profile/ProfileApi";
 
 function* getAuth(authData: any) {
   const userToken: string = yield authData
@@ -39,7 +40,7 @@ function* saveDataInState(userAuthData: any) {
     refreshToken: userAuthData.refreshToken
   };
   yield put(actions.saveUserAuthData(storageUserData));
-
+  
   if (
     !storageUserData.token ||
     !storageUserData.uid ||
@@ -76,8 +77,14 @@ function* signupUser(action: any) {
     if (!isSuccess) {
       return;
     }
-
     yield call(saveDataInState, { ...userAuthData, error: null, isAuth: true });
+    if (!action.payload.file) { return; }
+    yield putFile(
+      action.payload.file, 
+      getFileTypes.avatar.path,
+      getFileTypes.avatar.name, 
+      userAuthData.uid || ''
+    );
   } catch (e) {
     // error handle in future
   }

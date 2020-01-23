@@ -23,7 +23,7 @@ const ContentWrapper = (props: any) => {
         <ProtectedRoute path="/profile" redirect="/" isAuth={!!props.id}>
           <ProfilePage />
         </ProtectedRoute>
-        <ProtectedRoute path="/auth" redirect="/" isAuth={!!props.id}>
+        <ProtectedRoute path="/auth" redirect="/" isAuth={!props.id}>
           <Auth />
         </ProtectedRoute> 
       </Switch>

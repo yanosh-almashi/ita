@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import Img from '../../assets/images/ava.jpg';
 
 export const getFileTypes = {
   avatar: {
@@ -8,24 +9,21 @@ export const getFileTypes = {
 }
 
 export const getFile = (path: string, name: string, uid: string) => {
-  const getPath: string = `${path}/${name}-${uid}`;
-  firebase
+  return firebase
   .storage()
-  .ref(getPath)
+  .ref(`${path}/${name}-${uid}`)
   .getDownloadURL()
   .then((url: string) => {
     console.log(url);
     return url;
-  });
+  }).catch(() => Img);
 }
 
 export const putFile = (file: any, path: string, name: string, uid: string) => {
   const metadata = {
     contentType: 'image/*',
   };
+
   const putName: string = `${name}-${uid}`;
-  firebase.storage().ref(path).child(putName).put(file, metadata)
-    .then((url: any) => {
-      console.log(url);
-    });
+  firebase.storage().ref(path).child(putName).put(file, metadata);
 }

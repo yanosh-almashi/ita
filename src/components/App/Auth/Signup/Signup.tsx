@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { authSignup } from "../../../../store/auth/actionCreators";
 import Button from "@material-ui/core/Button";
@@ -8,7 +8,6 @@ import { Form } from "react-final-form";
 import InputValidate from "../../../../HOC/AuthHOC/InputValidateHOC";
 import { required, email, password, composeValidators } from "../validation";
 import FileUpload from "../../../../components/FileUpload/FileUpload";
-import { putFile } from "../../../../api/profile/ProfileApi";
 
 const SignupForm = styled.form`
   display: flex;
@@ -30,6 +29,8 @@ const initialValues = {
 
 const Signup: React.FC<Props> = props => {
 
+  const [avatar, setAvatar] = useState();
+
   const {
     authSignup
   } = props;
@@ -40,16 +41,18 @@ const Signup: React.FC<Props> = props => {
       password: form.password,
       name: form.name,
       group: form.group,
+      file: avatar
     };
     authSignup(userData);
   };
 
+  const handleFile = (file: File) => {
+    setAvatar(file);
+  }
+
   return (
     <div>
-      <FileUpload 
-        putFile={putFile}
-        path="avatars"
-      />
+      <FileUpload putFile={handleFile} />
       <Form
         onSubmit={formObj => {
           onSubmitForm(formObj);

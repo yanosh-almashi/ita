@@ -8,8 +8,6 @@ import {
   UploadFileTitle
 } from './FileUploadStyles';
 import Img from '../../assets/images/ava.jpg';
-import { connect } from 'react-redux';
-import { getFileTypes } from '../../api/profile/ProfileApi';
 
 const initialFile = {
   file: null,
@@ -17,13 +15,10 @@ const initialFile = {
 }
 
 interface Props {
-  putFile: (file: any, path: string, name: string, uid: string) => void;
-  uid: string;
-  path: string;
+  putFile: (file: any) => void;
 }
 
-const FileUpload: React.FC<Props> = ({ putFile, uid, path }) => {
-
+const FileUpload: React.FC<Props> = ({ putFile }) => {
   const [file, setFile] = React.useState(initialFile);
 
   const fileHandler = (event: any) => {
@@ -36,11 +31,11 @@ const FileUpload: React.FC<Props> = ({ putFile, uid, path }) => {
       });
     }
 
-    if (file) {
-      reader.readAsDataURL(file);
+    if (file) { 
+      reader.readAsDataURL(file); 
     }
     
-    putFile(file, path, getFileTypes.avatar.name, uid);
+    putFile(file);
   }
   
   return (
@@ -56,8 +51,4 @@ const FileUpload: React.FC<Props> = ({ putFile, uid, path }) => {
   )
 }
 
-const mapStateToProps = (state: any) => ({
-  uid: state.authReducer.uid
-});
-
-export default connect(mapStateToProps)(FileUpload);
+export default FileUpload;
