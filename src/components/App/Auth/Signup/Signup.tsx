@@ -29,7 +29,7 @@ const initialValues = {
 
 const Signup: React.FC<Props> = props => {
 
-  const [avatar, setAvatar] = useState(null);
+  const [avatar, setAvatar] = useState();
 
   const {
     authSignup
@@ -46,7 +46,7 @@ const Signup: React.FC<Props> = props => {
     authSignup(userData);
   };
 
-  const handleFile = (file: any) => {
+  const handleFile = (file: File) => {
     setAvatar(file);
   }
 

@@ -16,12 +16,7 @@ export const getFile = (path: string, name: string, uid: string) => {
   .then((url: string) => {
     console.log(url);
     return url;
-  }).catch(function(error: any) {
-    switch (error.code) {
-      case 'storage/object-not-found':
-        return Img;
-      }
-    });
+  }).catch(() => Img);
 }
 
 export const putFile = (file: any, path: string, name: string, uid: string) => {
