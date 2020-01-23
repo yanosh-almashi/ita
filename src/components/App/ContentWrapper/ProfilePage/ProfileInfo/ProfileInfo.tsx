@@ -36,7 +36,8 @@ const ProfileInfo: React.FC<Props> = (props) => {
     getData } = props;
 
   const updateAvatar = () => {
-    putFile(avatar, getFileTypes.avatar.path, getFileTypes.avatar.name, uid);
+    putFile(avatar, getFileTypes.avatar.path, getFileTypes.avatar.name, uid)
+    .then(() => getData());
   }
 
   const updateTextData = (formObj: any) => {
@@ -47,9 +48,9 @@ const ProfileInfo: React.FC<Props> = (props) => {
     .then(() => getData());
   }
 
-  const updateData = async (formObj: any) => {
-    await updateTextData(formObj);
-    await updateAvatar();
+  const updateData = (formObj: any) => {
+    updateTextData(formObj);
+    updateAvatar();
   }
 
   const handleFile = (file: any) => {
