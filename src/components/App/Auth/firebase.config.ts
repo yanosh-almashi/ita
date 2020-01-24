@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 
 export const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
+  apiKey: 'AIzaSyBUZC-i_E2PdMjmDYTnrvnqFxK7a-gWpRo',
   authDomain: 'itatools35.firebaseapp.com',
   databaseURL: 'https://itatools35.firebaseio.com',
   projectId: 'itatools35',
