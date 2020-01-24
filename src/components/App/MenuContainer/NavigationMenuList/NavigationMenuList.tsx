@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import MenuItem from './NavigationMenuItem/NavigationMenuItem';
 import { StyledNavMenu } from './NavigationMenuListStyles';
 import { ItemsInterface, NestedMenuType } from '../types/types';
@@ -10,8 +10,8 @@ export interface Props {
   addNestedMenu?(elem: NestedMenuType): void;
 }
 
-const NavigationMenu: React.FC<Props> = (props: Props) => {
-  const [active, setActive] = useState<boolean>(false);
+const NavigationMenu: React.FC<Props> = (props) => {
+  const [active, setActive] = useState(false);
 
   const activeState = (elem: boolean) => {
     setActive(elem);

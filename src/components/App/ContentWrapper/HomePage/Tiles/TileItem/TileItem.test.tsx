@@ -14,66 +14,40 @@ const tileItem: TileInterface = {
   icon: 'fa-cogs'
 };
 
-describe('Tile item', () => {
-  it('Should render one tile', () => {
-    const { container } = render(
+const setup = () => {
+  const { container } = render(
       <BrowserRouter>
-        <Link to={'tools/random'} key={'001'}>
-          <TileItem
-            tile={{ id: '001', name: 'Random', text: 'text', icon: 'fa-cogs' }}
-          />
+        <Link to={`tools/${tileItem.name.toLowerCase()}`} key={tileItem.id}>
+          <TileItem tile={tileItem} />
         </Link>
       </BrowserRouter>
-    );
-    const tileItem = container.querySelector('.tiles__tile');
+  );
+  return container;
+};
+
+describe('Tile item', () => {
+  it('Should render one tile', () => {
+    const tileItem = setup().querySelector('.tiles__tile');
     expect(tileItem).toBeInTheDocument();
   });
 
   it('Should render Random in h3 tag', () => {
-    const { container } = render(
-      <BrowserRouter>
-        <Link to={`tools/${tileItem.name.toLowerCase()}`} key={tileItem.id}>
-          <TileItem tile={tileItem} />
-        </Link>
-      </BrowserRouter>
-    );
-    const titleItemTag = container.querySelector('h3');
+    const titleItemTag = setup().querySelector('h3');
     expect(titleItemTag).toHaveTextContent('Random');
   });
 
   it('Should render text in p tag', () => {
-    const { container } = render(
-      <BrowserRouter>
-        <Link to={`tools/${tileItem.name.toLowerCase()}`} key={tileItem.id}>
-          <TileItem tile={tileItem} />
-        </Link>
-      </BrowserRouter>
-    );
-    const titleItemTag = container.querySelector('p');
+    const titleItemTag = setup().querySelector('p');
     expect(titleItemTag).toHaveTextContent('text');
   });
 
   it('Should render i tag', () => {
-    const { container } = render(
-      <BrowserRouter>
-        <Link to={`tools/${tileItem.name.toLowerCase()}`} key={tileItem.id}>
-          <TileItem tile={tileItem} />
-        </Link>
-      </BrowserRouter>
-    );
-    const iTag = container.querySelector('i');
+    const iTag = setup().querySelector('i');
     expect(iTag).toBeInTheDocument();
   });
 
   it('Should render class "fas fa-cogs"', () => {
-    const { container } = render(
-      <BrowserRouter>
-        <Link to={`tools/${tileItem.name.toLowerCase()}`} key={tileItem.id}>
-          <TileItem tile={tileItem} />
-        </Link>
-      </BrowserRouter>
-    );
-    const iTag = container.querySelector('i');
+    const iTag = setup().querySelector('i');
     const classOne = iTag?.classList[0] === 'fas';
     const classTwo = iTag?.classList[1] === 'fa-cogs';
     expect(classTwo && classOne).toBeTruthy();
