@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   AppBar,
   Box,
-  makeStyles,
   Tab,
   Tabs,
   Typography
-} from "@material-ui/core";
+} from '@material-ui/core';
 import SignIn from "./Signin/Signin";
 import Signup from "./Signup/Signup";
+import styled from "styled-components";
+
+const AuthFormContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+`;
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -36,25 +41,18 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: any) {
   return {
     id: `scrollable-auto-tab-${index}`,
-    "aria-controls": `scrollable-auto-tabpanel-${index}`
+    'aria-controls': `scrollable-auto-tabpanel-${index}`
   };
 }
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1
-  }
-});
-
 const TabButtons = () => {
-  const classes = useStyles();
   const [value, setValue] = useState(0);
 
   const handleChange = (e: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
   return (
-    <div className={classes.root}>
+    <AuthFormContainer>
       <AppBar position="static" color="default">
         <Tabs
           value={value}
@@ -75,7 +73,7 @@ const TabButtons = () => {
       <TabPanel value={value} index={1}>
         <Signup />
       </TabPanel>
-    </div>
+    </AuthFormContainer>
   );
 };
 

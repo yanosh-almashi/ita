@@ -3,12 +3,12 @@ import {
   SIGNOUT,
   AUTH_SUCCESSFUL,
   SIGNIN_ERROR
-} from "./actionConstants";
-import { UserInterface } from "./initialStateInterface";
-import Cookies from "js-cookie";
+} from './actionConstants';
+import { UserInterface } from './initialStateInterface';
+import Cookies from 'js-cookie';
 
-let token = Cookies.get("token") || Cookies.get("refreshToken");
-const id = Cookies.get("uid");
+let token = Cookies.get('token') || Cookies.get('refreshToken');
+const id = Cookies.get('uid');
 
 export const initialState: UserInterface = {
   uid: id || null,

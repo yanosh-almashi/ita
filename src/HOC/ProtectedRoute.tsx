@@ -8,15 +8,20 @@ interface Props {
   children: any;
 }
 
-const ProtectedRoute: React.FC<Props> = ({path, isAuth, redirect, children }) => {
+const ProtectedRoute: React.FC<Props> = ({
+  path,
+  isAuth,
+  redirect,
+  children
+}) => {
   return (
-    <Route 
-      path={ path }
-      render={ 
-        () => isAuth ? ( children ) : ( <Redirect to={{ pathname: redirect }} /> ) 
+    <Route
+      path={path}
+      render={() =>
+        isAuth ? children : <Redirect to={{ pathname: redirect }} />
       }
     />
-  )
-}
+  );
+};
 
 export default ProtectedRoute;

@@ -1,18 +1,23 @@
-import { SignupInterface, SignupFullDataInterface } from '@components/App/Auth/Signup/SignupInterface';
-import { auth, db } from '../../components/App/Auth/firebase.config';
+import {
+  SignupInterface,
+  SignupFullDataInterface
+} from '@components/App/Auth/Signup/SignupInterface';
+import { auth, db } from '../../firebase/firebase.config';
 import { signInUser } from '../../store/auth/actionCreators';
-
 
 export const authSignup = (userData: SignupInterface) => {
   return auth
     .createUserWithEmailAndPassword(userData.email, userData.password)
-    .then((data: any) => {console.dir(data);signInUser(userData.email, userData.password); return data.user})
+    .then((data: any) => {
+      signInUser(userData.email, userData.password);
+      return data.user;
+    })
     .catch(() => null);
 };
 
 export const authSignupFullData = (fullUserData: SignupFullDataInterface) => {
   const time = new Date().getTime();
-  const threeMonth = 3 * 30 * 24* 60 * 60 * 1000;
+  const threeMonth = 3 * 30 * 24 * 60 * 60 * 1000;
   return db
     .collection('users')
     .doc(fullUserData.uid)
@@ -32,5 +37,5 @@ export const authSignupFullData = (fullUserData: SignupFullDataInterface) => {
       }
     })
     .then(() => true)
-    .catch(() =>  false);
+    .catch(() => false);
 };

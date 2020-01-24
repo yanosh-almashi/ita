@@ -1,11 +1,12 @@
 import React from 'react';
-import HomePage from './HomePage/HomePage';
 import { Switch, Route } from 'react-router';
-import ProfilePage from './ProfilePage/ProfilePage';
 import MultilineTextFields from '../Randomizer/Randomizer';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import ProtectedRoute from '../../../HOC/ProtectedRoute';
+import HomePage from './HomePage/HomePage';
+import ProfilePage from './ProfilePage/ProfilePage';
+import Auth from '../Auth/Auth';
 
 const StyledContentWrapper = styled.div`
   width: 100%;
@@ -13,35 +14,28 @@ const StyledContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-flow: column;
-  padding: 40px 0px;
 `;
-
-const StyledModalTest = styled.div`
-  margin-top: 100px;
-`;
-
 
 const ContentWrapper = (props: any) => {
-
   return (
     <StyledContentWrapper>
-      <StyledModalTest>
-      </StyledModalTest>
       <Switch>
-        <Route path="/" exact component={ HomePage } />
+        <Route path="/" exact component={HomePage} />
         <ProtectedRoute path="/profile" redirect="/" isAuth={!!props.id}>
           <ProfilePage />
         </ProtectedRoute>
         <Route path="/randomizer" component={ MultilineTextFields } />
+        <ProtectedRoute path="/auth" redirect="/" isAuth={!props.id}>
+          <Auth />
+        </ProtectedRoute> 
       </Switch>
     </StyledContentWrapper>
-  )
-}
+  );
+};
 
-const mapStateToProps = (state: any) => {
-  return {
-    id: state.authReducer.uid
-  }
-}
+const mapStateToProps = (state: any) => ({
+  id: state.authReducer.uid
+});
 
-export default connect(mapStateToProps, null)(ContentWrapper);
+export default connect(mapStateToProps)(ContentWrapper);
+

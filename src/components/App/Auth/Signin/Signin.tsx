@@ -1,15 +1,15 @@
-import React from "react";
-import { bindActionCreators } from "redux";
-import { Form } from "react-final-form";
-import { SigninInterface } from "./Interfaces/SignInInterface";
-import { signInUser, signOutUser } from "../../../../store/auth/actionCreators";
-import { connect } from "react-redux";
-import { UserForm } from "@components/App/Auth/Signin/Interfaces/UserFormInterface";
-import InputValidate from "../../../../HOC/AuthHOC/InputValidateHOC";
-import { required, email, password, composeValidators } from "../validation";
-import { Button } from "@material-ui/core";
-import styled from "styled-components";
-import { InitialStateInterface } from "store/auth/initialStateInterface";
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { Form } from 'react-final-form';
+import { SigninInterface } from './Interfaces/SignInInterface';
+import { signInUser, signOutUser } from '../../../../store/auth/actionCreators';
+import { connect } from 'react-redux';
+import { UserForm } from '@components/App/Auth/Signin/Interfaces/UserFormInterface';
+import InputValidate from '../../../../HOC/AuthHOC/InputValidateHOC';
+import { required, email, password, composeValidators } from '../validation';
+import { Button } from '@material-ui/core';
+import styled from 'styled-components';
+import { InitialStateInterface } from 'store/auth/initialStateInterface';
 
 const SigninForm = styled.form`
   width: 480px;
@@ -18,8 +18,8 @@ const SigninForm = styled.form`
 `;
 
 const initialValues: UserForm = {
-  email: "",
-  password: ""
+  email: '',
+  password: ''
 };
 
 const SignIn = ({ error, signInUser }: SigninInterface) => {
@@ -35,7 +35,7 @@ const SignIn = ({ error, signInUser }: SigninInterface) => {
       validate={() => {
         const errors: any = {};
         if (error) {
-          errors.password = "Invalid email or password";
+          errors.password = 'Invalid email or password';
         }
         return errors;
       }}

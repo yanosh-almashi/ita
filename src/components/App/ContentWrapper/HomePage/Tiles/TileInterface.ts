@@ -1,8 +1,8 @@
 interface TileInterface {
-  id: string;
+  id?: string;
   name: string;
-  text: string;
   icon: string;
+  text: string;
 }
 
 export default TileInterface;

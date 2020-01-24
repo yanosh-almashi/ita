@@ -1,14 +1,15 @@
-import * as actionTypes from "./actionConstants";
+import * as actionTypes from './actionConstants';
 import {
   SignupInterface,
   AuthDataInterface
-} from "@components/App/Auth/Signup/SignupInterface";
-import { SIGNIN_SUCCESSFUL, SIGNIN_ERROR, SIGNOUT } from "./actionConstants";
-import { Firebase } from "../../components/App/Auth/firebase.config";
+} from '@components/App/Auth/Signup/SignupInterface';
+import { SIGNIN_SUCCESSFUL, SIGNIN_ERROR, SIGNOUT } from './actionConstants';
+import { Firebase } from '../../firebase/firebase.config';
+
 import {
   createUserInformation,
   deleteUserInformation
-} from "../../components/App/Auth/AuthUtils";
+} from '../../components/App/Auth/AuthUtils';
 
 export const successSignin = (user: any) => {
   return {
