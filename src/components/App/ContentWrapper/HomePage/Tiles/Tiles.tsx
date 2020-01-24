@@ -18,7 +18,7 @@ const Tiles: React.FC<Props> = ({ tiles }) => {
         ))}
       </StyledTiles>
     </div>
-  );
+  )
 };
 
 export default Tiles;

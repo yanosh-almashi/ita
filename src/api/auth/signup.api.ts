@@ -2,7 +2,7 @@ import {
   SignupInterface,
   SignupFullDataInterface
 } from '@components/App/Auth/Signup/SignupInterface';
-import { auth, db } from '../../components/App/Auth/firebase.config';
+import { auth, db } from '../../firebase/firebase.config';
 import { signInUser } from '../../store/auth/actionCreators';
 
 export const authSignup = (userData: SignupInterface) => {

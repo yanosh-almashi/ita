@@ -1,4 +1,4 @@
-import { db } from '../../components/App/Auth/firebase.config';
+import { db } from '../../firebase/firebase.config';
 
 export async function getTilesData() {
   const tiles = await db

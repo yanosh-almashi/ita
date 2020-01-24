@@ -3,6 +3,7 @@ export interface SignupInterface {
   password: string;
   name?: string;
   group?: string;
+  file?: any;
 }
 
 export interface SignupFullDataInterface {
