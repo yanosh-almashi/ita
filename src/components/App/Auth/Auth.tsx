@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Dialog } from "@material-ui/core";
-import styled from "styled-components";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { signOutUser } from "../../../store/auth/actionCreators";
-import TabButtons from "./Tabs";
+import React, { useState } from 'react';
+import { Dialog } from '@material-ui/core';
+import styled from 'styled-components';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { signOutUser } from '../../../store/auth/actionCreators';
+import TabButtons from './Tabs';
 
 const CloseIcon = styled.i`
   position: absolute;

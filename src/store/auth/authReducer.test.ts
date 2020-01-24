@@ -1,6 +1,6 @@
-import { authReducer as reducer } from "./authReducer";
-import * as types from "./actionConstants";
-import { UserInterface } from "./initialStateInterface";
+import { authReducer as reducer } from './authReducer';
+import * as types from './actionConstants';
+import { UserInterface } from './initialStateInterface';
 
 const initialState: UserInterface = {
   uid: null,
@@ -8,58 +8,58 @@ const initialState: UserInterface = {
   error: null
 };
 
-describe("user auth reducer", () => {
-  it("should return the initial state", () => {
+describe('user auth reducer', () => {
+  it('should return the initial state', () => {
     expect(reducer({ ...initialState }, {})).toEqual({ ...initialState });
   });
 
-  it("success", () => {
+  it('success', () => {
     const action = {
       type: types.AUTH_SUCCESSFUL,
-      payload: { token: "token", uid: "id" }
+      payload: { token: 'token', uid: 'id' }
     };
     expect(reducer(initialState, action)).toEqual({
-      token: "token",
-      uid: "id",
+      token: 'token',
+      uid: 'id',
       error: null
     });
   });
 
-  it("sign in successfully", () => {
+  it('sign in successfully', () => {
     expect(
       reducer(
         { ...initialState },
         {
           type: types.SIGNIN_SUCCESSFUL,
-          payload: { uid: "123", token: "qwerty" }
+          payload: { uid: '123', token: 'qwerty' }
         }
       )
     ).toEqual({
-      uid: "123",
-      token: "qwerty",
+      uid: '123',
+      token: 'qwerty',
       error: null
     });
   });
-  it("sign in error", () => {
+  it('sign in error', () => {
     expect(
       reducer(
         { ...initialState },
         {
           type: types.SIGNIN_ERROR,
-          payload: "Invalid email or password"
+          payload: 'Invalid email or password'
         }
       )
     ).toEqual({
       uid: null,
       token: null,
-      error: "Invalid email or password"
+      error: 'Invalid email or password'
     });
   });
 
-  it("sign out", () => {
+  it('sign out', () => {
     expect(
       reducer(
-        { uid: "123", token: "qwerty", error: null },
+        { uid: '123', token: 'qwerty', error: null },
         {
           type: types.SIGNOUT
         }

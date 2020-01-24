@@ -19,13 +19,13 @@ const StyledTitleH1 = styled.h1`
 `;
 
 const HomePage = () => {
-
   const [tiles, setTiles] = useState<any[]>([]);
 
   const fetchTiles = async () => {
     const tiles: any = await getTilesData();
+    console.log(tiles);
     setTiles(tiles);
-  }
+  };
 
   useEffect(() => {
     fetchTiles();
@@ -36,9 +36,9 @@ const HomePage = () => {
       <StyledTitle>
         <StyledTitleH1>ITA Tools</StyledTitleH1>
       </StyledTitle>
-      <Tiles tiles = { tiles } />
+      <Tiles tiles={tiles} />
     </div>
-  )
-}
+  );
+};
 
 export default HomePage;

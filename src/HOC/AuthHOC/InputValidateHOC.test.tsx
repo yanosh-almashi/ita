@@ -7,12 +7,9 @@ import { Form } from 'react-final-form';
 afterEach(cleanup);
 
 describe('Signup input', () => {
-
   it('Should render 1 inputs', () => {
-
     const { container } = render(
-
-      <Form 
+      <Form
         onSubmit={() => {}}
         render={({ handleSubmit }) => (
           <form onSubmit={() => {}}>
@@ -27,9 +24,8 @@ describe('Signup input', () => {
         )}
       />
     );
-    
+
     const inputItems = container.querySelector('input[type="text"]');
     expect(inputItems).toBeInTheDocument();
   });
-
 });
