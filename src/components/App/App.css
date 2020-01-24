@@ -10,10 +10,6 @@ body {
   display: flex;
 }
 
-.form {
-  padding: 60px 0px;
-}
-
 legend {
   display: none;
 }

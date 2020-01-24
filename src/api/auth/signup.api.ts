@@ -9,7 +9,6 @@ export const authSignup = (userData: SignupInterface) => {
   return auth
     .createUserWithEmailAndPassword(userData.email, userData.password)
     .then((data: any) => {
-      console.dir(data);
       signInUser(userData.email, userData.password);
       return data.user;
     })
