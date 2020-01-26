@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
-import MultilineTextFields from '../Randomizer/Randomizer';
+import Randomizer from '../Randomizer/Randomizer';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import ProtectedRoute from '../../../HOC/ProtectedRoute';
@@ -24,7 +24,7 @@ const ContentWrapper = (props: any) => {
         <ProtectedRoute path="/profile" redirect="/" isAuth={!!props.id}>
           <ProfilePage />
         </ProtectedRoute>
-        <Route path="/randomizer" component={ MultilineTextFields } />
+        <Route path="/randomizer" component={ Randomizer } />
         <ProtectedRoute path="/auth" redirect="/" isAuth={!props.id}>
           <Auth />
         </ProtectedRoute> 

@@ -2,10 +2,10 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import './ListItem.css'
-import {StyledTextArea, StyledRandom, AreaWrapper, NavWrapper, ResultArea} from './StyledRandomizerComponents'
+import {StyledTextArea, StyledRandom, AreaWrapper, NavWrapper, ResultArea, TheList} from './StyledRandomizerComponents'
 import {ResultInterface} from './ResultItemInterface'
 
-export default function MultilineTextFields() {
+export default function Randomizer() {
   const [value, setValue] = React.useState('Your result will be here');
   const [result, setResult] = React.useState<ResultInterface[]>([]);
   const [inputValue, setInputValue]= React.useState(1);
@@ -22,14 +22,14 @@ export default function MultilineTextFields() {
   const randomize = () => {
     resultArray = value.split('\n');
     if(resultArray.length>=inputValue){
-      let res = createResult(resultArray);
+      let res = chooseRandom(resultArray);
       setResult([...res]);
     } else {
       setResult([{id: 0, value: "Incorrect input."}]);
     }
   }
   
-  const createResult = (resultArray: string[]) =>
+  const chooseRandom = (resultArray: string[]) =>
   {
     let currentIndex = resultArray.length, 
     temporaryValue, randomIndex, resultIndex, arr: ResultInterface[]=[], loopCounter=0;
@@ -37,7 +37,7 @@ export default function MultilineTextFields() {
     let filteredArray = [];
     let uniqueValues = new Set(resultArray);
      filteredArray = [...uniqueValues];
-
+     uniqueValues.clear();
     if(resultArray.length <=inputValue || filteredArray.length <= inputValue){
       return [{id: 0, value: "Incorrect input."}];
     } else{
@@ -66,7 +66,6 @@ export default function MultilineTextFields() {
            }
              loopCounter++;
           }
-          console.log(arr)
         return arr;
     }
   }
@@ -74,20 +73,20 @@ export default function MultilineTextFields() {
   <StyledRandom id="main">
       <AreaWrapper>
         <NavWrapper>   
-          <Button id="RandomizeButton" variant="contained" color="primary" onClick={randomize} >
+          <Button id="RandomizeButton" variant="contained" color="primary" onClick={randomize}>
             Randomize
           </Button>
-          <Input id="RandomizeInput" type="number" color="primary" onChange={handleInputChange} placeholder="Please type number of results you want. Default value is 1" ></Input>
+          <Input id="RandomizeInput" type="number" color="primary" onChange={handleInputChange} placeholder="Input number of results. Default value is 1"></Input>
         </NavWrapper> 
         <StyledTextArea onChange={(e: any) => handleChange(e)}>
         </StyledTextArea>
         <ResultArea>
-          <ul className="theList">
+          <TheList>
             {result.map((item) => {
             return <li key={item.id}>{item.value}</li>     
             })
             }
-          </ul>
+          </TheList>
         </ResultArea> 
       </AreaWrapper>
   </StyledRandom>

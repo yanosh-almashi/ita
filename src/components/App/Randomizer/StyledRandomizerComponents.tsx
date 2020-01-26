@@ -29,8 +29,6 @@ export const StyledRandom = styled.div`
   background-color: #fff;
   overflow: auto;
 `;
-
-
 export const AreaWrapper = styled.div`
   display: flex;
   flex-flow: row nowrap;
@@ -51,3 +49,19 @@ export const ResultArea = styled.div`
   border-bottom-right-radius: 50px;
   border-left: 1px solid #b0b0b0;
 `;
+export const TheList = styled.ul`
+  padding: 0;
+  li{
+    color: #333;
+    background-color: rgba(255, 255, 255, .5);
+    padding: 20px 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    list-style: none;  
+  }
+  li:hover {
+    background-color: #24c3f9;
+    cursor: pointer;
+  } 
+`;
+
