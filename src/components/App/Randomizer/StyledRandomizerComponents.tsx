@@ -4,7 +4,7 @@ export const StyledTextArea = styled.textarea`
   border: none;
   outline: none;
   width: 50%;
-  height: 300px;
+  height: auto;
   border-bottom-left-radius: 50px;
   resize: none;  
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -16,7 +16,7 @@ export const StyledRandom = styled.div`
   max-width: 1280px;
   margin: 0 auto;
  }
-  height: 100%;
+  height: 70%;
   position: relative;
   width: 100%;
   border-top-left-radius: 8px;
@@ -27,15 +27,16 @@ export const StyledRandom = styled.div`
   padding-top: 48px;
   width: 50%;
   background-color: #fff;
+  overflow: auto;
 `;
-export const MainHeader = styled.div`
-  padding-top: 5px;
-  width: 100%;
-`;
+
 
 export const AreaWrapper = styled.div`
   display: flex;
   flex-flow: row nowrap;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
 `;
 export const NavWrapper = styled.div`
   position: absolute;

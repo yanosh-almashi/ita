@@ -2,12 +2,12 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import './ListItem.css'
-import {StyledTextArea, StyledRandom, MainHeader, AreaWrapper, NavWrapper, ResultArea} from './StyledRandomizerComponents'
-import {ResultItemInterface} from './ResultItemInterface'
+import {StyledTextArea, StyledRandom, AreaWrapper, NavWrapper, ResultArea} from './StyledRandomizerComponents'
+import {ResultInterface} from './ResultItemInterface'
 
 export default function MultilineTextFields() {
   const [value, setValue] = React.useState('Your result will be here');
-  const [result, setResult] = React.useState<ResultItemInterface[]>([]);
+  const [result, setResult] = React.useState<ResultInterface[]>([]);
   const [inputValue, setInputValue]= React.useState(1);
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,38 +16,62 @@ export default function MultilineTextFields() {
   //TYPE IS ANY DUE TO MATERIAL UI DOCUMENTATION ISSUES
   const handleInputChange = (event: any) => {
     setInputValue(Number(event.target.value));
-    console.log(inputValue);
-    console.log(typeof(inputValue));
   };
+
   let resultArray: string[] = [];
-  const randomize = () =>
+  const randomize = () => {
+    resultArray = value.split('\n');
+    if(resultArray.length>=inputValue){
+      let res = createResult(resultArray);
+      setResult([...res]);
+    } else {
+      setResult([{id: 0, value: "Incorrect input."}]);
+    }
+  }
+  
+  const createResult = (resultArray: string[]) =>
   {
     let currentIndex = resultArray.length, 
-    temporaryValue, randomIndex, resultIndex, arr=[];
+    temporaryValue, randomIndex, resultIndex, arr: ResultInterface[]=[], loopCounter=0;
     setResult([]);
-    for(let i = 0; i<inputValue; i++){
-    resultArray = value.split('\n');
-        // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
-          // Pick a remaining element...
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
-          // And swap it with the current element.
-          temporaryValue = resultArray[currentIndex];
-          resultArray[currentIndex] = resultArray[randomIndex];
-          resultArray[randomIndex] = temporaryValue;
-        }
-      resultIndex = Math.floor(Math.random() * resultArray.length);
-      let ItemOfResult = {id: 0, value: ""};
-      ItemOfResult.value = resultArray[resultIndex];
-      ItemOfResult.id = Math.random()*1e8;
-      arr.push(ItemOfResult); 
-    } 
-    setResult( [...arr]);
+    let filteredArray = [];
+    let uniqueValues = new Set(resultArray);
+     filteredArray = [...uniqueValues];
+
+    if(resultArray.length <=inputValue || filteredArray.length <= inputValue){
+      return [{id: 0, value: "Incorrect input."}];
+    } else{
+      while( loopCounter<inputValue){
+             // While there remain elements to shuffle...
+             while (0 !== currentIndex) {
+               // Pick a remaining element...
+               randomIndex = Math.floor(Math.random() * currentIndex);
+               currentIndex -= 1;
+               // And swap it with the current element.
+               temporaryValue = resultArray[currentIndex];
+               resultArray[currentIndex] = resultArray[randomIndex];
+               resultArray[randomIndex] = temporaryValue;
+             }
+           resultIndex = Math.floor(Math.random() * resultArray.length);
+           let ItemOfResult = {id: 0, value: ""};
+           ItemOfResult.value = resultArray[resultIndex];
+           ItemOfResult.id = Math.random()*1e8;
+            let isExists = arr.some((item) =>{
+              return item.value === ItemOfResult.value
+            })
+           if(!isExists && ItemOfResult.value !== ""){
+              arr.push(ItemOfResult);
+           } else{
+             loopCounter--;
+           }
+             loopCounter++;
+          }
+          console.log(arr)
+        return arr;
+    }
   }
   return (
   <StyledRandom id="main">
-    <MainHeader>
       <AreaWrapper>
         <NavWrapper>   
           <Button id="RandomizeButton" variant="contained" color="primary" onClick={randomize} >
@@ -66,7 +90,6 @@ export default function MultilineTextFields() {
           </ul>
         </ResultArea> 
       </AreaWrapper>
-    </MainHeader>
   </StyledRandom>
   );
 }

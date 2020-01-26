@@ -1,5 +1,4 @@
-export interface ResultItemInterface{
+export interface ResultInterface{
     id: number;
     value: string;
   }
- 
