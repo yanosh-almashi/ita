@@ -14,6 +14,7 @@ export const ProfileContainer = styled.div`
   width: 100%;
   padding: 50px;
   overflow-y: auto;
+  height: 100vh;
 
   @media (max-width: 1300px) {
     grid-template-columns: 1fr;
@@ -60,6 +61,7 @@ export const ProfileSummaryInnerItem = styled.span`
 
 export const ProfileProgressContainer = styled.div`
   grid-column: 2/5;
+  margin-bottom: 50px;
   ${ProfileItem}
 
   @media (max-width: 1300px) {
