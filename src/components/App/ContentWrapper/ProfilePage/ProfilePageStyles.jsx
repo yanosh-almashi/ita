@@ -13,6 +13,7 @@ export const ProfileContainer = styled.div`
   grid-gap: 30px;
   width: 100%;
   padding: 50px;
+  overflow-y: auto;
 
   @media (max-width: 1300px) {
     grid-template-columns: 1fr;
