@@ -1,4 +1,4 @@
-export interface ResultInterface{
-    id: number;
-    value: string;
-  }
+export interface ResultInterface {
+  id: number;
+  value: string;
+}

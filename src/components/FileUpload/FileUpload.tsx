@@ -1,7 +1,7 @@
 import React from 'react';
-import {  
-  FileResultContainer, 
-  UploadFileContainer, 
+import {
+  FileResultContainer,
+  UploadFileContainer,
   FileContainer,
   FileResultImg,
   UploadFileInputContainer,
@@ -12,7 +12,7 @@ import Img from '../../assets/images/ava.jpg';
 const initialFile = {
   file: null,
   fileUrl: Img
-}
+};
 
 interface Props {
   putFile: (file: any) => void;
@@ -29,15 +29,15 @@ const FileUpload: React.FC<Props> = ({ putFile }) => {
         file: file,
         fileUrl: event.target.result
       });
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
     }
 
-    if (file) { 
-      reader.readAsDataURL(file); 
-    }
-    
     putFile(file);
-  }
-  
+  };
+
   return (
     <FileContainer>
       <FileResultContainer>
@@ -45,10 +45,15 @@ const FileUpload: React.FC<Props> = ({ putFile }) => {
       </FileResultContainer>
       <UploadFileContainer>
         <UploadFileTitle>Upload</UploadFileTitle>
-        <UploadFileInputContainer id="upload" type="file" onChange={ fileHandler } accept="image/*"/>
+        <UploadFileInputContainer
+          id="upload"
+          type="file"
+          onChange={fileHandler}
+          accept="image/*"
+        />
       </UploadFileContainer>
     </FileContainer>
-  )
-}
+  );
+};
 
 export default FileUpload;

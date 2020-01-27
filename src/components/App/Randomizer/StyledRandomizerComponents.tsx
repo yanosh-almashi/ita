@@ -6,16 +6,17 @@ export const StyledTextArea = styled.textarea`
   width: 50%;
   height: auto;
   border-bottom-left-radius: 50px;
-  resize: none;  
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  resize: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   font-size: 16px;
-  `;
+`;
 export const StyledRandom = styled.div`
- @media screen and (min-width: 1280px)
- {
-  max-width: 1280px;
-  margin: 0 auto;
- }
+  @media screen and (min-width: 1280px) {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
   height: 70%;
   position: relative;
   width: 100%;
@@ -23,7 +24,7 @@ export const StyledRandom = styled.div`
   border-top-right-radius: 8px;
   border-bottom-right-radius: 50px;
   border-bottom-left-radius: 50px;
-  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.37);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
   padding-top: 48px;
   width: 50%;
   background-color: #fff;
@@ -51,17 +52,16 @@ export const ResultArea = styled.div`
 `;
 export const TheList = styled.ul`
   padding: 0;
-  li{
+  li {
     color: #333;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 20px 10px;
     margin-bottom: 5px;
     border-radius: 5px;
-    list-style: none;  
+    list-style: none;
   }
   li:hover {
     background-color: #24c3f9;
     cursor: pointer;
-  } 
+  }
 `;
-

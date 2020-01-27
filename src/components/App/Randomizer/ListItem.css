@@ -3,29 +3,8 @@
     height: 48px;
     width: 50%;
 }
-@media screen and (min-width: 720px) {
-    #outlined-multiline-static {
-        display: flex;
-        position: relative;
-        width: 100%;
-        border-radius: 1px;
-        margin-bottom: 5px;
-        border-top-left-radius: "0 !important";
-        border-top-right-radius: "0";
-        border-bottom-right-radius: "0";
-        border-bottom-left-radius: "inherit";
-    }
-}
-@media screen and (min-width: 720px) {
-    #outlined-multiline-static2 {
-        display: flex;
-        position: relative;
-        width: 100%;
-        border-radius: 1px;
-        margin-bottom: 5px;
-    }
-}
- #RandomizeButton{ 
+
+#Randomize-button{ 
     position: relative;
     bottom: 8.5%;
     height: 48px;
@@ -35,7 +14,7 @@
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 2px;
 }
-#RandomizeInput{
+#Randomize-input{
     position: relative;
     left: 0;
     width: 100%;

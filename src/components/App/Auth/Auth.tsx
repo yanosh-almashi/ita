@@ -18,7 +18,7 @@ const AuthSide = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: -100px 0px;
-  box-shadow: rgba(36,195,249, .4) 0 0 0 100vw inset;
+  box-shadow: rgba(36, 195, 249, 0.4) 0 0 0 100vw inset;
 
   @media (max-width: 1300px) {
     width: 40%;
@@ -48,11 +48,24 @@ const AuthForm = styled.div`
   align-items: center;
   overflow-y: auto;
 
-  &::scrollbar { width: 3px; height: 3px;}
-  &::scrollbar-button {  background-color: #fff; }
-  &::scrollbar-track {  background-color: #fff;}
-  &::scrollbar-track-piece { background-color: #ffffff;}
-  &::scrollbar-thumb { height: 50px; background-color: rgba(36,195,249, 1); border-radius: 10px;}
+  &::scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+  &::scrollbar-button {
+    background-color: #fff;
+  }
+  &::scrollbar-track {
+    background-color: #fff;
+  }
+  &::scrollbar-track-piece {
+    background-color: #ffffff;
+  }
+  &::scrollbar-thumb {
+    height: 50px;
+    background-color: rgba(36, 195, 249, 1);
+    border-radius: 10px;
+  }
 
   @media (max-width: 1300px) {
     width: 60%;

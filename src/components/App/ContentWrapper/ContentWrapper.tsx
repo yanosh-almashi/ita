@@ -24,10 +24,10 @@ const ContentWrapper = (props: any) => {
         <ProtectedRoute path="/profile" redirect="/" isAuth={!!props.id}>
           <ProfilePage />
         </ProtectedRoute>
-        <Route path="/randomizer" component={ Randomizer } />
+        <Route path="/randomizer" component={Randomizer} />
         <ProtectedRoute path="/auth" redirect="/" isAuth={!props.id}>
           <Auth />
-        </ProtectedRoute> 
+        </ProtectedRoute>
       </Switch>
     </StyledContentWrapper>
   );
@@ -38,4 +38,3 @@ const mapStateToProps = (state: any) => ({
 });
 
 export default connect(mapStateToProps)(ContentWrapper);
-

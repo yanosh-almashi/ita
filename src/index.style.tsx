@@ -15,18 +15,17 @@ export const theme = createMuiTheme({
 });
 
 export const GlobalCSS = withStyles({
-  "@global": {
-    
-    ".MuiButton-contained": {
-      fontSize: "14px",
-      borderRadius: "50px",
-      fontWeight: "bold",
-      letterSpacing: "1px",
-      color: "#f8f7ff",
-      "&:hover": {
-        backgroundColor: "#ffffff",
-        borderColor: "#ffffff",
-        color: "#20233f"
+  '@global': {
+    '.MuiButton-contained': {
+      fontSize: '14px',
+      borderRadius: '50px',
+      fontWeight: 'bold',
+      letterSpacing: '1px',
+      color: '#f8f7ff',
+      '&:hover': {
+        backgroundColor: '#ffffff',
+        borderColor: '#ffffff',
+        color: '#20233f'
       }
     },
     '.MuiOutlinedInput-input': {
@@ -53,15 +52,15 @@ export const GlobalCSS = withStyles({
       borderColor: '#ffffff',
       backgroundColor: '#ffffff'
     },
-    ".MuiAppBar-colorDefault": {
-      backgroundColor: "transparent"
+    '.MuiAppBar-colorDefault': {
+      backgroundColor: 'transparent'
     },
-    ".MuiTabs-flexContainer": {
-      marginLeft: "100px"
+    '.MuiTabs-flexContainer': {
+      marginLeft: '100px'
     },
-    ".MuiPaper-elevation4": {
-      boxShadow: "none",
-      borderBottom: "1px solid #24c3f9"
+    '.MuiPaper-elevation4': {
+      boxShadow: 'none',
+      borderBottom: '1px solid #24c3f9'
     }
   }
 })(() => null);
