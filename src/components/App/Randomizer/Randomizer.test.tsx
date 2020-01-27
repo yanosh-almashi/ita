@@ -34,7 +34,7 @@ describe('Randomizer test', () => {
     if (button === null || textarea === null || input === null) {
       return;
     }
-
+    
     fireEvent.change(textarea, { target: { value: items } });
     fireEvent.change(input, { target: { value: 2 } });
     fireEvent.click(button);
