@@ -8,9 +8,9 @@ import { Route, Switch } from 'react-router-dom';
 
 export const menuItems: ItemsInterface[] = [
   {
-    name: 'home',
+    name: 'auth',
     icon: 'fas fa-home',
-    path: '/random'
+    path: '/auth'
   },
   {
     name: 'profile',
@@ -33,7 +33,7 @@ export const menuItems: ItemsInterface[] = [
         path: '/chicken'
       },
       {
-        name: 'randomaizer',
+        name: 'randomizer',
         icon: 'fas fa-random',
         path: '/random'
       },
@@ -94,7 +94,7 @@ const MenuContainer = () => {
       {nestedMenuContent ? (
         <StyledContainer>{nestedMenuContent}</StyledContainer>
       ) : (
-        <Switch>{initialNestedMenu.map((item: ReactElement) => item)}</Switch>
+          <Switch>{initialNestedMenu.map((item: ReactElement) => item)}</Switch>
       )}
     </StyledMenuContainer>
   );
