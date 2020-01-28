@@ -1,4 +1,4 @@
-import { profileTypes } from "./ProfileType";
+import { profileTypes } from './ProfileType';
 
 export const initialState = {
   profileData: null,
@@ -11,12 +11,12 @@ export const profileReducer = (state = initialState, action: any) => {
       return {
         ...state,
         profileData: action.payload
-      }
+      };
     case profileTypes.CHANGE_PROFILE_SUMMARY_WINDOW:
       return {
         ...state,
         windowStatus: !state.windowStatus
-      }
+      };
     default:
       return state;
   }

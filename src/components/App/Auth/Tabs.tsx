@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
-import {
-  AppBar,
-  Box,
-  Tab,
-  Tabs,
-  Typography
-} from '@material-ui/core';
-import SignIn from "./Signin/Signin";
-import Signup from "./Signup/Signup";
-import styled from "styled-components";
+import { AppBar, Box, Tab, Tabs, Typography } from '@material-ui/core';
+import SignIn from './Signin/Signin';
+import Signup from './Signup/Signup';
+import styled from 'styled-components';
 
 const AuthFormContainer = styled.div`
   display: flex;

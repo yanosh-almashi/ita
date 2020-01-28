@@ -16,11 +16,11 @@ const tileItem: TileInterface = {
 
 const setup = () => {
   const { container } = render(
-      <BrowserRouter>
-        <Link to={`tools/${tileItem.name.toLowerCase()}`} key={tileItem.id}>
-          <TileItem tile={tileItem} />
-        </Link>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Link to={`tools/${tileItem.name.toLowerCase()}`} key={tileItem.id}>
+        <TileItem tile={tileItem} />
+      </Link>
+    </BrowserRouter>
   );
   return container;
 };

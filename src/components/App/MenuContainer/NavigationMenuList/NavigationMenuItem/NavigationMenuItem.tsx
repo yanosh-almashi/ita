@@ -19,11 +19,13 @@ export interface Props {
   addNestedMenu?(elem: NestedMenuType): void;
 }
 
-const MenuItem: React.FC<Props> = (props) => {
+const MenuItem: React.FC<Props> = props => {
   const linkClickListener = () => {
     if (props.nextMenu) {
       if (props.addNestedMenu) {
-        props.addNestedMenu(<NavigationMenu nestedRoute={props.path} menuItems={props.nextMenu} />)
+        props.addNestedMenu(
+          <NavigationMenu nestedRoute={props.path} menuItems={props.nextMenu} />
+        );
       }
       props.setActive(true);
     }
