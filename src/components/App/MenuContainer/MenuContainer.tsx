@@ -87,19 +87,14 @@ const MenuContainer = () => {
       <StyledContainer>
         <div>
           <Logo />
-          <NavigationMenu
-              addNestedMenu={addMenu}
-              menuItems={menuItems}
-          />
+          <NavigationMenu addNestedMenu={addMenu} menuItems={menuItems} />
         </div>
         <Chat />
       </StyledContainer>
       {nestedMenuContent ? (
         <StyledContainer>{nestedMenuContent}</StyledContainer>
       ) : (
-        <Switch>
-          {initialNestedMenu.map((item: ReactElement) => item)}
-        </Switch>
+        <Switch>{initialNestedMenu.map((item: ReactElement) => item)}</Switch>
       )}
     </StyledMenuContainer>
   );

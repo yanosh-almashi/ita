@@ -1,10 +1,10 @@
-import React from "react";
-import { render, cleanup, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
-import Signup from "./Signup";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import rootReducer from "../../../../store/rootReducer";
+import React from 'react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import Signup from './Signup';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from '../../../../store/rootReducer';
 
 const store = createStore(rootReducer);
 

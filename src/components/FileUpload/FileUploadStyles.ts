@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FileContainer = styled.div`  
+export const FileContainer = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -52,5 +52,5 @@ export const UploadFileTitle = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: .3s;
+  transition: 0.3s;
 `;
