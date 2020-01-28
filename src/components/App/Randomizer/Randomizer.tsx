@@ -41,43 +41,49 @@ const Randomizer = () => {
       resultArray.length <= inputValue ||
       filteredArray.length <= inputValue
     ) {
-      return [{ id: 0, value: 'Incorrect input.' }];
+      return [
+        { id: 0, value: 'Incorrect input. Check number of unique characters' }
+      ];
     } else {
       return shuffle(resultArray);
     }
   };
   const shuffle = (resultArray: string[]) => {
-    let currentIndex = resultArray.length,
-      temporaryValue,
-      randomIndex,
-      resultIndex,
-      arr: ResultInterface[] = [],
-      loopCounter = 0;
-    while (loopCounter < inputValue) {
+    let randomIndex,
+      arr: ResultInterface[] = [];
+    for (let i = 0; i < inputValue; i++) {
       // While there remain elements to shuffle...
-      while (0 !== currentIndex) {
+      for (
+        let currentIndex = resultArray.length - 1;
+        currentIndex > 0;
+        currentIndex--
+      ) {
         // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
         // And swap it with the current element.
-        temporaryValue = resultArray[currentIndex];
-        resultArray[currentIndex] = resultArray[randomIndex];
-        resultArray[randomIndex] = temporaryValue;
+        [resultArray[currentIndex], resultArray[randomIndex]] = [
+          resultArray[randomIndex],
+          resultArray[currentIndex]
+        ];
       }
-      resultIndex = Math.floor(Math.random() * resultArray.length);
-      const ItemOfResult = { id: 0, value: '' };
-      ItemOfResult.value = resultArray[resultIndex];
-      ItemOfResult.id = Math.random() * 1e8;
+      //pick random item
+      randomIndex = Math.floor(Math.random() * resultArray.length);
+      //create result object
+      const ItemOfResult = {
+        id: Math.random() * 1e8,
+        value: resultArray[randomIndex]
+      };
+      //check if it is unique and not empty string and push. If not, then one more looping through
       const isExists = arr.some(item => item.value === ItemOfResult.value);
       if (!isExists && ItemOfResult.value !== '') {
         arr.push(ItemOfResult);
       } else {
-        loopCounter--;
+        i--;
       }
-      loopCounter++;
     }
     return arr;
   };
+
   return (
     <StyledRandom id="main">
       <AreaWrapper>

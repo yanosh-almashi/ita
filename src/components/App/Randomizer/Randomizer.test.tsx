@@ -24,21 +24,27 @@ describe('Randomizer test', () => {
     const textarea = baseElement.querySelector('textarea');
     expect(textarea).toBeInTheDocument();
   });
-  it('Should render <li>', () => {
+  it('Should render spesific number of list items which values are the subset of data given', () => {
     const { baseElement } = component();
-    const button = baseElement.querySelector('#RandomizeButton');
+    const button = baseElement.querySelector('#Randomize-button');
     const input = baseElement.querySelector('input[type="number"]');
     const textarea = baseElement.querySelector('textarea');
-    const items = 'first \n second \n third';
+    const items = 'first\nsecond\nthird\nfourth'; //test string for textarea from which result should be generated
+    const splittedItems = ['first', 'second', 'third', 'fourth']; //test array to compare if the expected array is a subset of the this array
+    let filteredItems: string[] = []; // array for expected randomized items
 
     if (button === null || textarea === null || input === null) {
       return;
     }
-    
-    fireEvent.change(textarea, { target: { value: items } });
-    fireEvent.change(input, { target: { value: 2 } });
-    fireEvent.click(button);
+
+    fireEvent.change(textarea, { target: { value: items } }); // split the start values
+    fireEvent.change(input, { target: { value: 2 } }); //pick number of results
+    fireEvent.click(button); //Pick random results
     const li = baseElement.querySelectorAll('li');
+    li.forEach(item => {
+      filteredItems.push(item.innerHTML);
+    });
+    expect(splittedItems).toEqual(expect.arrayContaining(filteredItems));
     expect(li).toHaveLength(2);
   });
 });
