@@ -24,7 +24,7 @@ const NavigationMenu: React.FC<Props> = props => {
                 isNestedItem={props.nestedRoute!}
                 name={item.name}
                 path={props.nestedRoute ? props.nestedRoute + item.path : item.path}
-                icon={item.icon}
+                icon={item.icon!}
                 nextMenu={item.nextMenu!}
                 addNestedMenu={props.addNestedMenu}
                 active={active}

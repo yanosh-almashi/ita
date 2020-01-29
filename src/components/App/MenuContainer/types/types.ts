@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 
 export interface ItemsInterface {
   name: string;
-  icon: string;
+  icon?: string;
   path: string;
   nextMenu?: ItemsInterface[];
 }

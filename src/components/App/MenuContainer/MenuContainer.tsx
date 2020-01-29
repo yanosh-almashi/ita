@@ -1,21 +1,19 @@
 import React, { useState, useEffect, ReactElement } from 'react';
 import NavigationMenu from './NavigationMenuList/NavigationMenuList';
-import Logo from './Logo/Logo';
 import Chat from './Chat/Chat';
 import { StyledContainer, StyledMenuContainer } from './MenuContainerStyles';
 import { ItemsInterface } from './types/types';
 import { Route, Switch } from 'react-router-dom';
 
-export const menuItems: ItemsInterface[] = [
+const menuItems: ItemsInterface[] = [
   {
-    name: 'auth',
-    icon: 'fas fa-home',
-    path: '/auth'
+    name: 'logo',
+    path: '/'
   },
   {
-    name: 'profile',
-    icon: 'fas fa-user',
-    path: '/profile'
+    name: 'auth',
+    icon: 'fas fa-sign-in-alt',
+    path: '/auth'
   },
   {
     name: 'tools',
@@ -85,10 +83,7 @@ const MenuContainer = () => {
   return (
     <StyledMenuContainer data-testid="menu-container">
       <StyledContainer>
-        <div>
-          <Logo />
-          <NavigationMenu addNestedMenu={addMenu} menuItems={menuItems} />
-        </div>
+        <NavigationMenu addNestedMenu={addMenu} menuItems={menuItems} />
         <Chat />
       </StyledContainer>
       {nestedMenuContent ? (

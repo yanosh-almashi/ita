@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Props } from './NavigationMenuItem';
+import { NavLink } from 'react-router-dom';
+const logo = require('../../../../../assets/images/Logo.png');
 
 export const Item = styled.li`
   list-style-type: none;
@@ -32,4 +34,15 @@ export const ArrowSubmenu = styled.i`
   right: 0;
   margin-top: 8px;
   color: ${(props: Props) => (props.active ? '#24c0fd' : '#9ba6b2')};
+`;
+
+export const LogoLink = styled(NavLink)`
+  margin-bottom: 50px !important;
+  background: #fff url(${logo}) 50% 50%;
+  width: 42px;
+  height: 50px;
+  &:hover {
+    background-color: #fff !important;
+    opacity: 0.8;
+  }
 `;
