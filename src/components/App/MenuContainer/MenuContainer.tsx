@@ -1,21 +1,19 @@
 import React, { useState, useEffect, ReactElement } from 'react';
 import NavigationMenu from './NavigationMenuList/NavigationMenuList';
-import Logo from './Logo/Logo';
 import Chat from './Chat/Chat';
 import { StyledContainer, StyledMenuContainer } from './MenuContainerStyles';
 import { ItemsInterface } from './types/types';
 import { Route, Switch } from 'react-router-dom';
 
-export const menuItems: ItemsInterface[] = [
+const menuItems: ItemsInterface[] = [
   {
-    name: 'home',
-    icon: 'fas fa-home',
-    path: '/random'
+    name: 'logo',
+    path: '/'
   },
   {
-    name: 'profile',
-    icon: 'fas fa-user',
-    path: '/profile'
+    name: 'auth',
+    icon: 'fas fa-sign-in-alt',
+    path: '/auth'
   },
   {
     name: 'tools',
@@ -33,7 +31,7 @@ export const menuItems: ItemsInterface[] = [
         path: '/chicken'
       },
       {
-        name: 'randomaizer',
+        name: 'randomizer',
         icon: 'fas fa-random',
         path: '/random'
       },
@@ -85,16 +83,13 @@ const MenuContainer = () => {
   return (
     <StyledMenuContainer data-testid="menu-container">
       <StyledContainer>
-        <div>
-          <Logo />
-          <NavigationMenu addNestedMenu={addMenu} menuItems={menuItems} />
-        </div>
+        <NavigationMenu addNestedMenu={addMenu} menuItems={menuItems} />
         <Chat />
       </StyledContainer>
       {nestedMenuContent ? (
         <StyledContainer>{nestedMenuContent}</StyledContainer>
       ) : (
-        <Switch>{initialNestedMenu.map((item: ReactElement) => item)}</Switch>
+          <Switch>{initialNestedMenu.map((item: ReactElement) => item)}</Switch>
       )}
     </StyledMenuContainer>
   );

@@ -1,12 +1,17 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import NavigationMenuItem from './NavigationMenuItem';
+import configureStore, { MockStore } from 'redux-mock-store';
 import { BrowserRouter } from 'react-router-dom';
+import {Provider} from "react-redux";
+
+const mockStore = configureStore([]);
 
 const config = {
   name: 'home',
   icon: 'fas fa-home',
   path: '/random',
+  id: 'someId',
   nextMenu: [
     {
       name: 'rem',
@@ -22,6 +27,7 @@ const config2 = {
   name: 'home',
   icon: 'fas fa-home',
   path: '/random',
+  id: 'someId',
   nextMenu: [
     {
       name: 'rem',
@@ -34,17 +40,30 @@ const config2 = {
 };
 
 describe('NavigationMenuItem', () => {
+  let store: MockStore;
+
+  beforeEach(() => {
+    store = mockStore({
+      authReducer: {
+        uid: 'token'
+      }
+    });
+    store.dispatch = jest.fn();
+  });
+
   it('test', () => {
     const { container, getByTitle, rerender } = render(
       <BrowserRouter>
-        <NavigationMenuItem
-          name={config.name}
-          icon={config.icon}
-          path={config.path}
-          nextMenu={config.nextMenu}
-          active={config.active}
-          setActive={config.setActive}
-        />
+        <Provider store={store}>
+          <NavigationMenuItem
+            name={config.name}
+            icon={config.icon}
+            path={config.path}
+            nextMenu={config.nextMenu}
+            active={config.active}
+            setActive={config.setActive}
+          />
+        </Provider>
       </BrowserRouter>
     );
     expect(getByTitle(config.name)).not.toBeNull();
@@ -57,14 +76,16 @@ describe('NavigationMenuItem', () => {
 
     rerender(
       <BrowserRouter>
-        <NavigationMenuItem
-          name={config.name}
-          icon={config.icon}
-          path={config.path}
-          nextMenu={config.nextMenu}
-          active={config2.active}
-          setActive={config.setActive}
-        />
+        <Provider store={store}>
+          <NavigationMenuItem
+              name={config.name}
+              icon={config.icon}
+              path={config.path}
+              nextMenu={config.nextMenu}
+              active={config2.active}
+              setActive={config.setActive}
+          />
+        </Provider>
       </BrowserRouter>
     );
     expect(container.querySelector('.fa-chevron-right')).toBeNull();

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledTextArea = styled.textarea`
+  padding: 10px 0 10px 30px;
   border: none;
   outline: none;
   width: 50%;

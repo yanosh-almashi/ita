@@ -1,8 +1,9 @@
-import React from 'react';
-import { Item, MenuItemIcon, ArrowSubmenu } from './NavigationMenuItemStyles';
-import { NavLink } from 'react-router-dom';
+import React, {ReactElement, useEffect} from 'react';
+import { Item, MenuItemIcon, ArrowSubmenu, LogoLink } from './NavigationMenuItemStyles';
+import { NavLink, useLocation } from 'react-router-dom';
 import NavigationMenu from '../NavigationMenuList';
 import Tooltip from '@material-ui/core/Tooltip';
+import { connect } from 'react-redux';
 import {
   ItemsInterface,
   NestedMenuType
@@ -10,7 +11,8 @@ import {
 
 export interface Props {
   name: string;
-  icon: string;
+  icon?: string;
+  id: string;
   nextMenu: ItemsInterface[];
   path: string;
   active: boolean;
@@ -19,7 +21,17 @@ export interface Props {
   addNestedMenu?(elem: NestedMenuType): void;
 }
 
-const MenuItem: React.FC<Props> = props => {
+
+const ConnectedMenuItem: React.FC<Props> = props => {
+  let location = useLocation();
+  useEffect(() => {
+    if ( location.pathname.indexOf('/tools') !== -1) {
+      props.setActive(true);
+    } else {
+      props.setActive(false);
+    }
+  }, [props, location]);
+
   const linkClickListener = () => {
     if (props.nextMenu) {
       if (props.addNestedMenu) {
@@ -38,40 +50,80 @@ const MenuItem: React.FC<Props> = props => {
     }
   };
 
-  let linkContent = (
-    <>
-      <MenuItemIcon className={props.icon} />
-      {props.nextMenu && (
-        <ArrowSubmenu
-          className={
-            props.active ? 'fas fa-chevron-right' : 'fas fa-chevron-down'
-          }
-          {...props}
-        />
-      )}
-    </>
-  );
+  let linkContent: ReactElement;
+  let link = () => {
+    if (props.icon) {
+      if (props.id && props.path === '/auth') {
+        linkContent = (
+            <>
+              <MenuItemIcon className={`fas fa-user`}/>
+            </>
+        );
+      } else {
+        linkContent = (
+            <>
+              <MenuItemIcon className={props.icon}/>
+              {props.nextMenu && (
+                  <ArrowSubmenu
+                      className={
+                        props.active ? 'fas fa-chevron-right' : 'fas fa-chevron-down'
+                      }
+                      {...props}
+                  />
+              )}
+            </>
+        );
+      }
 
-  let link = (
-    <NavLink
-      activeStyle={{
-        color: `#24c0fd`,
-        backgroundColor: `#e1f6ff`
-      }}
-      to={props.path}
-      onClick={linkClickListener}
-    >
-      {linkContent}
-    </NavLink>
-  );
+      if (props.id && props.path === '/auth') {
+        return (
+            <NavLink
+                activeStyle={{
+                  color: `#24c0fd`,
+                  backgroundColor: `#e1f6ff`
+                }}
+                to={`/profile`}
+                onClick={linkClickListener}
+            >
+              {linkContent}
+            </NavLink>
+        )
+      }
 
+      return (
+          <NavLink
+              activeStyle={{
+                color: `#24c0fd`,
+                backgroundColor: `#e1f6ff`
+              }}
+              to={props.path}
+              onClick={linkClickListener}
+          >
+            {linkContent}
+          </NavLink>
+      )
+    } else {
+      return (
+          <LogoLink
+              to={props.path}
+              onClick={linkClickListener}
+          />
+      )
+    }
+  }
   return (
     <Item>
-      <Tooltip title={props.name} placement="right" arrow>
-        {link}
+      <Tooltip title={ props.id && props.path === '/auth' ? 'profile': props.name } placement="right" arrow>
+        {link()}
       </Tooltip>
     </Item>
   );
 };
 
-export default MenuItem;
+
+  const mapStateToProps = (state: any) => ({
+    id: state.authReducer.uid
+  });
+  const MenuItem = connect(mapStateToProps)(ConnectedMenuItem);
+
+  export default MenuItem;

@@ -101,8 +101,8 @@ const Randomizer = () => {
             type="number"
             color="primary"
             onChange={handleInputChange}
-            placeholder="Input number of results. The Default value is 1"
-          ></Input>
+            placeholder="Input your value. Default is 1"
+          />
         </NavWrapper>
         <StyledTextArea onChange={handleChange} />
         <ResultArea>

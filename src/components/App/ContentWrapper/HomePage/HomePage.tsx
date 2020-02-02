@@ -30,6 +30,10 @@ const HomePage = () => {
     fetchTiles();
   }, []);
 
+  if (!tiles.length) {
+    return <div>Loading</div>;
+  }
+
   return (
     <div>
       <StyledTitle>

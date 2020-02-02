@@ -21,10 +21,11 @@ const ContentWrapper = (props: any) => {
     <StyledContentWrapper>
       <Switch>
         <Route path="/" exact component={HomePage} />
+        <Route path="/tools" exact component={HomePage} />
         <ProtectedRoute path="/profile" redirect="/" isAuth={!!props.id}>
           <ProfilePage />
         </ProtectedRoute>
-        <Route path="/randomizer" component={Randomizer} />
+        <Route path="/tools/random" component={Randomizer} />
         <ProtectedRoute path="/auth" redirect="/" isAuth={!props.id}>
           <Auth />
         </ProtectedRoute>

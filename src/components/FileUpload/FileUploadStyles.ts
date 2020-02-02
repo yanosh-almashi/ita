@@ -39,6 +39,16 @@ export const UploadFileInputContainer = styled.input`
   cursor: pointer;
   border: none;
   outline: none;
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 0;
+    width: 30px;
+    height: 9px;
+    background-color: #fff;
+  }
 `;
 
 export const UploadFileTitle = styled.label`
