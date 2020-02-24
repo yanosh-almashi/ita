@@ -15,6 +15,8 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas/index.sagas';
 import { GlobalCSS } from './index.style';
 
+
+
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware, thunkMiddleware];
 const store = createStore(rootReducer, applyMiddleware(...middleware));

@@ -8,6 +8,10 @@ import HomePage from './HomePage/HomePage';
 import ProfilePage from './ProfilePage/ProfilePage';
 import Auth from '../Auth/Auth';
 
+
+
+import Todo from '../Todo/Todo';
+
 const StyledContentWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -26,6 +30,7 @@ const ContentWrapper = (props: any) => {
           <ProfilePage />
         </ProtectedRoute>
         <Route path="/tools/random" component={Randomizer} />
+        <Route path="/tools/todo" component={Todo} />
         <ProtectedRoute path="/auth" redirect="/" isAuth={!props.id}>
           <Auth />
         </ProtectedRoute>

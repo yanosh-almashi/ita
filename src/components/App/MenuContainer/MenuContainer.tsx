@@ -38,7 +38,7 @@ const menuItems: ItemsInterface[] = [
       {
         name: 'todo',
         icon: 'far fa-list-alt',
-        path: '/sosna'
+        path: '/todo'
       }
     ]
   }
