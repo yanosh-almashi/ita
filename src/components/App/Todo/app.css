@@ -16,3 +16,11 @@ ul {
 .doneButton {
   background-color: #ffc600;
 }
+
+#filterButton {
+  background-color: #ffc600;
+}
+
+#deleteBtn {
+  background-color: tomato;
+}

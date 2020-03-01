@@ -3,7 +3,7 @@ import ToDoAddForm from './ToDoAddForm/ToDoAddForm';
 import ToDoList from './ToDoList/ToDoList';
 import Filters from './Filters/Filters';
 import { TodoItem } from '../types/types';
-
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
   addTodo,
@@ -26,9 +26,14 @@ interface Props {
   showedItems: string;
 }
 
+const StyledTodo = styled.div`
+  position: relative;
+  top: -140px;
+`;
+
 const App: React.FC<Props> = props => {
   return (
-    <div className='todo-app'>
+    <StyledTodo>
       <ToDoAddForm addTodo={props.addTodo} />
       <ToDoList
         tasks={props.tasks}
@@ -36,13 +41,16 @@ const App: React.FC<Props> = props => {
         changeStatus={props.changeStatus}
         showedItems={props.showedItems}
       />
-
-      <Filters
-        showAllItems={props.showAllItems}
-        showCompletedItems={props.showCompletedItems}
-        showActiveItems={props.showActiveItems}
-      />
-    </div>
+      {props.tasks.length ? (
+        <Filters
+          showAllItems={props.showAllItems}
+          showCompletedItems={props.showCompletedItems}
+          showActiveItems={props.showActiveItems}
+        />
+      ) : (
+        ''
+      )}
+    </StyledTodo>
   );
 };
 

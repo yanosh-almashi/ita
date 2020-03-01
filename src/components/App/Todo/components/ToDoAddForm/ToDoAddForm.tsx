@@ -1,27 +1,17 @@
 import React, { useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+
+import styled from 'styled-components';
 
 interface Props {
   addTodo: (text: string) => void;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: 200
-      }
-    }
-  })
-);
+const Form = styled.form``;
 
 const defaultText = '';
 
 const ToDoAddForm = (props: Props) => {
-  const classes = useStyles();
-
   const [text, setText] = useState(defaultText);
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +25,7 @@ const ToDoAddForm = (props: Props) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit}>
       {/* <input
         type='text'
         placeholder='add task to do'
@@ -53,7 +43,7 @@ const ToDoAddForm = (props: Props) => {
         value={text}
         required
       />
-    </form>
+    </Form>
   );
 };
 

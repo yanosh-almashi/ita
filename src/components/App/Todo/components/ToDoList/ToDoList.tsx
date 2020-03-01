@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../app.css';
+import styled from 'styled-components';
 import TodoListItem from '../ToDoListItem/ToDoListItem';
 import { TodoItem } from '../../types/types';
 
@@ -7,11 +8,20 @@ interface Props {
   tasks: Array<TodoItem>;
   deleteTodo: (id: number) => void;
   changeStatus: (id: number) => void;
-  showedItems: string
+  showedItems: string;
 }
 
-const TodoList: React.FC<Props> = ({ tasks, deleteTodo, changeStatus, showedItems }) => {
+const TodosList = styled.ul`
+  margin: 0;
+  padding: 0;
+`;
 
+const TodoList: React.FC<Props> = ({
+  tasks,
+  deleteTodo,
+  changeStatus,
+  showedItems
+}) => {
   const listItems = tasks.filter(el => {
     if (showedItems === 'all') {
       return true;
@@ -25,7 +35,7 @@ const TodoList: React.FC<Props> = ({ tasks, deleteTodo, changeStatus, showedItem
   });
 
   return (
-    <ul className="todo__items-list">
+    <TodosList>
       {listItems.map(item => {
         return (
           <TodoListItem
@@ -37,10 +47,8 @@ const TodoList: React.FC<Props> = ({ tasks, deleteTodo, changeStatus, showedItem
           />
         );
       })}
-    </ul>
+    </TodosList>
   );
-
-
 };
 
 export default TodoList;
