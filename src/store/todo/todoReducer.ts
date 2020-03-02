@@ -6,19 +6,21 @@ import {
   SHOW_ALL_ITEMS,
   SHOW_COMPLETED_ITEMS,
   SHOW_ACTIVE_ITEMS
-} from '../types/redux/actionsTypes';
-import { State } from '../types/redux/reducerTypes';
-import { TodoItem } from '../types/types';
+} from '../../components/App/Todo/types/redux/actionsTypes';
+import { State } from '../../components/App/Todo/types/redux/reducerTypes';
+import { TodoItem } from '../../components/App/Todo/types/types';
 
 export const initialState: State = {
   tasks: [],
   showedItems: 'all'
 };
 
-export const reducer = (state: State = initialState, action: ActionTypes) => {
+export const todoReducer = (
+  state: State = initialState,
+  action: ActionTypes
+) => {
   switch (action.type) {
     case ADD_TODO:
-      console.log(state);
       return {
         ...state,
         tasks: [
@@ -26,7 +28,7 @@ export const reducer = (state: State = initialState, action: ActionTypes) => {
           {
             id: action.id,
             text: action.text,
-            done: false
+            done: action.done
           }
         ]
       };

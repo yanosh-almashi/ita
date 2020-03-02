@@ -6,7 +6,7 @@ import '@testing-library/jest-dom/extend-expect';
 //tools for redux in testings
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import * as actionCreators from '../../redux/actions';
+import * as actionCreators from '../../../../../store/todo/actions';
 
 describe('<TodoListItem />', () => {
   const mockStore = configureStore([]);

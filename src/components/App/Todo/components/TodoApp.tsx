@@ -1,6 +1,6 @@
 import React from 'react';
 import ToDoAddForm from './ToDoAddForm/ToDoAddForm';
-import ToDoList from './ToDoList/ToDoList';
+import TodoList from './ToDoList/ToDoList';
 import Filters from './Filters/Filters';
 import { TodoItem } from '../types/types';
 import styled from 'styled-components';
@@ -12,7 +12,7 @@ import {
   showActiveItems,
   showCompletedItems,
   showAllItems
-} from '../redux/actions';
+} from '../../../../store/todo/actions';
 import { State } from '../types/redux/reducerTypes';
 
 interface Props {
@@ -31,21 +31,30 @@ const StyledTodo = styled.div`
   top: -140px;
 `;
 
-const TodoApp: React.FC<Props> = props => {
+const TodoApp: React.FC<Props> = ({
+  addTodo,
+  tasks,
+  deleteTodo,
+  changeStatus,
+  showedItems,
+  showAllItems,
+  showCompletedItems,
+  showActiveItems
+}) => {
   return (
     <StyledTodo>
-      <ToDoAddForm addTodo={props.addTodo} />
-      <ToDoList
-        tasks={props.tasks}
-        deleteTodo={props.deleteTodo}
-        changeStatus={props.changeStatus}
-        showedItems={props.showedItems}
+      <ToDoAddForm addTodo={addTodo} />
+      <TodoList
+        tasks={tasks}
+        deleteTodo={deleteTodo}
+        changeStatus={changeStatus}
+        showedItems={showedItems}
       />
-      {props.tasks.length ? (
+      {tasks.length ? (
         <Filters
-          showAllItems={props.showAllItems}
-          showCompletedItems={props.showCompletedItems}
-          showActiveItems={props.showActiveItems}
+          showAllItems={showAllItems}
+          showCompletedItems={showCompletedItems}
+          showActiveItems={showActiveItems}
         />
       ) : (
         ''

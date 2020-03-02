@@ -6,14 +6,15 @@ import {
   SHOW_COMPLETED_ITEMS,
   SHOW_ACTIVE_ITEMS,
   ActionTypes
-} from '../types/redux/actionsTypes';
+} from '../../components/App/Todo/types/redux/actionsTypes';
 
 let id = 0;
 
 export const addTodo = (text: string): ActionTypes => ({
   type: ADD_TODO,
-  id: id++,
-  text
+  id: ++id,
+  text,
+  done: false
 });
 
 export const changeStatus = (id: number): ActionTypes => ({

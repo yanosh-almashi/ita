@@ -9,6 +9,7 @@ interface addTodoAction {
   type: typeof ADD_TODO;
   id: number;
   text: string;
+  done: boolean;
 }
 
 interface changeStatus {

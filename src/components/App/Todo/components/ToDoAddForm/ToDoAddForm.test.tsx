@@ -6,7 +6,7 @@ import '@testing-library/jest-dom/extend-expect';
 
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import * as actionCreators from '../../redux/actions';
+import * as actionCreators from '../../../../../store/todo/actions';
 
 describe('<ToDoAddForm>', () => {
   const mockStore = configureStore([]);
@@ -37,20 +37,15 @@ describe('<ToDoAddForm>', () => {
   });
 
   it('should add properly', () => {
-    // fireEvent.change(component.getByTestId('todo-input'), {
-    //   target: { value: 'Learn testing' }
-    // });
     fireEvent.submit(component.getByTestId('todo-form'), {
       bubbles: true,
       cancelable: true
     });
 
     expect(store.getActions()[0].type).toBe('ADD_TODO');
-    // expect(store.getActions()[0].text).toBe('Learn testing');
+
     store.clearActions();
-    // fireEvent.change(component.getByTestId('todo-input'), {
-    //   target: { value: '' }
-    // });
+
     fireEvent.submit(component.getByTestId('todo-form'), {
       bubbles: true,
       cancelable: true
@@ -58,8 +53,4 @@ describe('<ToDoAddForm>', () => {
 
     expect(store.getActions().length).toBe(1);
   });
-
-  // it('No changes in component', () => {
-  //   expect(component).toMatchSnapshot();
-  // });
 });
