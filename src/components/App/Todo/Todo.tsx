@@ -1,18 +1,18 @@
 import React from 'react';
-import App from './components/App';
+import TodoApp from './components/TodoApp';
 
 import { createStore } from 'redux';
-import { reducer } from './redux/reducer'
+import { reducer } from './redux/reducer';
 import { Provider } from 'react-redux';
 
 const store = createStore(reducer);
 
-
 const Todo = () => {
   return (
     <Provider store={store}>
-      <App />
-    </Provider>)
-}
+      <TodoApp />
+    </Provider>
+  );
+};
 
 export default Todo;

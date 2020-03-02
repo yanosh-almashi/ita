@@ -25,9 +25,9 @@ const TodoList: React.FC<Props> = ({
   const listItems = tasks.filter(el => {
     if (showedItems === 'all') {
       return true;
-    } else if (showedItems === 'completed' && el.status) {
+    } else if (showedItems === 'completed' && el.done) {
       return true;
-    } else if (showedItems === 'active' && !el.status) {
+    } else if (showedItems === 'active' && !el.done) {
       return true;
     }
 
@@ -40,10 +40,12 @@ const TodoList: React.FC<Props> = ({
         return (
           <TodoListItem
             text={item.text}
-            status={item.status}
+            done={item.done}
             id={item.id}
+            key={item.id}
             deleteTodo={deleteTodo}
             changeStatus={changeStatus}
+            data-testid='todo-item'
           />
         );
       })}

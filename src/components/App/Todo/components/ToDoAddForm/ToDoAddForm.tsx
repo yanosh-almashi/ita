@@ -25,7 +25,7 @@ const ToDoAddForm = (props: Props) => {
   };
 
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} data-testid='todo-form'>
       {/* <input
         type='text'
         placeholder='add task to do'
@@ -41,6 +41,7 @@ const ToDoAddForm = (props: Props) => {
         placeholder='add task to do'
         onChange={onInputChange}
         value={text}
+        data-testid='todo-input'
         required
       />
     </Form>

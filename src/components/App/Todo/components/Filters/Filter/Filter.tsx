@@ -26,6 +26,7 @@ const Filter: React.FC<Props> = props => {
       variant='contained'
       color='primary'
       id='filterButton'
+      data-testid='todo-filter'
     >
       {props.name}
     </Button>

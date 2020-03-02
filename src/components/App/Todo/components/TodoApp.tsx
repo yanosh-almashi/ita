@@ -31,7 +31,7 @@ const StyledTodo = styled.div`
   top: -140px;
 `;
 
-const App: React.FC<Props> = props => {
+const TodoApp: React.FC<Props> = props => {
   return (
     <StyledTodo>
       <ToDoAddForm addTodo={props.addTodo} />
@@ -68,4 +68,4 @@ const mapDispatchToProps = (dispatch: any) => ({
   showActiveItems: () => dispatch(showActiveItems())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);
