@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../app.css';
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -27,7 +26,6 @@ const TodoListItem: React.FC<Props> = ({
   };
 
   let changeStatusText = 'Done';
-
   let classNames = 'text';
 
   if (done) {
@@ -84,6 +82,10 @@ export const TodoItem = styled.li`
     flex-grow: 3;
     flex-wrap: wrap;
     /* max-width: 100px; */
+  }
+  .completed {
+    text-decoration: line-through;
+    opacity: 0.2;
   }
 `;
 

@@ -26,11 +26,6 @@ interface Props {
   showedItems: string;
 }
 
-const StyledTodo = styled.div`
-  position: relative;
-  top: -140px;
-`;
-
 const TodoApp: React.FC<Props> = ({
   addTodo,
   tasks,
@@ -78,3 +73,8 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);
+
+const StyledTodo = styled.div`
+  position: relative;
+  /* top: -140px; */
+`;

@@ -2,16 +2,13 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 
 import styled from 'styled-components';
-
 interface Props {
   addTodo: (text: string) => void;
 }
 
-const Form = styled.form``;
-
 const defaultText = '';
 
-const ToDoAddForm = (props: Props) => {
+const ToDoAddForm: React.FC<Props> = ({ addTodo }) => {
   const [text, setText] = useState(defaultText);
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,19 +17,12 @@ const ToDoAddForm = (props: Props) => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.addTodo(text);
+    addTodo(text);
     setText(defaultText);
   };
 
   return (
     <Form onSubmit={onSubmit} data-testid='todo-form'>
-      {/* <input
-        type='text'
-        placeholder='add task to do'
-        onChange={onInputChange}
-        value={text}
-        required /> */}
-
       <TextField
         id='outlined-basic'
         label='Add task to do'
@@ -49,3 +39,5 @@ const ToDoAddForm = (props: Props) => {
 };
 
 export default ToDoAddForm;
+
+const Form = styled.form``;

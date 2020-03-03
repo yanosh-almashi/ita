@@ -11,11 +11,6 @@ interface Props {
   showedItems: string;
 }
 
-const TodosList = styled.ul`
-  margin: 0;
-  padding: 0;
-`;
-
 const TodoList: React.FC<Props> = ({
   tasks,
   deleteTodo,
@@ -36,6 +31,11 @@ const TodoList: React.FC<Props> = ({
 
   return (
     <TodosList>
+      {tasks.length ? (
+        <h1 className='list-heading'>{showedItems} items</h1>
+      ) : (
+        ''
+      )}
       {listItems.map(item => {
         return (
           <TodoListItem
@@ -54,3 +54,12 @@ const TodoList: React.FC<Props> = ({
 };
 
 export default TodoList;
+
+const TodosList = styled.ul`
+  margin: 0;
+  padding: 0;
+
+  .list-heading {
+    text-align: center;
+  }
+`;

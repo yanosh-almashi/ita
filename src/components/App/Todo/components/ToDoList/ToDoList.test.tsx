@@ -5,7 +5,9 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import * as actionCreators from '../../../../../store/todo/actions';
 
-describe('<Todo list />', () => {
+afterEach(cleanup);
+
+describe('<TodoList />', () => {
   const mockStore = configureStore([]);
   let store: any;
 

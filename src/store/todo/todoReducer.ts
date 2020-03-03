@@ -34,8 +34,6 @@ export const todoReducer = (
       };
 
     case CHANGE_STATUS:
-      console.log(state);
-
       return {
         ...state,
         tasks: [...state.tasks].map((item: TodoItem) => {

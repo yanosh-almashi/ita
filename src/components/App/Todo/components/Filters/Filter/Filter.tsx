@@ -9,18 +9,18 @@ interface Props {
   id?: number;
 }
 
-const Filter: React.FC<Props> = props => {
-  const clickHandler = () => {
-    if (props.id) {
-      props.clickHandler(props.id);
+const Filter: React.FC<Props> = ({ name, clickHandler, id }) => {
+  const filterButtonClickHandler = () => {
+    if (id) {
+      clickHandler(id);
     } else {
-      props.clickHandler();
+      clickHandler();
     }
   };
   return (
     <Button
       onClick={() => {
-        clickHandler();
+        filterButtonClickHandler();
       }}
       type='button'
       variant='contained'
@@ -28,7 +28,7 @@ const Filter: React.FC<Props> = props => {
       id='filterButton'
       data-testid='todo-filter'
     >
-      {props.name}
+      {name}
     </Button>
   );
 };
