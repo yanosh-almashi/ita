@@ -28,7 +28,6 @@ const ToDoAddForm: React.FC<Props> = ({ addTodo }) => {
         label='Add task to do'
         variant='outlined'
         type='text'
-        placeholder='add task to do'
         onChange={onInputChange}
         value={text}
         data-testid='todo-input'
@@ -40,4 +39,7 @@ const ToDoAddForm: React.FC<Props> = ({ addTodo }) => {
 
 export default ToDoAddForm;
 
-const Form = styled.form``;
+const Form = styled.form`
+  /* display: fixed;
+  top: 20px; */
+`;

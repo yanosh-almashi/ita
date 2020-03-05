@@ -39,12 +39,6 @@ const TodoApp: React.FC<Props> = ({
   return (
     <StyledTodo>
       <ToDoAddForm addTodo={addTodo} />
-      <TodoList
-        tasks={tasks}
-        deleteTodo={deleteTodo}
-        changeStatus={changeStatus}
-        showedItems={showedItems}
-      />
       {tasks.length ? (
         <Filters
           showAllItems={showAllItems}
@@ -54,6 +48,12 @@ const TodoApp: React.FC<Props> = ({
       ) : (
         ''
       )}
+      <TodoList
+        tasks={tasks}
+        deleteTodo={deleteTodo}
+        changeStatus={changeStatus}
+        showedItems={showedItems}
+      />
     </StyledTodo>
   );
 };
@@ -75,6 +75,6 @@ const mapDispatchToProps = (dispatch: any) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);
 
 const StyledTodo = styled.div`
-  position: relative;
-  /* top: -140px; */
+  position: fixed;
+  top: 100px;
 `;

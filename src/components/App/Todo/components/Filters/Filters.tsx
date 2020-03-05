@@ -25,6 +25,7 @@ const Filters: React.FC<Props> = ({
 export default Filters;
 
 const FiltersWrapper = styled.div`
+  margin-top: 30px;
   button {
     margin: 10px;
   }
