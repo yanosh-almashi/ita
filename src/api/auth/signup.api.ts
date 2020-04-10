@@ -1,9 +1,9 @@
 import {
   SignupInterface,
   SignupFullDataInterface
-} from '@components/App/Auth/Signup/SignupInterface';
+} from '@components/Auth/Signup/SignupInterface';
 import { auth, db } from '../../firebase/firebase.config';
-import { signInUser } from '../../store/auth/actionCreators';
+import { signInUser } from '../../store/auth/auth.actions';
 
 export const authSignup = (userData: SignupInterface) => {
   return auth
