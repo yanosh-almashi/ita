@@ -6,7 +6,7 @@ import {
   SHOW_COMPLETED_ITEMS,
   SHOW_ACTIVE_ITEMS,
   ActionTypes
-} from '../../components/App/Todo/types/redux/actionsTypes';
+} from '../../components/Todo/types/redux/actionsTypes';
 
 let id = 0;
 

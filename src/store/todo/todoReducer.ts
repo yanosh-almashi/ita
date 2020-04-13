@@ -6,9 +6,9 @@ import {
   SHOW_ALL_ITEMS,
   SHOW_COMPLETED_ITEMS,
   SHOW_ACTIVE_ITEMS
-} from '../../components/App/Todo/types/redux/actionsTypes';
-import { State } from '../../components/App/Todo/types/redux/reducerTypes';
-import { TodoItem } from '../../components/App/Todo/types/types';
+} from '../../components/Todo/types/redux/actionsTypes';
+import { State } from '../../components/Todo/types/redux/reducerTypes';
+import { TodoItem } from '../../components/Todo/types/types';
 
 export const initialState: State = {
   tasks: [],
