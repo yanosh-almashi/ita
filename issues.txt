@@ -11,15 +11,3 @@ told about:
 4) Randomizer
 5) Travis (another repo, fix or not is up to you)
 6) CODEOWNERS
-
-creds:
-gmail
-login: gavnocode35
-password: Gavnocode35webui
-
-git
-login: generationsITA
-password: Gavnocode35webui
-
-firebase:
-linked with gmail
