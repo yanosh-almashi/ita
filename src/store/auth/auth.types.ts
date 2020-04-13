@@ -1,0 +1,6 @@
+export const SIGNIN_SUCCESSFUL = "SIGNIN_SUCCESSFUL";
+export const SIGNIN_ERROR = "SIGNIN_ERROR";
+export const SIGNOUT = "SIGNOUT";
+
+export const AUTH_SIGNUP = "AUTH_SIGNUP";
+export const AUTH_SUCCESSFUL = "AUTH_SUCCESSFUL";
