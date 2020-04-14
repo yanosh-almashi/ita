@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ISSUES:
 1) Add loading spinner in profile update for improve UX
 2) Finis folder and file structure
@@ -11,3 +12,5 @@ told about:
 4) Randomizer
 5) Travis (another repo, fix or not is up to you)
 6) CODEOWNERS
+=======
+>>>>>>> c257086af58ab26f2c2b87010a38cb2763965491

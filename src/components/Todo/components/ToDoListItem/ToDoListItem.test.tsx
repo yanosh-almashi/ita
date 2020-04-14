@@ -1,14 +1,14 @@
-import React from 'react';
-import TodoListItem from './ToDoListItem';
+import React from "react";
+import TodoListItem from "./ToDoListItem";
 //testing tools
-import { render, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import { render, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
 //tools for redux in testings
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import * as actionCreators from '../../../../../store/todo/actions';
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
+import * as actionCreators from "../../../../store/todo/actions";
 
-describe('<TodoListItem />', () => {
+describe("<TodoListItem />", () => {
   const mockStore = configureStore([]);
   let store: any;
   let component: any;
@@ -16,12 +16,12 @@ describe('<TodoListItem />', () => {
     store = mockStore({
       tasks: [
         {
-          text: 'Learn react',
+          text: "Learn react",
           id: 1,
           done: false
         }
       ],
-      showedItems: 'all'
+      showedItems: "all"
     });
   });
 
@@ -48,16 +48,16 @@ describe('<TodoListItem />', () => {
     );
   });
 
-  it('todo list item', () => {
+  it("todo list item", () => {
     store = mockStore({
       tasks: [
         {
-          title: 'Do homerwork',
+          title: "Do homerwork",
           id: 1,
           status: false
         }
       ],
-      itemsToShow: 'all'
+      itemsToShow: "all"
     });
 
     component.rerender(
@@ -76,8 +76,8 @@ describe('<TodoListItem />', () => {
     );
 
     fireEvent(
-      component.getByTestId('status-button'),
-      new MouseEvent('click', {
+      component.getByTestId("status-button"),
+      new MouseEvent("click", {
         bubbles: true,
         cancelable: true
       })
@@ -86,20 +86,20 @@ describe('<TodoListItem />', () => {
     const actions = store.getActions();
     const expectedPayload = {
       id: store.getState().tasks[0].id,
-      type: 'CHANGE_STATUS'
+      type: "CHANGE_STATUS"
     };
     expect(actions).toEqual([expectedPayload]);
   });
 
-  it('To do item name check', () => {
-    const taskText = component.getByTestId('task-text');
+  it("To do item name check", () => {
+    const taskText = component.getByTestId("task-text");
     expect(taskText).toHaveTextContent(store.getState().tasks[0].text);
   });
 
-  it('To do item delete functionality check', () => {
+  it("To do item delete functionality check", () => {
     fireEvent(
-      component.getByTestId('delete-button'),
-      new MouseEvent('click', {
+      component.getByTestId("delete-button"),
+      new MouseEvent("click", {
         bubbles: true,
         cancelable: true
       })
@@ -109,7 +109,7 @@ describe('<TodoListItem />', () => {
 
     const expectedPayload = {
       id: store.getState().tasks[0].id,
-      type: 'DELETE_TODO'
+      type: "DELETE_TODO"
     };
     expect(actions).toEqual([expectedPayload]);
   });
