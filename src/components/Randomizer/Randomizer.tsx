@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
-import './ListItem.css';
+import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
+import Input from "@material-ui/core/Input";
+import "./ListItem.css";
 import {
   StyledTextArea,
   StyledRandom,
   AreaWrapper,
   NavWrapper,
   ResultArea,
-  TheList
-} from './StyledRandomizerComponents';
-import { ResultInterface } from './ResultItemInterface';
+  TheList,
+} from "./StyledRandomizerComponents";
+import { ResultInterface } from "./ResultItemInterface";
 
 const Randomizer = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const [result, setResult] = useState<ResultInterface[]>([]);
   const [inputValue, setInputValue] = useState(1);
 
@@ -24,12 +24,12 @@ const Randomizer = () => {
     setInputValue(Number(event.target.value));
   };
   const randomize = () => {
-    const resultArray = value.split('\n');
+    const resultArray = value.split("\n");
     if (resultArray.length >= inputValue) {
       const res = chooseRandom(resultArray);
       setResult([...res]);
     } else {
-      setResult([{ id: 0, value: 'Incorrect input.' }]);
+      setResult([{ id: 0, value: "Incorrect input." }]);
     }
   };
   const chooseRandom = (resultArray: string[]) => {
@@ -42,7 +42,7 @@ const Randomizer = () => {
       filteredArray.length <= inputValue
     ) {
       return [
-        { id: 0, value: 'Incorrect input. Check number of unique characters' }
+        { id: 0, value: "Incorrect input. Check number of unique characters" },
       ];
     } else {
       return shuffle(resultArray);
@@ -63,7 +63,7 @@ const Randomizer = () => {
         // And swap it with the current element.
         [resultArray[currentIndex], resultArray[randomIndex]] = [
           resultArray[randomIndex],
-          resultArray[currentIndex]
+          resultArray[currentIndex],
         ];
       }
       //pick random item
@@ -71,11 +71,11 @@ const Randomizer = () => {
       //create result object
       const ItemOfResult = {
         id: Math.random() * 1e8,
-        value: resultArray[randomIndex]
+        value: resultArray[randomIndex],
       };
       //check if it is unique and not empty string and push. If not, then one more looping through
-      const isExists = arr.some(item => item.value === ItemOfResult.value);
-      if (!isExists && ItemOfResult.value !== '') {
+      const isExists = arr.some((item) => item.value === ItemOfResult.value);
+      if (!isExists && ItemOfResult.value !== "") {
         arr.push(ItemOfResult);
       } else {
         i--;
@@ -107,7 +107,7 @@ const Randomizer = () => {
         <StyledTextArea onChange={handleChange} />
         <ResultArea>
           <TheList>
-            {result.map(item => (
+            {result.map((item) => (
               <li key={item.id}>{item.value}</li>
             ))}
           </TheList>

@@ -38,7 +38,7 @@ const ContentWrapper = (props: any) => {
 };
 
 const mapStateToProps = (state: any) => ({
-  id: state.authReducer.uid
+  id: state.authReducer.uid,
 });
 
 export default connect(mapStateToProps)(ContentWrapper);
