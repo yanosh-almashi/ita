@@ -4,7 +4,7 @@ export async function getTilesData() {
   const tiles = await db
     .collection('tools')
     .get()
-    .then(querySnapshot => {
+    .then((querySnapshot: any) => {
       const tmpTile: any = [];
       querySnapshot.forEach((doc: any) => {
         tmpTile.push(doc.data());

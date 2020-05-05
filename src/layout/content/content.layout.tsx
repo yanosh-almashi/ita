@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router";
-import Randomizer from "../../components/randomizer/Randomizer";
+import Randomizer from "../../components/Randomizer/Randomizer";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import ProtectedRoute from "../../HOC/protected-route/protected-route.hoc";

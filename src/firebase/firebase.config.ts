@@ -1,4 +1,6 @@
-import * as firebase from 'firebase';
+const firebase = require("firebase/firebase");
+//Required for side-effects
+require("firebase/firestore");
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyBUZC-i_E2PdMjmDYTnrvnqFxK7a-gWpRo',
