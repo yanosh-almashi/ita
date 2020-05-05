@@ -1,0 +1,87 @@
+.tiles__tile {
+  background-color: #ffffff;
+  color: #abb0b5;
+  padding: 0px 20px;
+  height: 138px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  border-radius: 10px;
+  border: 1px solid #e4e7e9;
+  box-shadow: 0px 10px 15px -10px rgba(0,0,0,0.72);
+  cursor: pointer;
+  width: 250px;
+  margin: 0 auto;
+}
+
+.tiles__tile h3 {
+  font-size: 18px;
+  font-weight: 700;
+  border-bottom: 1px solid #f8f7ff;
+  padding: 10px 0px;
+  z-index: 1000;
+  position: absolute;
+  background-color: #ffffff;
+  top: 0;
+  right: 15px;
+  left: 15px;
+  margin: 0;
+}
+
+.tiles__tile i {
+  text-align: center;
+  font-size: 40px;
+  display: block;
+  transition: .3s;
+  z-index: 900;
+  align-self: center;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tiles__tile p {
+  transition: .3s;
+  margin-top: 50px;
+  overflow-y: scroll;
+  text-align: justify;
+  padding-right: 5px;
+}
+
+.tiles__tile p::-webkit-scrollbar{
+  width: 4px;
+}
+
+.tiles__tile p::-webkit-scrollbar-thumb{
+  border-width: 1px 1px 1px 1px;
+  border-color: #45465b;
+  background-color: #45465b;
+  border-radius: 10px;
+}
+
+.tiles__tile:hover i {
+  top: 15%;
+}
+
+.tiles__tile p {
+  opacity: 0;
+}
+
+.tiles__tile:hover p {
+  opacity: 1;
+  display: block;
+}
+
+.tiles__tile:hover {
+  background-color: #7fd3f7;
+  color: #f8f7ff;
+}
+
+.tiles__tile:hover h3 {
+  background-color: #7fd3f7;
+}
+
+.tiles__tile:hover p::-webkit-scrollbar-thumb {
+  background-color: #f8f7ff;
+}

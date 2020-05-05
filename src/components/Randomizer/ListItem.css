@@ -1,0 +1,25 @@
+.MuiInput-root {
+  position: relative;
+  height: 48px;
+  width: 50%;
+}
+
+#Randomize-button {
+  position: relative;
+  bottom: 8.5%;
+  height: 48px;
+  width: 50%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 2px;
+}
+#Randomize-input {
+  position: relative;
+  left: 0;
+  width: 100%;
+  margin-bottom: -10px;
+  padding-top: 5px;
+  font-size: 14px;
+  text-align: center;
+}

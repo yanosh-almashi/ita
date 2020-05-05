@@ -1,0 +1,26 @@
+.text {
+  margin-left: 1.25rem;
+  line-height: 35px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* .completed {
+  text-decoration: line-through;
+} */
+
+ul {
+  list-style-type: none;
+}
+
+.doneButton {
+  background-color: #ffc600;
+}
+
+#filterButton {
+  background-color: #ffc600;
+}
+
+#deleteBtn {
+  background-color: tomato;
+}

@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'OpenSans', sans-serif;
+  background-color: #f8f7ff;
+  overflow-y: hidden !important;
+}
+
+.App {
+  display: flex;
+}
+
+legend {
+  display: none;
+}

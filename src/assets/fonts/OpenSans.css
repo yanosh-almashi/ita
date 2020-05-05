@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'OpenSans';
+  src:  url('./OpenSans/OpenSans-Regular.ttf');
+  src:  url('./OpenSans/OpenSans-Regular.ttf') format('truetype'),
+    url('./OpenSans/OpenSans-Bold.ttf') format('truetype'),
+    url('./OpenSans/OpenSans-BoldItalic.ttf') format('truetype'),
+    url('./OpenSans/OpenSans-ExtraBold.ttf') format('truetype'),
+    url('./OpenSans/OpenSans-ExtraBoldItalic.ttf') format('truetype'),
+    url('./OpenSans/OpenSans-Italic.ttf') format('truetype'),
+    url('./OpenSans/OpenSans-Light.ttf') format('truetype'),
+    url('./OpenSans/OpenSans-LightItalic.ttf') format('truetype'),
+    url('./OpenSans/OpenSans-SemiBold.ttf') format('truetype'),
+    url('./OpenSans/OpenSans-SemiBoldItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
